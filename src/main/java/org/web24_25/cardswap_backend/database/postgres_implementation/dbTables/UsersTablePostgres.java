@@ -1,7 +1,7 @@
-package org.web24_25.cardswap_backend.database.postgress_implementation.dbTables;
+package org.web24_25.cardswap_backend.database.postgres_implementation.dbTables;
 
-import org.web24_25.cardswap_backend.database.postgress_implementation.DatabasePostgress;
-import org.web24_25.cardswap_backend.database.postgress_implementation.dbEntry.UserEntryPostgress;
+import org.web24_25.cardswap_backend.database.postgres_implementation.DatabasePostgres;
+import org.web24_25.cardswap_backend.database.postgres_implementation.dbEntry.UserEntryPostgres;
 import org.web24_25.cardswap_backend.database.structure.dbEntry.UserEntry;
 import org.web24_25.cardswap_backend.database.structure.dbTables.UsersTable;
 
@@ -12,24 +12,24 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class UsersTablePostgress implements UsersTable {
+public class UsersTablePostgres implements UsersTable {
     private static final HashMap<Integer, UserEntry> users = new HashMap<>();
-    private static UsersTablePostgress instance;
+    private static UsersTablePostgres instance;
 
-    public static UsersTablePostgress getInstance() {
+    public static UsersTablePostgres getInstance() {
         if (instance == null) {
-            instance = new UsersTablePostgress();
+            instance = new UsersTablePostgres();
         }
         return instance;
     }
 
-    private UsersTablePostgress() {}
+    private UsersTablePostgres() {}
 
     @Override
     public boolean createUserWithPassword( String username, String email, String password_hash ) {
-        if (DatabasePostgress.getInstance().verifyConnectionAndReconnect()) {
+        if (DatabasePostgres.getInstance().verifyConnectionAndReconnect()) {
             try {
-                PreparedStatement ps =  DatabasePostgress.conn.prepareStatement("INSERT INTO users (username, email, password_hash) VALUES (?, ?, ?);");
+                PreparedStatement ps =  DatabasePostgres.conn.prepareStatement("INSERT INTO users (username, email, password_hash) VALUES (?, ?, ?);");
                 ps.setString(1, username);
                 ps.setString(2, email);
                 ps.setString(3, password_hash);
@@ -44,9 +44,9 @@ public class UsersTablePostgress implements UsersTable {
 
     @Override
     public boolean createUserWithGoogle(String username, String email, String google_id) {
-        if (DatabasePostgress.getInstance().verifyConnectionAndReconnect()) {
+        if (DatabasePostgres.getInstance().verifyConnectionAndReconnect()) {
             try {
-                PreparedStatement ps =  DatabasePostgress.conn.prepareStatement("INSERT INTO users (username, email, google_id) VALUES (?, ?, ?);");
+                PreparedStatement ps =  DatabasePostgres.conn.prepareStatement("INSERT INTO users (username, email, google_id) VALUES (?, ?, ?);");
                 ps.setString(1, username);
                 ps.setString(2, email);
                 ps.setString(3, google_id);
@@ -61,9 +61,9 @@ public class UsersTablePostgress implements UsersTable {
 
     @Override
     public boolean deleteUser(int id) {
-        if (DatabasePostgress.getInstance().verifyConnectionAndReconnect()) {
+        if (DatabasePostgres.getInstance().verifyConnectionAndReconnect()) {
             try {
-                PreparedStatement ps = DatabasePostgress.conn.prepareStatement("DELETE FROM users WHERE id = ?;");
+                PreparedStatement ps = DatabasePostgres.conn.prepareStatement("DELETE FROM users WHERE id = ?;");
                 ps.setInt(1, id);
                 ps.executeUpdate();
                 users.remove(id);
@@ -80,13 +80,13 @@ public class UsersTablePostgress implements UsersTable {
         if (users.containsKey(id)) {
             return users.get(id);
         } else {
-            if (DatabasePostgress.getInstance().verifyConnectionAndReconnect()) {
+            if (DatabasePostgres.getInstance().verifyConnectionAndReconnect()) {
                 try {
-                    PreparedStatement ps = DatabasePostgress.conn.prepareStatement("SELECT * FROM users WHERE id = ?;");
+                    PreparedStatement ps = DatabasePostgres.conn.prepareStatement("SELECT * FROM users WHERE id = ?;");
                     ps.setInt(1, id);
                     ResultSet rs = ps.executeQuery();
                     if (rs.next()) {
-                        UserEntryPostgress uep = new UserEntryPostgress(
+                        UserEntryPostgres uep = new UserEntryPostgres(
                                 rs.getInt("id"),
                                 rs.getString("username"),
                                 rs.getString("email"),
@@ -99,7 +99,7 @@ public class UsersTablePostgress implements UsersTable {
                         return uep;
                     }
                 } catch (SQLException e) {
-                    //TODO: log error
+                    DatabasePostgres.logger.severe(e.getMessage());
                 }
             }
         }
@@ -113,13 +113,13 @@ public class UsersTablePostgress implements UsersTable {
                 return ue;
             }
         }
-        if (DatabasePostgress.getInstance().verifyConnectionAndReconnect()) {
+        if (DatabasePostgres.getInstance().verifyConnectionAndReconnect()) {
             try {
-                PreparedStatement ps = DatabasePostgress.conn.prepareStatement("SELECT * FROM users WHERE username = ?;");
+                PreparedStatement ps = DatabasePostgres.conn.prepareStatement("SELECT * FROM users WHERE username = ?;");
                 ps.setString(1, username);
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
-                    UserEntryPostgress uep = new UserEntryPostgress(
+                    UserEntryPostgres uep = new UserEntryPostgres(
                             rs.getInt("id"),
                             rs.getString("username"),
                             rs.getString("email"),
@@ -132,7 +132,7 @@ public class UsersTablePostgress implements UsersTable {
                     return uep;
                 }
             } catch (SQLException e) {
-                //TODO: log error
+                DatabasePostgres.logger.severe(e.getMessage());
             }
         }
         return null;
@@ -140,9 +140,9 @@ public class UsersTablePostgress implements UsersTable {
 
     public List<UserEntry> getUsersRange(int start_id, int limit) {
         List<UserEntry> user_list = new ArrayList<>();
-        if (DatabasePostgress.getInstance().verifyConnectionAndReconnect()) {
+        if (DatabasePostgres.getInstance().verifyConnectionAndReconnect()) {
             try {
-                PreparedStatement ps = DatabasePostgress.conn.prepareStatement("SELECT * FROM users WHERE id >= ? LIMIT ?;");
+                PreparedStatement ps = DatabasePostgres.conn.prepareStatement("SELECT * FROM users WHERE id >= ? LIMIT ?;");
                 ps.setInt(1, start_id);
                 ps.setInt(2, limit);
                 ResultSet rs = ps.executeQuery();
@@ -151,7 +151,7 @@ public class UsersTablePostgress implements UsersTable {
                         user_list.add(users.get(rs.getInt("id")));
                         continue;
                     }
-                    UserEntryPostgress uep = new UserEntryPostgress(
+                    UserEntryPostgres uep = new UserEntryPostgres(
                             rs.getInt("id"),
                             rs.getString("username"),
                             rs.getString("email"),
@@ -165,21 +165,22 @@ public class UsersTablePostgress implements UsersTable {
                 rs.close();
                 return user_list;
             } catch (SQLException e) {
-                //TODO: log error
+                DatabasePostgres.logger.severe(e.getMessage());
             }
         }
         return user_list;
     }
 
     public int getUserCount() {
-        if (DatabasePostgress.getInstance().verifyConnectionAndReconnect()) {
+        if (DatabasePostgres.getInstance().verifyConnectionAndReconnect()) {
             try {
-                PreparedStatement ps = DatabasePostgress.conn.prepareStatement("SELECT COUNT(*) FROM users;");
+                PreparedStatement ps = DatabasePostgres.conn.prepareStatement("SELECT COUNT(*) FROM users;");
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {
                     return rs.getInt(1);
                 }
             } catch (SQLException e) {
+                DatabasePostgres.logger.severe(e.getMessage());
             }
         }
         return 0;

@@ -1,4 +1,4 @@
-package org.web24_25.cardswap_backend.database.postgress_implementation;
+package org.web24_25.cardswap_backend.database.postgres_implementation;
 
 import io.github.cdimascio.dotenv.Dotenv;
 import org.web24_25.cardswap_backend.database.structure.Database;
@@ -10,26 +10,26 @@ import java.util.concurrent.*;
 import java.util.logging.Logger;
 
 
-public class DatabasePostgress implements AutoCloseable, Database {
+public class DatabasePostgres implements AutoCloseable, Database {
     protected final ExecutorService executorService = Executors.newCachedThreadPool();
     private static final Dotenv dotenv = Dotenv.load();
-    public static final Logger logger = Logger.getLogger(DatabasePostgress.class.getName()); //TODO: change for global logger (maybe)
+    public static final Logger logger = Logger.getLogger(DatabasePostgres.class.getName()); //TODO: change for global logger (maybe)
 
-    private static DatabasePostgress instance = null;
+    private static DatabasePostgres instance = null;
     public static Connection conn = null;
 
     private final String dbUrl = dotenv.get("DATASOURCE_URL");
     private final String dbUsername = dotenv.get("DATASOURCE_USERNAME");
     private final String dbPassword = dotenv.get("DATASOURCE_PASSWORD");
 
-    public static DatabasePostgress getInstance() {
+    public static DatabasePostgres getInstance() {
         if (instance == null) {
-            instance = new DatabasePostgress();
+            instance = new DatabasePostgres();
         }
         return instance;
     }
 
-    private DatabasePostgress() {
+    private DatabasePostgres() {
         verifyConnectionAndReconnect();
     }
 

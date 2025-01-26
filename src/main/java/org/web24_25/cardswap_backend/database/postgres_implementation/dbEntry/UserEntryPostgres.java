@@ -1,6 +1,6 @@
-package org.web24_25.cardswap_backend.database.postgress_implementation.dbEntry;
+package org.web24_25.cardswap_backend.database.postgres_implementation.dbEntry;
 
-import org.web24_25.cardswap_backend.database.postgress_implementation.DatabasePostgress;
+import org.web24_25.cardswap_backend.database.postgres_implementation.DatabasePostgres;
 import org.web24_25.cardswap_backend.database.structure.dbEntry.UserEntry;
 
 import java.sql.Date;
@@ -9,7 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
 
-public final class UserEntryPostgress implements UserEntry {
+public final class UserEntryPostgres implements UserEntry {
     private final Integer id;
     private String username;
     private final String email;
@@ -17,7 +17,7 @@ public final class UserEntryPostgress implements UserEntry {
     private final String google_id;
     private final Date creation_date;
 
-    public UserEntryPostgress(Integer id, String username, String email, String password_hash, String google_id, Date creation_date) {
+    public UserEntryPostgres(Integer id, String username, String email, String password_hash, String google_id, Date creation_date) {
         Objects.requireNonNull(id);
         Objects.requireNonNull(username);
         Objects.requireNonNull(email);
@@ -45,9 +45,9 @@ public final class UserEntryPostgress implements UserEntry {
 
     @Override
     public boolean setUsername(String username) {
-        if (DatabasePostgress.getInstance().verifyConnectionAndReconnect()) {
+        if (DatabasePostgres.getInstance().verifyConnectionAndReconnect()) {
             try {
-                PreparedStatement ps =  DatabasePostgress.conn.prepareStatement("UPDATE users SET username = ? WHERE id = ?;");
+                PreparedStatement ps =  DatabasePostgres.conn.prepareStatement("UPDATE users SET username = ? WHERE id = ?;");
                 ps.setString(1, username);
                 ps.setInt(2, this.id);
                 ResultSet rs = ps.executeQuery();
@@ -63,9 +63,9 @@ public final class UserEntryPostgress implements UserEntry {
 
     @Override
     public boolean setPasswordHash(String password_hash) {
-        if (DatabasePostgress.getInstance().verifyConnectionAndReconnect()) {
+        if (DatabasePostgres.getInstance().verifyConnectionAndReconnect()) {
             try {
-                PreparedStatement ps =  DatabasePostgress.conn.prepareStatement("UPDATE users SET password_hash = ? WHERE id = ?;");
+                PreparedStatement ps =  DatabasePostgres.conn.prepareStatement("UPDATE users SET password_hash = ? WHERE id = ?;");
                 ps.setString(1, password_hash);
                 ps.setInt(2, this.id);
                 ResultSet rs = ps.executeQuery();
@@ -103,7 +103,7 @@ public final class UserEntryPostgress implements UserEntry {
     public boolean equals(Object obj) {
         if (obj == this) return true;
         if (obj == null || obj.getClass() != this.getClass()) return false;
-        var that = (UserEntryPostgress) obj;
+        var that = (UserEntryPostgres) obj;
         return Objects.equals(this.id, that.id) &&
                 Objects.equals(this.username, that.username) &&
                 Objects.equals(this.email, that.email) &&
