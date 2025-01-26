@@ -8,8 +8,19 @@ public interface UsersTable {
     static UsersTable getInstance() {
         return null;
     }
-    UserEntry createUser(String username, String password_hash);
+    boolean createUserWithPassword(
+            String username,
+            String email,
+            String password_hash
+    );
+    boolean createUserWithGoogle(
+            String username,
+            String email,
+            String google_id
+    );
     boolean deleteUser(int id);
-    UserEntry getUser(int id);
-    List<UserEntry> getAllUsers();
+    UserEntry getUserFromId(int id);
+    UserEntry getUserFromUsername(String username);
+    List<UserEntry> getUsersRange(int start_id, int limit);
+    int getUserCount();
 }

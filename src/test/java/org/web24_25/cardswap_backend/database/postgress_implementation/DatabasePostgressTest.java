@@ -1,8 +1,7 @@
-package org.web24_25.cardswap_backend.database.postgresImplementation;
+package org.web24_25.cardswap_backend.database.postgress_implementation;
 
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
-import org.web24_25.cardswap_backend.database.postgress_implementation.DatabasePostgress;
 
 import java.util.logging.Level;
 

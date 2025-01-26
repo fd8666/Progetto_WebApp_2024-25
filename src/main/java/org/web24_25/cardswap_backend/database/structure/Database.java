@@ -11,6 +11,4 @@ public interface Database {
     boolean isConnected();
     boolean reconnect();
     boolean closeConnection();
-    ResultSet executeQuery(String query);
-    boolean executeUpdate(String query);
 }

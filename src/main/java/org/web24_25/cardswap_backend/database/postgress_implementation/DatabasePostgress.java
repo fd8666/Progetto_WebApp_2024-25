@@ -5,7 +5,6 @@ import org.web24_25.cardswap_backend.database.structure.Database;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.concurrent.*;
 import java.util.logging.Logger;
@@ -17,7 +16,7 @@ public class DatabasePostgress implements AutoCloseable, Database {
     public static final Logger logger = Logger.getLogger(DatabasePostgress.class.getName()); //TODO: change for global logger (maybe)
 
     private static DatabasePostgress instance = null;
-    private static Connection conn = null;
+    public static Connection conn = null;
 
     private final String dbUrl = dotenv.get("DATASOURCE_URL");
     private final String dbUsername = dotenv.get("DATASOURCE_USERNAME");
@@ -87,29 +86,6 @@ public class DatabasePostgress implements AutoCloseable, Database {
             return true;
         } catch (SQLException e) {
             logger.severe("Failed to close connection: " + e.getMessage());
-        }
-        return false;
-    }
-
-    public ResultSet executeQuery(String query) {
-        if (verifyConnectionAndReconnect()) {
-            try {
-                return conn.createStatement().executeQuery(query);
-            } catch (SQLException e) {
-                logger.severe("Failed to execute query: " + e.getMessage());
-            }
-        }
-        return null;
-    }
-
-    public boolean executeUpdate(String query) {
-        if (verifyConnectionAndReconnect()) {
-            try {
-                conn.createStatement().executeUpdate(query);
-                return true;
-            } catch (SQLException e) {
-                logger.severe("Failed to execute update: " + e.getMessage());
-            }
         }
         return false;
     }
