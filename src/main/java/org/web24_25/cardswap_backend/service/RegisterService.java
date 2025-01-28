@@ -1,10 +1,8 @@
 package org.web24_25.cardswap_backend.service;
 
 import org.springframework.http.ResponseEntity;
-import org.web24_25.cardswap_backend.dataStructures.GoogleLogin;
-import org.web24_25.cardswap_backend.dataStructures.GoogleRegistration;
-import org.web24_25.cardswap_backend.dataStructures.PasswordLogin;
-import org.web24_25.cardswap_backend.dataStructures.PasswordRegistration;
+import org.web24_25.cardswap_backend.requests.GoogleRegistration;
+import org.web24_25.cardswap_backend.requests.PasswordRegistration;
 
 public class RegisterService {
     public ResponseEntity<String> registerPassword(PasswordRegistration data) {

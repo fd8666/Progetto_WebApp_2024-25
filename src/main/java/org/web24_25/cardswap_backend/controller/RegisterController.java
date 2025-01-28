@@ -2,9 +2,8 @@ package org.web24_25.cardswap_backend.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.web24_25.cardswap_backend.dataStructures.GoogleRegistration;
-import org.web24_25.cardswap_backend.dataStructures.PasswordRegistration;
-import org.web24_25.cardswap_backend.service.LoginService;
+import org.web24_25.cardswap_backend.requests.GoogleRegistration;
+import org.web24_25.cardswap_backend.requests.PasswordRegistration;
 import org.web24_25.cardswap_backend.service.RegisterService;
 
 @RestController

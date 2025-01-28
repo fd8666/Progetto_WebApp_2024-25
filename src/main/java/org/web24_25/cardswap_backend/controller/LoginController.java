@@ -1,9 +1,11 @@
 package org.web24_25.cardswap_backend.controller;
 
+import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.web24_25.cardswap_backend.dataStructures.GoogleLogin;
-import org.web24_25.cardswap_backend.dataStructures.PasswordLogin;
+import org.web24_25.cardswap_backend.requests.GoogleLogin;
+import org.web24_25.cardswap_backend.requests.PasswordLogin;
 import org.web24_25.cardswap_backend.service.LoginService;
 
 @RestController
@@ -11,13 +13,13 @@ import org.web24_25.cardswap_backend.service.LoginService;
 @RequestMapping("/api/login")
 public class LoginController {
     private final LoginService service = new LoginService();
+
     @PostMapping("/password")
-    public ResponseEntity<String> loginPassword(@RequestBody PasswordLogin data) {
-        return service.loginPassword(data);
+    public ResponseEntity<String> loginPassword(@RequestBody PasswordLogin data, HttpSession session) {
+        return service.loginPassword(data, session);
     }
 
     @PostMapping("/google")
-    public ResponseEntity<String> loginGoogle(@RequestBody GoogleLogin data) {
-        return service.loginGoogle(data);
-    }
-}
+    public ResponseEntity<String> loginGoogle(@RequestBody GoogleLogin data, HttpSession session) {
+        return service.loginGoogle(data, session);
+    }}
