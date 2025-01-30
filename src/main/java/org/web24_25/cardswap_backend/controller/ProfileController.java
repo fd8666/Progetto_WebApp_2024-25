@@ -14,17 +14,17 @@ import org.web24_25.cardswap_backend.service.ProfileService;
 public class ProfileController {
     private final ProfileService service = new ProfileService();
     @GetMapping("/usermane")
-    public ResponseEntity<String> getUsername(HttpSession session) {
+    public ResponseEntity<String> getUsername(@CookieValue HttpSession session) {
         return service.getUsername(session);
     }
 
     @GetMapping("/email")
-    public ResponseEntity<String> getEmail(HttpSession session) {
+    public ResponseEntity<String> getEmail(@CookieValue HttpSession session) {
         return service.getEmail(session);
     }
 
     @GetMapping("/picture")
-    public ResponseEntity<String> getPicture(HttpSession session) {
+    public ResponseEntity<String> getPicture(@CookieValue HttpSession session) {
         return service.getPicture(session);
     }
 

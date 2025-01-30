@@ -5,6 +5,9 @@ import org.web24_25.cardswap_backend.database.structure.dbEntry.SessionEntry;
 import java.util.List;
 
 public interface SessionsTable {
+    static SessionsTable getInstance() {
+        return null;
+    }
     boolean createSession(int user_id, String cookie);
     SessionEntry getSessionById(int id);
     SessionEntry getSessionByCookie(String cookie);

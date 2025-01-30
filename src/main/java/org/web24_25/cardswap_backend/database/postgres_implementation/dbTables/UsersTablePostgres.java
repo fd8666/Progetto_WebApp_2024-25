@@ -11,10 +11,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class UsersTablePostgres implements UsersTable {
     private static final HashMap<Integer, UserEntry> users = new HashMap<>();
     private static UsersTablePostgres instance;
+    public static final Logger logger = Logger.getLogger(UsersTablePostgres.class.getName());
 
     public static UsersTablePostgres getInstance() {
         if (instance == null) {
@@ -35,8 +37,7 @@ public class UsersTablePostgres implements UsersTable {
                 ps.setString(3, password_hash);
                 return ps.executeUpdate() != 0;
             } catch (SQLException e) {
-                //TODO: log error
-                System.out.println(e.getMessage());
+                logger.severe(e.getMessage());
             }
         }
         return false;
@@ -52,8 +53,7 @@ public class UsersTablePostgres implements UsersTable {
                 ps.setString(3, google_id);
                 return ps.executeUpdate() != 0;
             } catch (SQLException e) {
-                //TODO: log error
-                System.out.println(e.getMessage());
+                logger.severe(e.getMessage());
             }
         }
         return false;
@@ -69,7 +69,7 @@ public class UsersTablePostgres implements UsersTable {
                 users.remove(id);
                 return true;
             } catch (SQLException e) {
-                //TODO: log error
+                logger.severe(e.getMessage());
             }
         }
         return false;
@@ -99,7 +99,7 @@ public class UsersTablePostgres implements UsersTable {
                         return uep;
                     }
                 } catch (SQLException e) {
-                    DatabasePostgres.logger.severe(e.getMessage());
+                    logger.severe(e.getMessage());
                 }
             }
         }
@@ -132,7 +132,7 @@ public class UsersTablePostgres implements UsersTable {
                     return uep;
                 }
             } catch (SQLException e) {
-                DatabasePostgres.logger.severe(e.getMessage());
+                logger.severe(e.getMessage());
             }
         }
         return null;
@@ -165,7 +165,7 @@ public class UsersTablePostgres implements UsersTable {
                 rs.close();
                 return user_list;
             } catch (SQLException e) {
-                DatabasePostgres.logger.severe(e.getMessage());
+                logger.severe(e.getMessage());
             }
         }
         return user_list;
@@ -180,7 +180,7 @@ public class UsersTablePostgres implements UsersTable {
                     return rs.getInt(1);
                 }
             } catch (SQLException e) {
-                DatabasePostgres.logger.severe(e.getMessage());
+                logger.severe(e.getMessage());
             }
         }
         return 0;

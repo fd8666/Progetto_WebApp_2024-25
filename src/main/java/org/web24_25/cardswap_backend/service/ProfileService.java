@@ -8,26 +8,38 @@ import org.web24_25.cardswap_backend.requests.SetUsername;
 
 public class ProfileService {
     public ResponseEntity<String> getUsername(HttpSession session) {
-        return ResponseEntity.ok("username "+session.getId());
+        return ResponseEntity.ok("get/username "+session.getId());
     }
 
     public ResponseEntity<String> getEmail(HttpSession session) {
-        return ResponseEntity.ok("email "+session.getId());
+        return ResponseEntity.ok("get/email "+session.getId());
     }
 
     public ResponseEntity<String> getPicture(HttpSession session) {
-        return ResponseEntity.ok("picture "+session.getId());
+        return ResponseEntity.ok("get/picture "+session.getId());
     }
 
     public ResponseEntity<String> setUsername(SetUsername data, HttpSession session) {
-        return ResponseEntity.ok("username");
+        String sessionId = (String) session.getAttribute("session_id");
+        if (sessionId == null) {
+            return ResponseEntity.badRequest().body("Session ID not found");
+        }
+        return ResponseEntity.ok("set/username "+data.username()+"/"+data.password_hash()+"/"+session.getId());
     }
 
     public ResponseEntity<String> setPassword(SetPassword data, HttpSession session) {
-        return ResponseEntity.ok("password");
+        String sessionId = (String) session.getAttribute("session_id");
+        if (sessionId == null) {
+            return ResponseEntity.badRequest().body("Session ID not found");
+        }
+        return ResponseEntity.ok("set/password "+session.getId());
     }
 
     public ResponseEntity<String> setPicture(SetPicture data, HttpSession session) {
-        return ResponseEntity.ok("picture");
+        String sessionId = (String) session.getAttribute("session_id");
+        if (sessionId == null) {
+            return ResponseEntity.badRequest().body("Session ID not found");
+        }
+        return ResponseEntity.ok("set/picture "+session.getId());
     }
 }

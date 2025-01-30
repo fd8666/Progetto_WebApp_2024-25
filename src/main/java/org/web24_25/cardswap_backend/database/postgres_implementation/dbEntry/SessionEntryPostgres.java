@@ -1,10 +1,14 @@
 package org.web24_25.cardswap_backend.database.postgres_implementation.dbEntry;
 
+import org.web24_25.cardswap_backend.database.postgres_implementation.DatabasePostgres;
 import org.web24_25.cardswap_backend.database.structure.dbEntry.SessionEntry;
 
 import java.sql.Date;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Objects;
+import java.util.logging.Logger;
 
 public final class SessionEntryPostgres implements SessionEntry {
     private final Integer id;
@@ -15,6 +19,8 @@ public final class SessionEntryPostgres implements SessionEntry {
     private final Date creation_date;
     private final Integer time_to_live;
     private Boolean valid;
+
+    private static final Logger logger = Logger.getLogger(SessionEntryPostgres.class.getName());
 
     public SessionEntryPostgres(Integer id, Integer user_id, String ipv4, String cookie, String user_agent, Date creation_date, Integer time_to_live, Boolean valid) {
         this.id = id;
@@ -56,10 +62,28 @@ public final class SessionEntryPostgres implements SessionEntry {
     }
 
     public Boolean valid() {
-        if (creation_date.toLocalDate().plusDays(time_to_live / 3600).isAfter(LocalDate.now())) {
+        if (valid && creation_date.toLocalDate().plusDays(time_to_live / 3600).isAfter(LocalDate.now())) {
             valid = false;
         }
         return valid;
+    }
+
+    public boolean invalidate() {
+        if (DatabasePostgres.getInstance().verifyConnectionAndReconnect()) {
+            try {
+                PreparedStatement ps =  DatabasePostgres.conn.prepareStatement("UPDATE sessions SET valid = ? WHERE id = ?;");
+                ps.setBoolean(1, false);
+                ps.setInt(2, this.id);
+                int res = ps.executeUpdate();
+                if (res != 0) {
+                    this.valid = false;
+                    return true;
+                }
+            } catch (SQLException e) {
+                logger.severe(e.getMessage());
+            }
+        }
+        return false;
     }
 
     @Override

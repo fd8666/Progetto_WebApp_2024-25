@@ -12,12 +12,7 @@ public class LoginService {
         if (data.email() == null || data.password() == null) {
             return ResponseEntity.badRequest().body("Missing fields");
         }
-        if (data.email().length() < 3 || data.email().length() > 50) {
-            return ResponseEntity.badRequest().body("Email must be between 3 and 50 characters");
-        }
-        if (data.password().length() < 8 || data.password().length() > 50) {
-            return ResponseEntity.badRequest().body("Password must be between 8 and 50 characters");
-        }
+
 
         String sessionId = UUID.randomUUID().toString();
         session.setAttribute("session_id", sessionId);

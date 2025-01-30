@@ -9,15 +9,19 @@ public class RegisterService {
         if (data.username() == null || data.email() == null || data.password() == null) {
             return ResponseEntity.badRequest().body("Missing fields");
         }
+
         if (data.username().length() < 3 || data.username().length() > 20) {
-            return ResponseEntity.badRequest().body("Username must be between 3 and 20 characters");
+            //Username must be between 3 and 20 characters
+            return ResponseEntity.badRequest().body("Invalid username");
         }
-        if (data.email().length() < 3 || data.email().length() > 50) {
-            return ResponseEntity.badRequest().body("Email must be between 3 and 50 characters");
+        if (!data.email().matches("(?=.{1,254}$)[a-z0-9A-Z](?:[a-z0-9A-Z-]{0,61}[a-z0-9A-Z]|)(?:\\.[a-zA-Z]([a-z0-9A-Z-]{0,61}[a-z0-9A-Z]|))*")) {
+            return ResponseEntity.badRequest().body("Invalid email");
         }
-        if (data.password().length() < 8 || data.password().length() > 50) {
-            return ResponseEntity.badRequest().body("Password must be between 8 and 50 characters");
+        if (!data.password().matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$")) {
+            //Password must contain at least one lowercase letter, one uppercase letter, one digit, and be at least 8 characters long
+            return ResponseEntity.badRequest().body("Invalid password");
         }
+
         return ResponseEntity.ok("Success");
     }
 

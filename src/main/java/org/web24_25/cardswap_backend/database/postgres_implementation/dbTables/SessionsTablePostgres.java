@@ -11,10 +11,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.logging.Logger;
 
 public class SessionsTablePostgres implements SessionsTable {
     private static final HashMap<Integer, SessionEntry> sessions = new HashMap<>();
     private static SessionsTablePostgres instance;
+    public static final Logger logger = Logger.getLogger(SessionsTablePostgres.class.getName());
 
     public static SessionsTablePostgres getInstance() {
         if (instance == null) {

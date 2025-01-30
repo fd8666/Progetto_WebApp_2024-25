@@ -5,9 +5,9 @@ import org.web24_25.cardswap_backend.database.structure.dbEntry.UserEntry;
 
 import java.sql.Date;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Objects;
+import java.util.logging.Logger;
 
 public final class UserEntryPostgres implements UserEntry {
     private final Integer id;
@@ -16,6 +16,8 @@ public final class UserEntryPostgres implements UserEntry {
     private String password_hash;
     private final String google_id;
     private final Date creation_date;
+
+    public static final Logger logger = Logger.getLogger(UserEntryPostgres.class.getName());
 
     public UserEntryPostgres(Integer id, String username, String email, String password_hash, String google_id, Date creation_date) {
         Objects.requireNonNull(id);
@@ -50,12 +52,13 @@ public final class UserEntryPostgres implements UserEntry {
                 PreparedStatement ps =  DatabasePostgres.conn.prepareStatement("UPDATE users SET username = ? WHERE id = ?;");
                 ps.setString(1, username);
                 ps.setInt(2, this.id);
-                ResultSet rs = ps.executeQuery();
-                this.username = username;
-                rs.close();
-                return true;
+                int result = ps.executeUpdate();
+                if (result != 0) {
+                    this.username = username;
+                    return true;
+                }
             } catch (SQLException e) {
-                //TODO: log error
+                logger.severe(e.getMessage());
             }
         }
         return false;
@@ -68,12 +71,13 @@ public final class UserEntryPostgres implements UserEntry {
                 PreparedStatement ps =  DatabasePostgres.conn.prepareStatement("UPDATE users SET password_hash = ? WHERE id = ?;");
                 ps.setString(1, password_hash);
                 ps.setInt(2, this.id);
-                ResultSet rs = ps.executeQuery();
-                this.password_hash = password_hash;
-                rs.close();
-                return true;
+                int result = ps.executeUpdate();
+                if (result != 0) {
+                    this.password_hash = password_hash;
+                    return true;
+                }
             } catch (SQLException e) {
-                //TODO: log error
+                logger.severe(e.getMessage());
             }
         }
         return false;

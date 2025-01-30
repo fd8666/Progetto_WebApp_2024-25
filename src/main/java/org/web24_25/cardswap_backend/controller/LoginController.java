@@ -1,6 +1,5 @@
 package org.web24_25.cardswap_backend.controller;
 
-import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,4 +21,5 @@ public class LoginController {
     @PostMapping("/google")
     public ResponseEntity<String> loginGoogle(@RequestBody GoogleLogin data, HttpSession session) {
         return service.loginGoogle(data, session);
-    }}
+    }
+}
