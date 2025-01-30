@@ -1,5 +1,6 @@
 package org.web24_25.cardswap_backend.database.postgres_implementation.dbTables;
 
+import org.web24_25.cardswap_backend.database.postgres_implementation.DatabasePostgres;
 import org.web24_25.cardswap_backend.database.structure.dbEntry.CardEntry;
 import org.web24_25.cardswap_backend.database.structure.dbEntry.TagEntry;
 import org.web24_25.cardswap_backend.database.structure.dbTables.CardTagsTable;
@@ -22,6 +23,16 @@ public class CardTagsTablePostgres implements CardTagsTable {
 
     @Override
     public boolean addCardTagToTable(int cardId, int tagId) {
+        if (DatabasePostgres.getInstance().verifyConnectionAndReconnect()) {
+            try {
+                var ps = DatabasePostgres.conn.prepareStatement("INSERT INTO card_tags (card, tag) VALUES (?, ?);");
+                ps.setInt(1, cardId);
+                ps.setInt(2, tagId);
+                return ps.executeUpdate() != 0;
+            } catch (Exception e) {
+                logger.severe(e.getMessage());
+            }
+        }
         return false;
     }
 

@@ -1,5 +1,6 @@
 package org.web24_25.cardswap_backend.database.postgres_implementation.dbTables;
 
+import org.web24_25.cardswap_backend.database.postgres_implementation.DatabasePostgres;
 import org.web24_25.cardswap_backend.database.structure.dbEntry.ExpansionEntry;
 import org.web24_25.cardswap_backend.database.structure.dbEntry.GameEntry;
 import org.web24_25.cardswap_backend.database.structure.dbTables.ExpansionsTable;
@@ -21,6 +22,16 @@ public class ExpansionsTablePostgres implements ExpansionsTable {
 
     @Override
     public boolean addExpansion(String name, int gameId) {
+        if (DatabasePostgres.getInstance().verifyConnectionAndReconnect()) {
+            try {
+                var ps = DatabasePostgres.conn.prepareStatement("INSERT INTO expansions (game, name) VALUES (?, ?);");
+                ps.setInt(1, gameId);
+                ps.setString(2, name);
+                return ps.executeUpdate() != 0;
+            } catch (Exception e) {
+                logger.severe(e.getMessage());
+            }
+        }
         return false;
     }
 

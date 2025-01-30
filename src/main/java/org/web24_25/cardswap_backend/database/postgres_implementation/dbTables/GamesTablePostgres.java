@@ -1,5 +1,6 @@
 package org.web24_25.cardswap_backend.database.postgres_implementation.dbTables;
 
+import org.web24_25.cardswap_backend.database.postgres_implementation.DatabasePostgres;
 import org.web24_25.cardswap_backend.database.structure.dbEntry.CardEntry;
 import org.web24_25.cardswap_backend.database.structure.dbEntry.ExpansionEntry;
 import org.web24_25.cardswap_backend.database.structure.dbEntry.GameEntry;
@@ -23,6 +24,15 @@ public class GamesTablePostgres implements GamesTable {
 
     @Override
     public boolean addGame(String name) {
+        if (DatabasePostgres.getInstance().verifyConnectionAndReconnect()) {
+            try {
+                var ps = DatabasePostgres.conn.prepareStatement("INSERT INTO games (name) VALUES (?);");
+                ps.setString(1, name);
+                return ps.executeUpdate() != 0;
+            } catch (Exception e) {
+                logger.severe(e.getMessage());
+            }
+        }
         return false;
     }
 
