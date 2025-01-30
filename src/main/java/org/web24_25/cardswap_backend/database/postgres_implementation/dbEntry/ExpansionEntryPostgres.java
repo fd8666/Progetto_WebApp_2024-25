@@ -1,10 +1,15 @@
 package org.web24_25.cardswap_backend.database.postgres_implementation.dbEntry;
 
 import org.web24_25.cardswap_backend.database.postgres_implementation.DatabasePostgres;
+import org.web24_25.cardswap_backend.database.postgres_implementation.dbTables.CardsTablePostgres;
+import org.web24_25.cardswap_backend.database.postgres_implementation.dbTables.GamesTablePostgres;
+import org.web24_25.cardswap_backend.database.structure.dbEntry.CardEntry;
 import org.web24_25.cardswap_backend.database.structure.dbEntry.ExpansionEntry;
+import org.web24_25.cardswap_backend.database.structure.dbEntry.GameEntry;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Objects;
 import java.util.logging.Logger;
 
@@ -78,6 +83,16 @@ public final class ExpansionEntryPostgres implements ExpansionEntry {
     }
 
     @Override
+    public GameEntry getGame() {
+        return GamesTablePostgres.getInstance().getGameWithId(game());
+    }
+
+    @Override
+    public List<CardEntry> getCards() {
+        return CardsTablePostgres.getInstance().getCardsWithExpansion(id());
+    }
+
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) return true;
         if (obj == null || obj.getClass() != this.getClass()) return false;
@@ -101,5 +116,4 @@ public final class ExpansionEntryPostgres implements ExpansionEntry {
                 "name=" + name + ", " +
                 "description=" + description + ']';
     }
-
 }

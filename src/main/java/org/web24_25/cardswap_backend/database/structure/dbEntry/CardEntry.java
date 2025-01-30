@@ -19,24 +19,9 @@ public interface CardEntry {
     boolean setGame(Integer game);
     boolean setDescription(String description);
     boolean setIdentifier(String identifier);
-    default GameEntry getGame() {
-        assert GamesTable.getInstance() != null;
-        return GamesTable.getInstance().getGameWithId(game());
-    };
-    default ExpansionEntry getExpansion() {
-        assert ExpansionsTable.getInstance() != null;
-        return ExpansionsTable.getInstance().getExpansionWithId(expansion());
-    };
-    default List<TagEntry> getTags() {
-        assert CardTagsTable.getInstance() != null;
-        return CardTagsTable.getInstance().getTagsWithCard(id());
-    };
-    default boolean addTag(TagEntry tag) {
-        assert CardTagsTable.getInstance() != null;
-        return CardTagsTable.getInstance().addCardTagToTable(id(), tag.id());
-    };
-    default boolean removeTag(TagEntry tag) {
-        assert CardTagsTable.getInstance() != null;
-        return CardTagsTable.getInstance().removeCardTagFromTable(id(), tag.id());
-    };
+    GameEntry getGame();
+    ExpansionEntry getExpansion();
+    List<TagEntry> getTags();
+    boolean addTag(TagEntry tag);
+    boolean removeTag(TagEntry tag);
 }

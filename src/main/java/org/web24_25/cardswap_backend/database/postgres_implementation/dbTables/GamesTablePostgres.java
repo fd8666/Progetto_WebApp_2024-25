@@ -4,8 +4,14 @@ import org.web24_25.cardswap_backend.database.postgres_implementation.DatabasePo
 import org.web24_25.cardswap_backend.database.structure.dbEntry.CardEntry;
 import org.web24_25.cardswap_backend.database.structure.dbEntry.ExpansionEntry;
 import org.web24_25.cardswap_backend.database.structure.dbEntry.GameEntry;
+import org.web24_25.cardswap_backend.database.structure.dbEntry.TagEntry;
+import org.web24_25.cardswap_backend.database.structure.dbTables.CardTagsTable;
+import org.web24_25.cardswap_backend.database.structure.dbTables.ExpansionsTable;
 import org.web24_25.cardswap_backend.database.structure.dbTables.GamesTable;
+import org.web24_25.cardswap_backend.database.structure.dbTables.TagsTable;
 
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Logger;
@@ -38,6 +44,25 @@ public class GamesTablePostgres implements GamesTable {
 
     @Override
     public boolean removeGameWithName(String name) {
+        if (DatabasePostgres.getInstance().verifyConnectionAndReconnect()) {
+            try {
+                GameEntry ge = GamesTablePostgres.getInstance().getGameWithName(name);
+                if (!ge.getExpansions().isEmpty()) {
+//                    throw new IllegalStateException("Cannot remove game with expansions");
+                    return false;
+                }
+                if (!ge.getCards().isEmpty()) {
+//                    throw new IllegalStateException("Cannot remove game with cards");
+                    return false;
+                }
+
+                PreparedStatement ps =  DatabasePostgres.conn.prepareStatement("DELETE FROM games WHERE name = ?;");
+                ps.setString(1, name);
+                return ps.executeUpdate() != 0;
+            } catch (SQLException e) {
+                logger.severe(e.getMessage());
+            }
+        }
         return false;
     }
 

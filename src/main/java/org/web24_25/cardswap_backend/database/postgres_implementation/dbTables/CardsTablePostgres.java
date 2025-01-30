@@ -4,7 +4,6 @@ import org.web24_25.cardswap_backend.database.postgres_implementation.DatabasePo
 import org.web24_25.cardswap_backend.database.structure.dbEntry.CardEntry;
 import org.web24_25.cardswap_backend.database.structure.dbTables.CardTagsTable;
 import org.web24_25.cardswap_backend.database.structure.dbTables.CardsTable;
-import org.web24_25.cardswap_backend.database.structure.dbTables.ExpansionsTable;
 
 import java.util.HashMap;
 import java.util.List;

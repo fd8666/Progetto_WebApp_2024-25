@@ -44,10 +44,8 @@ public class TagsTablePostgres implements TagsTable {
     public boolean removeTagWithName(String name) {
         if (DatabasePostgres.getInstance().verifyConnectionAndReconnect()) {
             try {
-                assert TagsTable.getInstance() != null;
-                TagEntry te = TagsTable.getInstance().getTagWithName(name);
-                assert CardTagsTable.getInstance() != null;
-                if (!CardTagsTable.getInstance().getCardsWithTag(te.id()).isEmpty()) {
+                TagEntry te = TagsTablePostgres.getInstance().getTagWithName(name);
+                if (!CardTagsTablePostgres.getInstance().getCardsWithTag(te.id()).isEmpty()) {
                     return false;
                 }
 

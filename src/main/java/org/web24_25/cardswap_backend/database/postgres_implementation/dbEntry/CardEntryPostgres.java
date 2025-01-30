@@ -1,10 +1,17 @@
 package org.web24_25.cardswap_backend.database.postgres_implementation.dbEntry;
 
 import org.web24_25.cardswap_backend.database.postgres_implementation.DatabasePostgres;
+import org.web24_25.cardswap_backend.database.postgres_implementation.dbTables.CardTagsTablePostgres;
+import org.web24_25.cardswap_backend.database.postgres_implementation.dbTables.ExpansionsTablePostgres;
+import org.web24_25.cardswap_backend.database.postgres_implementation.dbTables.GamesTablePostgres;
 import org.web24_25.cardswap_backend.database.structure.dbEntry.CardEntry;
+import org.web24_25.cardswap_backend.database.structure.dbEntry.ExpansionEntry;
+import org.web24_25.cardswap_backend.database.structure.dbEntry.GameEntry;
+import org.web24_25.cardswap_backend.database.structure.dbEntry.TagEntry;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Objects;
 import java.util.logging.Logger;
 
@@ -142,6 +149,31 @@ public final class CardEntryPostgres implements CardEntry {
         return false;
     }
 
+    @Override
+    public GameEntry getGame() {
+        return GamesTablePostgres.getInstance().getGameWithId(game());
+    }
+
+    @Override
+    public ExpansionEntry getExpansion() {
+        return ExpansionsTablePostgres.getInstance().getExpansionWithId(expansion());
+    }
+
+    @Override
+    public List<TagEntry> getTags() {
+        return CardTagsTablePostgres.getInstance().getTagsWithCard(id());
+    }
+
+    @Override
+    public boolean addTag(TagEntry tag) {
+        return CardTagsTablePostgres.getInstance().addCardTagToTable(id(), tag.id());
+    }
+
+    @Override
+    public boolean removeTag(TagEntry tag) {
+        return CardTagsTablePostgres.getInstance().removeCardTagFromTable(id(), tag.id());
+    }
+
     public String description() {
         return description;
     }
@@ -174,5 +206,4 @@ public final class CardEntryPostgres implements CardEntry {
                 "identifier=" + identifier + ", " +
                 "description=" + description + ']';
     }
-
 }

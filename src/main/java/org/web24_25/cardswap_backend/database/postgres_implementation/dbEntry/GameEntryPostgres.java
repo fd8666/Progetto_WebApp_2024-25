@@ -1,10 +1,15 @@
 package org.web24_25.cardswap_backend.database.postgres_implementation.dbEntry;
 
 import org.web24_25.cardswap_backend.database.postgres_implementation.DatabasePostgres;
+import org.web24_25.cardswap_backend.database.postgres_implementation.dbTables.CardsTablePostgres;
+import org.web24_25.cardswap_backend.database.postgres_implementation.dbTables.ExpansionsTablePostgres;
+import org.web24_25.cardswap_backend.database.structure.dbEntry.CardEntry;
+import org.web24_25.cardswap_backend.database.structure.dbEntry.ExpansionEntry;
 import org.web24_25.cardswap_backend.database.structure.dbEntry.GameEntry;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.List;
 import java.util.Objects;
 import java.util.logging.Logger;
 
@@ -69,6 +74,16 @@ public final class GameEntryPostgres implements GameEntry {
             }
         }
         return false;
+    }
+
+    @Override
+    public List<ExpansionEntry> getExpansions() {
+        return ExpansionsTablePostgres.getInstance().getExpansionsWithGame(id());
+    }
+
+    @Override
+    public List<CardEntry> getCards() {
+        return CardsTablePostgres.getInstance().getCardsWithGame(id());
     }
 
     @Override

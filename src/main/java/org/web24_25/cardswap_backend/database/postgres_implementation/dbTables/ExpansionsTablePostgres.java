@@ -2,10 +2,10 @@ package org.web24_25.cardswap_backend.database.postgres_implementation.dbTables;
 
 import org.web24_25.cardswap_backend.database.postgres_implementation.DatabasePostgres;
 import org.web24_25.cardswap_backend.database.structure.dbEntry.ExpansionEntry;
-import org.web24_25.cardswap_backend.database.structure.dbEntry.GameEntry;
 import org.web24_25.cardswap_backend.database.structure.dbTables.ExpansionsTable;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.logging.Logger;
 
 public class ExpansionsTablePostgres implements ExpansionsTable {
@@ -52,6 +52,11 @@ public class ExpansionsTablePostgres implements ExpansionsTable {
 
     @Override
     public ExpansionEntry getExpansionWithId(int id) {
+        return null;
+    }
+
+    @Override
+    public List<ExpansionEntry> getExpansionsWithGame(int gameId) {
         return null;
     }
 

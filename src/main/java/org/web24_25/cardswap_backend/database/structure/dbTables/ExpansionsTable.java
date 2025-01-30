@@ -2,6 +2,8 @@ package org.web24_25.cardswap_backend.database.structure.dbTables;
 
 import org.web24_25.cardswap_backend.database.structure.dbEntry.ExpansionEntry;
 
+import java.util.List;
+
 public interface ExpansionsTable {
     static ExpansionsTable getInstance() {
         return null;
@@ -11,4 +13,5 @@ public interface ExpansionsTable {
     boolean removeExpansionWithId(int id);
     ExpansionEntry getExpansionWithName(String name);
     ExpansionEntry getExpansionWithId(int id);
+    List<ExpansionEntry> getExpansionsWithGame(int gameId);
 }
