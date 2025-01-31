@@ -1,3 +1,236 @@
-<p>front-page works!</p>
-<button routerLink="/Registrazione">Vai alla Seconda Pagina</button>
-<button routerLink="/Login">Vai alla Seconda Pagina</button>
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>TCG Exchange</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="../../styles.css"/>
+
+</head>
+<body class="bg-light">
+<header class="bg-dark text-white"style="position: sticky; top: 0; left: 0;right: 0; z-index: 9999;">
+  <div class="container d-flex justify-content-between align-items-center py-4">
+    <div class="d-flex align-items-center">
+      <h1 class="h2">TCG Exchange</h1>
+    </div>
+    <nav>
+      <ul class="nav">
+        <li class="nav-item"><a class="nav-link text-white" href="#">Vetrina</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="#">Eventi</a></li>
+        <li class="nav-item"><a class="nav-link text-white" href="#">Contatti</a></li>
+      </ul>
+    </nav>
+    <div class="d-flex align-items-center">
+      <div class="dropdown">
+        <button class="btn btn-secondary dropdown-toggle" id="accountButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-user"></i>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="accountButton">
+          <a class="dropdown-item" routerLink="/Login">Login</a>
+          <a class="dropdown-item" routerLink="/Registrazione">Registrati</a>
+        </div>
+      </div>
+      <div class="dropdown ml-2">
+        <button class="btn btn-secondary dropdown-toggle" id="cartButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <i class="fas fa-shopping-cart"></i>
+        </button>
+        <div class="dropdown-menu" aria-labelledby="cartButton">
+          <p class="dropdown-item">Il tuo carrello è vuoto.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+<main class="container py-4">
+  <section class="mb-4">
+    <h2 class="h3 font-weight-bold mb-4">Benvenuti su TCG Exchange</h2>
+    <p class="text-muted mb-4">Scopri il mondo degli scambi e degli acquisti di carte collezionabili! Qui puoi trovare altri collezionisti con cui scambiare le tue carte, partecipare a eventi e rimanere aggiornato sulle ultime notizie del mondo delle carte collezionabili.</p>
+
+    <div class="slideshow-container">
+
+      <div class="mySlides fade">
+        <div class="numbertext">1 / 3</div>
+        <img src="https://www.guizettefamily.com/wp-content/uploads/2024/08/Pokemon-JCC-Etincelles-Deferlantes-1.jpg" style="width:100%">
+      </div>
+
+      <div class="mySlides fade">
+        <div class="numbertext">2 / 3</div>
+        <img src="https://cardotaku.com/cdn/shop/collections/one-piece-card-game-booster-pack-op-09-emperors-in-the-new-world-cards-list.png?v=1720055194&width=1200" style="width:100%">
+      </div>
+
+      <div class="mySlides fade">
+        <div class="numbertext">3 / 3</div>
+        <img src="https://www.disneylorcana.com/cms/gallery/lorcana-web/landing/shimmeringskies_it_thumbnail.jpg" style="width:100%">
+      </div>
+      <div style="text-align:center; position:absolute; top:710px;right:640px">
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+      </div>
+    </div>
+    <br>
+
+  </section>
+  <hr class="styled-line"> <!-- Aggiungi la linea qui -->
+  <section class="mb-4">
+    <h2 class="h3 font-weight-bold mb-4">Ultime Notizie</h2>
+    <div class="row">
+      <article class="col-md-4 mb-4">
+        <div class="card">
+          <img alt="Immagine di un evento di carte collezionabili" class="card-img-top" src="https://images.unsplash.com/photo-1604908177520-472d1d1a5b1b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDJ8fHBva2Vtb24lMjBjYXJkc3xlbnwwfHx8fDE2NjY2NjY2NjY&ixlib=rb-1.2.1&q=80&w=1080"/>
+          <div class="card-body">
+            <h3 class="card-title">Evento di Carte Collezionabili</h3>
+            <p class="card-text">Partecipa al nuovo evento di carte collezionabili e trova carte rare!</p>
+          </div>
+        </div>
+      </article>
+      <article class="col-md-4 mb-4">
+        <div class="card">
+          <img alt="Immagine di una nuova carta collezionabile" class="card-img-top" src="https://images.unsplash.com/photo-1604908177520-472d1d1a5b1b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDJ8fHBva2Vtb24lMjBjYXJkc3xlbnwwfHx8fDE2NjY2NjY2NjY&ixlib=rb-1.2.1&q=80&w=1080"/>
+          <div class="card-body">
+            <h3 class="card-title">Nuova Carta Scoperta</h3>
+            <p class="card-text">Scopri la nuova carta appena scoperta nella serie più recente.</p>
+          </div>
+        </div>
+      </article>
+      <article class="col-md-4 mb-4">
+        <div class="card">
+          <img alt="Immagine di un torneo di carte collezionabili" class="card-img-top" src="https://images.unsplash.com/photo-1604908177520-472d1d1a5b1b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=MnwzNjUyOXwwfDF8c2VhcmNofDJ8fHBva2Vtb24lMjBjYXJkc3xlbnwwfHx8fDE2NjY2NjY2NjY&ixlib=rb-1.2.1&q=80&w=1080"/>
+          <div class="card-body">
+            <h3 class="card-title">Torneo di Carte Collezionabili</h3>
+            <p class="card-text">Iscriviti al prossimo torneo di carte collezionabili e dimostra di essere il miglior collezionista!</p>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+  <hr class="styled-line"> <!-- Aggiungi la linea qui -->
+  <section class="mb-4">
+    <h2 class="h3 font-weight-bold mb-4">Cosa Puoi Fare</h2>
+    <div class="row">
+      <div class="col-md-4 mb-4">
+        <div class="card text-center">
+          <div class="card-body">
+            <i class="fas fa-exchange-alt fa-4x text-primary mb-4"></i>
+            <h3 class="card-title">Scambiare</h3>
+            <p class="card-text">Trova altri collezionisti con cui scambiare le tue carte.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card text-center">
+          <div class="card-body">
+            <i class="fas fa-dollar-sign fa-4x text-primary mb-4"></i>
+            <h3 class="card-title">Vendere</h3>
+            <p class="card-text">Vendi le tue carte collezionabili e guadagna.</p>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-4">
+        <div class="card text-center">
+          <div class="card-body">
+            <i class="fas fa-shopping-cart fa-4x text-primary mb-4"></i>
+            <h3 class="card-title">Acquistare</h3>
+            <p class="card-text">Acquista carte collezionabili per completare la tua collezione.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  <hr class="styled-line"> <!-- Aggiungi la linea qui -->
+  <section>
+    <div id="da-sapere">
+      <div class="da-sapere-row">Ogni utente può contattare qualsiasi altro utente.</div>
+      <div class="da-sapere-row">Puoi proporre uno scambio direttamente all'utente.</div>
+      <div class="da-sapere-row">Ogni utente registrato ha il suo STORE con le proprie carte.</div>
+      <div class="da-sapere-row">Spedizione con raccomandata a carico di chi spedisce la carta.</div>
+      <div class="da-sapere-row">Puoi prelevare non appena il compratore conferma la ricezione.</div>
+    </div>
+  </section>
+  <hr class="styled-line"> <!-- Aggiungi la linea qui -->
+  <section>
+    <h2 class="h3 font-weight-bold mb-4">Domande Frequenti</h2>
+    <div class="row">
+      <div class="col-md-6 mb-4">
+        <div class="card">
+          <button class="btn btn-link w-100 text-left" data-toggle="collapse" data-target="#faq1">
+            <h3 class="h5">Come posso scambiare le mie carte?</h3>
+          </button>
+          <div class="collapse" id="faq1">
+            <div class="card-body">Per scambiare le tue carte, vai alla sezione Scambi e trova altri collezionisti interessati.</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 mb-4">
+        <div class="card">
+          <button class="btn btn-link w-100 text-left" data-toggle="collapse" data-target="#faq2">
+            <h3 class="h5">Come posso vendere le mie carte?</h3>
+          </button>
+          <div class="collapse" id="faq2">
+            <div class="card-body">Per vendere le tue carte, vai alla sezione Vendite e segui le istruzioni per mettere in vendita le tue carte.</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 mb-4">
+        <div class="card">
+          <button class="btn btn-link w-100 text-left" data-toggle="collapse" data-target="#faq3">
+            <h3 class="h5">Come posso acquistare carte?</h3>
+          </button>
+          <div class="collapse" id="faq3">
+            <div class="card-body">Per acquistare carte, vai alla sezione Vetrina e scegli le carte che desideri acquistare.</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 mb-4">
+        <div class="card">
+          <button class="btn btn-link w-100 text-left" data-toggle="collapse" data-target="#faq4">
+            <h3 class="h5">Come posso partecipare agli eventi?</h3>
+          </button>
+          <div class="collapse" id="faq4">
+            <div class="card-body">Per partecipare agli eventi, visita la sezione Eventi e iscriviti agli eventi di tuo interesse.</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 mb-4">
+        <div class="card">
+          <button class="btn btn-link w-100 text-left" data-toggle="collapse" data-target="#faq5">
+            <h3 class="h5">Come posso contattare il supporto?</h3>
+          </button>
+          <div class="collapse" id="faq5">
+            <div class="card-body">Per contattare il supporto, visita la sezione Contatti e compila il modulo di contatto.</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-6 mb-4">
+        <div class="card">
+          <button class="btn btn-link w-100 text-left" data-toggle="collapse" data-target="#faq6">
+            <h3 class="h5">Come posso creare un account?</h3>
+          </button>
+          <div class="collapse" id="faq6">
+            <div class="card-body">Per creare un account, clicca sull'icona dell'account in alto a destra e seleziona Registrati.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+<footer class="bg-dark text-white py-4">
+  <div class="container text-center">
+    <p>© 2023 TCG Exchange. Tutti i diritti riservati.</p>
+    <div class="d-flex justify-content-center">
+      <a class="text-white mx-2" href="#"><i class="fab fa-facebook-f"></i></a>
+      <a class="text-white mx-2" href="#"><i class="fab fa-twitter"></i></a>
+      <a class="text-white mx-2" href="#"><i class="fab fa-instagram"></i></a>
+    </div>
+  </div>
+</footer>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<script src="script.js"></script> <!-- Link al file JavaScript -->
+<script src="slideshow.js"></script> <!-- Link al file JavaScript -->
+</body>
+</html>
