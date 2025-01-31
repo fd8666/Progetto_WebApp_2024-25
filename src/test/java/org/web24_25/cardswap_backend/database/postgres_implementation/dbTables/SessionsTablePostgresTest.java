@@ -17,11 +17,11 @@ class SessionsTablePostgresTest {
     }
 
     @Test
-    void getSessionById() {
+    void getSessionWithId() {
     }
 
     @Test
-    void getSessionByCookie() {
+    void getSessionWithCookie() {
     }
 
     @Test

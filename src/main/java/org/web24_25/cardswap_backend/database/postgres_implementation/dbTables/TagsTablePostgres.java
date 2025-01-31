@@ -4,12 +4,14 @@ import org.web24_25.cardswap_backend.database.postgres_implementation.DatabasePo
 import org.web24_25.cardswap_backend.database.postgres_implementation.dbEntry.TagEntryPostgres;
 import org.web24_25.cardswap_backend.database.structure.dbEntry.TagEntry;
 import org.web24_25.cardswap_backend.database.structure.dbTables.CardTagsTable;
+import org.web24_25.cardswap_backend.database.structure.dbTables.CardsTable;
 import org.web24_25.cardswap_backend.database.structure.dbTables.TagsTable;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.logging.Logger;
 
 public class TagsTablePostgres implements TagsTable {
@@ -45,13 +47,16 @@ public class TagsTablePostgres implements TagsTable {
         if (DatabasePostgres.getInstance().verifyConnectionAndReconnect()) {
             try {
                 TagEntry te = TagsTablePostgres.getInstance().getTagWithName(name);
-                if (!CardTagsTablePostgres.getInstance().getCardsWithTag(te.id()).isEmpty()) {
+                if (!CardsTablePostgres.getInstance().getCardsWithTag(te.id()).isEmpty()) {
                     return false;
                 }
 
                 PreparedStatement ps =  DatabasePostgres.conn.prepareStatement("DELETE FROM tags WHERE name = ?;");
                 ps.setString(1, name);
-                return ps.executeUpdate() != 0;
+                if (ps.executeUpdate() != 0) {
+                    tags.remove(te.id());
+                    return true;
+                }
             } catch (SQLException e) {
                 logger.severe(e.getMessage());
             }
@@ -63,14 +68,16 @@ public class TagsTablePostgres implements TagsTable {
     public boolean removeTagWithId(int id) {
         if (DatabasePostgres.getInstance().verifyConnectionAndReconnect()) {
             try {
-                assert CardTagsTable.getInstance() != null;
-                if (!CardTagsTable.getInstance().getCardsWithTag(id).isEmpty()) {
+                if (!CardsTablePostgres.getInstance().getCardsWithTag(id).isEmpty()) {
                     return false;
                 }
 
                 PreparedStatement ps =  DatabasePostgres.conn.prepareStatement("DELETE FROM tags WHERE id = ?;");
                 ps.setInt(1, id);
-                return ps.executeUpdate() != 0;
+                if (ps.executeUpdate() != 0) {
+                    tags.remove(id);
+                    return true;
+                }
             } catch (SQLException e) {
                 logger.severe(e.getMessage());
             }
@@ -131,5 +138,10 @@ public class TagsTablePostgres implements TagsTable {
             }
         }
         return null;
+    }
+
+    @Override
+    public List<TagEntry> getTagsForCard(int cardId) {
+        return List.of();
     }
 }

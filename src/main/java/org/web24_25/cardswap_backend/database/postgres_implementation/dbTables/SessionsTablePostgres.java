@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.logging.Logger;
 
 public class SessionsTablePostgres implements SessionsTable {
-    private static final HashMap<Integer, SessionEntry> sessions = new HashMap<>();
+    private static final HashMap<Integer, SessionEntry> sessions = new HashMap<>(); //cache
     private static SessionsTablePostgres instance;
     public static final Logger logger = Logger.getLogger(SessionsTablePostgres.class.getName());
 
@@ -43,7 +43,7 @@ public class SessionsTablePostgres implements SessionsTable {
     }
 
     @Override
-    public SessionEntry getSessionById(int id) {
+    public SessionEntry getSessionWithId(int id) {
         if (sessions.containsKey(id)) {
             return sessions.get(id);
         } else {
@@ -61,7 +61,8 @@ public class SessionsTablePostgres implements SessionsTable {
                             rs.getString("user_agent"),
                             rs.getDate("creation_date"),
                             rs.getInt("time_to_live"),
-                            rs.getBoolean("valid")
+                            rs.getBoolean("valid"),
+                            rs.getString("private_key")
                         );
                         sessions.put(sep.id(), sep);
                         rs.close();
@@ -76,7 +77,7 @@ public class SessionsTablePostgres implements SessionsTable {
     }
 
     @Override
-    public SessionEntry getSessionByCookie(String cookie) {
+    public SessionEntry getSessionWithCookie(String cookie) {
         for (SessionEntry se : sessions.values()) {
             if (se.cookie().equals(cookie)) {
                 return se;
@@ -96,7 +97,8 @@ public class SessionsTablePostgres implements SessionsTable {
                         rs.getString("user_agent"),
                         rs.getDate("creation_date"),
                         rs.getInt("time_to_live"),
-                        rs.getBoolean("valid")
+                        rs.getBoolean("valid"),
+                        rs.getString("private_key")
                     );
                     sessions.put(uep.id(), uep);
                     rs.close();
@@ -131,7 +133,8 @@ public class SessionsTablePostgres implements SessionsTable {
                         rs.getString("user_agent"),
                         rs.getDate("creation_date"),
                         rs.getInt("time_to_live"),
-                        rs.getBoolean("valid")
+                        rs.getBoolean("valid"),
+                        rs.getString("private_key")
                     );
                     sessions.put(sep.id(), sep);
                     sessions_list.add(sep);
@@ -165,7 +168,8 @@ public class SessionsTablePostgres implements SessionsTable {
                             rs.getString("user_agent"),
                             rs.getDate("creation_date"),
                             rs.getInt("time_to_live"),
-                            rs.getBoolean("valid")
+                            rs.getBoolean("valid"),
+                            rs.getString("private_key")
                     );
                     sessions.put(sep.id(), sep);
                     sessions_list.add(sep);
@@ -177,4 +181,6 @@ public class SessionsTablePostgres implements SessionsTable {
         }
         return sessions_list;
     }
+
+    //TODO: add a method to clear the sessions cache
 }

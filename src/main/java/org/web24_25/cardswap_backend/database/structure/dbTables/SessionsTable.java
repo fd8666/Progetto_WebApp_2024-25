@@ -9,8 +9,8 @@ public interface SessionsTable {
         return null;
     }
     boolean createSession(int user_id, String cookie);
-    SessionEntry getSessionById(int id);
-    SessionEntry getSessionByCookie(String cookie);
+    SessionEntry getSessionWithId(int id);
+    SessionEntry getSessionWithCookie(String cookie);
     List<SessionEntry> getValidUsersSessions(int start_id, int limit);
     List<SessionEntry> getValidUserSessions(int user_id);
 }

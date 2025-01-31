@@ -69,6 +69,11 @@ public class CardsTablePostgres implements CardsTable {
     }
 
     @Override
+    public List<CardEntry> getCardsWithTag(int tagId) {
+        return List.of();
+    }
+
+    @Override
     public CardEntry getCardWithName(String cardName) {
         return null;
     }

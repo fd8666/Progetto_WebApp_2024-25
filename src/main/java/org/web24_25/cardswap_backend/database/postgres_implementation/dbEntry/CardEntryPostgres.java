@@ -4,6 +4,7 @@ import org.web24_25.cardswap_backend.database.postgres_implementation.DatabasePo
 import org.web24_25.cardswap_backend.database.postgres_implementation.dbTables.CardTagsTablePostgres;
 import org.web24_25.cardswap_backend.database.postgres_implementation.dbTables.ExpansionsTablePostgres;
 import org.web24_25.cardswap_backend.database.postgres_implementation.dbTables.GamesTablePostgres;
+import org.web24_25.cardswap_backend.database.postgres_implementation.dbTables.TagsTablePostgres;
 import org.web24_25.cardswap_backend.database.structure.dbEntry.CardEntry;
 import org.web24_25.cardswap_backend.database.structure.dbEntry.ExpansionEntry;
 import org.web24_25.cardswap_backend.database.structure.dbEntry.GameEntry;
@@ -161,12 +162,12 @@ public final class CardEntryPostgres implements CardEntry {
 
     @Override
     public List<TagEntry> getTags() {
-        return CardTagsTablePostgres.getInstance().getTagsWithCard(id());
+        return TagsTablePostgres.getInstance().getTagsForCard(id());
     }
 
     @Override
     public boolean addTag(TagEntry tag) {
-        return CardTagsTablePostgres.getInstance().addCardTagToTable(id(), tag.id());
+        return CardTagsTablePostgres.getInstance().addTagToCard(id(), tag.id());
     }
 
     @Override

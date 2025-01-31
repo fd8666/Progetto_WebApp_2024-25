@@ -1,15 +1,13 @@
 package org.web24_25.cardswap_backend.database.postgres_implementation.dbTables;
 
 import org.web24_25.cardswap_backend.database.postgres_implementation.DatabasePostgres;
-import org.web24_25.cardswap_backend.database.structure.dbEntry.CardEntry;
-import org.web24_25.cardswap_backend.database.structure.dbEntry.ExpansionEntry;
+import org.web24_25.cardswap_backend.database.postgres_implementation.dbEntry.GameEntryPostgres;
 import org.web24_25.cardswap_backend.database.structure.dbEntry.GameEntry;
 import org.web24_25.cardswap_backend.database.structure.dbTables.GamesTable;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.HashMap;
-import java.util.List;
 import java.util.logging.Logger;
 
 public class GamesTablePostgres implements GamesTable {
@@ -23,6 +21,8 @@ public class GamesTablePostgres implements GamesTable {
         }
         return instance;
     }
+
+    private GamesTablePostgres() {}
 
     @Override
     public boolean addGame(String name) {
@@ -54,7 +54,10 @@ public class GamesTablePostgres implements GamesTable {
 
                 PreparedStatement ps =  DatabasePostgres.conn.prepareStatement("DELETE FROM games WHERE name = ?;");
                 ps.setString(1, name);
-                return ps.executeUpdate() != 0;
+                if (ps.executeUpdate() != 0) {
+                    games.remove(ge.id());
+                    return true;
+                }
             } catch (SQLException e) {
                 logger.severe(e.getMessage());
             }
@@ -64,28 +67,82 @@ public class GamesTablePostgres implements GamesTable {
 
     @Override
     public boolean removeGameWithId(int id) {
+        if (DatabasePostgres.getInstance().verifyConnectionAndReconnect()) {
+            try {
+                GameEntry ge = GamesTablePostgres.getInstance().getGameWithId(id);
+                if (!ge.getExpansions().isEmpty()) {
+//                    throw new IllegalStateException("Cannot remove game with expansions");
+                    return false;
+                }
+                if (!ge.getCards().isEmpty()) {
+//                    throw new IllegalStateException("Cannot remove game with cards");
+                    return false;
+                }
+
+                PreparedStatement ps =  DatabasePostgres.conn.prepareStatement("DELETE FROM games WHERE id = ?;");
+                ps.setInt(1, id);
+                if (ps.executeUpdate() != 0) {
+                    games.remove(id);
+                    return true;
+                }
+            } catch (SQLException e) {
+                logger.severe(e.getMessage());
+            }
+        }
         return false;
     }
 
     @Override
     public GameEntry getGameWithName(String name) {
+        for (GameEntry ge : games.values()) {
+            if (ge.name().equals(name)) {
+                return ge;
+            }
+        }
+        if (DatabasePostgres.getInstance().verifyConnectionAndReconnect()) {
+            try {
+                var ps = DatabasePostgres.conn.prepareStatement("SELECT * FROM games WHERE name = ?;");
+                ps.setString(1, name);
+                var rs = ps.executeQuery();
+                if (rs.next()) {
+                    var gep = new GameEntryPostgres(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("description")
+                    );
+                    games.put(gep.id(), gep);
+                    return gep;
+                }
+            } catch (SQLException e) {
+                logger.severe(e.getMessage());
+            }
+        }
         return null;
     }
 
     @Override
     public GameEntry getGameWithId(int id) {
+        if (games.containsKey(id)) {
+            return games.get(id);
+        }
+        if (DatabasePostgres.getInstance().verifyConnectionAndReconnect()) {
+            try {
+                var ps = DatabasePostgres.conn.prepareStatement("SELECT * FROM games WHERE id = ?;");
+                ps.setInt(1, id);
+                var rs = ps.executeQuery();
+                if (rs.next()) {
+                    var gep = new GameEntryPostgres(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("description")
+                    );
+                    games.put(gep.id(), gep);
+                    return gep;
+                }
+            } catch (SQLException e) {
+                logger.severe(e.getMessage());
+            }
+        }
         return null;
     }
-
-    @Override
-    public List<ExpansionEntry> getExpansionsForGame(int id) {
-        return List.of();
-    }
-
-    @Override
-    public List<CardEntry> getCardsForGame(int id) {
-        return List.of();
-    }
-
-    private GamesTablePostgres() {}
 }

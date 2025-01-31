@@ -1,11 +1,8 @@
 package org.web24_25.cardswap_backend.database.postgres_implementation.dbTables;
 
 import org.web24_25.cardswap_backend.database.postgres_implementation.DatabasePostgres;
-import org.web24_25.cardswap_backend.database.structure.dbEntry.CardEntry;
-import org.web24_25.cardswap_backend.database.structure.dbEntry.TagEntry;
 import org.web24_25.cardswap_backend.database.structure.dbTables.CardTagsTable;
 
-import java.util.List;
 import java.util.logging.Logger;
 
 public class CardTagsTablePostgres implements CardTagsTable {
@@ -20,7 +17,7 @@ public class CardTagsTablePostgres implements CardTagsTable {
     }
 
     @Override
-    public boolean addCardTagToTable(int cardId, int tagId) {
+    public boolean addTagToCard(int cardId, int tagId) {
         if (DatabasePostgres.getInstance().verifyConnectionAndReconnect()) {
             try {
                 var ps = DatabasePostgres.conn.prepareStatement("INSERT INTO card_tags (card, tag) VALUES (?, ?);");
@@ -47,16 +44,6 @@ public class CardTagsTablePostgres implements CardTagsTable {
     @Override
     public boolean removeAllCardTagsFromTag(int tagId) {
         return false;
-    }
-
-    @Override
-    public List<CardEntry> getCardsWithTag(int tagId) {
-        return List.of();
-    }
-
-    @Override
-    public List<TagEntry> getTagsWithCard(int cardId) {
-        return List.of();
     }
 
     private CardTagsTablePostgres() {}

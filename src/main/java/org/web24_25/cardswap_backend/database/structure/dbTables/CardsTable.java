@@ -15,6 +15,7 @@ public interface CardsTable {
     CardEntry getCardWithId(int cardId);
     List<CardEntry> getCardsWithExpansion(int expansionId);
     List<CardEntry> getCardsWithGame(int gameId);
+    List<CardEntry> getCardsWithTag(int tagId);
     CardEntry getCardWithName(String cardName);
     CardEntry getCardWithIdentifier(String identifier);
 }
