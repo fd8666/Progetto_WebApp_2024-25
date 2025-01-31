@@ -9,6 +9,4 @@ import {RouterModule} from '@angular/router';
   standalone: true,
   styleUrl: './front-page.component.css'
 })
-export class FrontPageComponent {
-
-}
+export class FrontPageComponent {}
