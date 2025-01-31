@@ -8,5 +8,6 @@ import {RouterModule} from '@angular/router';
   templateUrl: './front-page.component.html',
   standalone: true,
   styleUrl: './front-page.component.css'
+
 })
 export class FrontPageComponent {}
