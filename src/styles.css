@@ -4,6 +4,45 @@ body {
   font-family: 'Roboto', sans-serif;
 }
 
+/* Header */
+header {
+  background-color: #ffffff;
+  color: #fff;
+  padding: 20px;
+  text-align: center;
+  position: sticky;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+.titolo-sfondo{
+  background: linear-gradient(45deg, #0D47A1, #1E68D1, #3C8ED1);
+}
+header h1 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+/* Container per il modulo di registrazione */
+.container-modulo {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #ffffff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.container-header {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+  border-radius: 10px;
+  background: linear-gradient(45deg, #6d71f8, #4f57c4, #3f47a2);
+  box-shadow: 0 0 10px rgb(39, 89, 175);
+}
+
 /* Tablet: applica quando la larghezza della finestra è 768px o inferiore */
 @media (max-width: 768px) {
   body {
@@ -109,16 +148,6 @@ footer {
   transform: scale(1.1); /* Zoom al 110% al passaggio del mouse */
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Ombra al passaggio del mouse */
 }
-
-.btn-secondary {
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transizione per zoom e ombra */
-}
-
-.btn-secondary:hover {
-  transform: scale(1.1); /* Zoom al 110% al passaggio del mouse */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Ombra al passaggio del mouse */
-}
-
 
 h1.h2:hover {
   transform: scale(1.1); /* Zoom al 110% al passaggio del mouse */
