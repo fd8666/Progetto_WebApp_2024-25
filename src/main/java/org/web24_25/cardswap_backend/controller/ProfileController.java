@@ -13,7 +13,7 @@ import org.web24_25.cardswap_backend.service.ProfileService;
 @RequestMapping("/api/profile")
 public class ProfileController {
     private final ProfileService service = new ProfileService();
-    @GetMapping("/usermane")
+    @GetMapping("/username")
     public ResponseEntity<String> getUsername(@CookieValue HttpSession session) {
         return service.getUsername(session);
     }

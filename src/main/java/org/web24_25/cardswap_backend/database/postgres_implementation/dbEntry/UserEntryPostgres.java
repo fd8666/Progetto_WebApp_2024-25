@@ -123,7 +123,7 @@ public final class UserEntryPostgres implements UserEntry {
 
     @Override
     public String toString() {
-        return "UserEntryPostgress[" +
+        return "UserEntryPostgres[" +
                 "id=" + id + ", " +
                 "username=" + username + ", " +
                 "email=" + email + ", " +

@@ -19,10 +19,11 @@ public final class SessionEntryPostgres implements SessionEntry {
     private final Date creation_date;
     private final Integer time_to_live;
     private Boolean valid;
+    private final String private_key;
 
     private static final Logger logger = Logger.getLogger(SessionEntryPostgres.class.getName());
 
-    public SessionEntryPostgres(Integer id, Integer user_id, String ipv4, String cookie, String user_agent, Date creation_date, Integer time_to_live, Boolean valid) {
+    public SessionEntryPostgres(Integer id, Integer user_id, String ipv4, String cookie, String user_agent, Date creation_date, Integer time_to_live, Boolean valid, String private_key) {
         this.id = id;
         this.user_id = user_id;
         this.ipv4 = ipv4;
@@ -31,6 +32,7 @@ public final class SessionEntryPostgres implements SessionEntry {
         this.creation_date = creation_date;
         this.time_to_live = time_to_live;
         this.valid = valid;
+        this.private_key = private_key;
     }
 
     public Integer id() {
@@ -66,6 +68,11 @@ public final class SessionEntryPostgres implements SessionEntry {
             valid = false;
         }
         return valid;
+    }
+
+    @Override
+    public String private_key() {
+        return private_key;
     }
 
     public boolean invalidate() {

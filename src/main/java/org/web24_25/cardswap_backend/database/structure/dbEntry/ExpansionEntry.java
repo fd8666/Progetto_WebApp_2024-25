@@ -1,9 +1,5 @@
 package org.web24_25.cardswap_backend.database.structure.dbEntry;
 
-import org.web24_25.cardswap_backend.database.structure.dbTables.CardsTable;
-import org.web24_25.cardswap_backend.database.structure.dbTables.ExpansionsTable;
-import org.web24_25.cardswap_backend.database.structure.dbTables.GamesTable;
-
 import java.util.List;
 
 public interface ExpansionEntry {

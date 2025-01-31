@@ -76,7 +76,7 @@ public class UsersTablePostgres implements UsersTable {
     }
 
     @Override
-    public UserEntry getUserFromId(int id) {
+    public UserEntry getUserWithId(int id) {
         if (users.containsKey(id)) {
             return users.get(id);
         } else {

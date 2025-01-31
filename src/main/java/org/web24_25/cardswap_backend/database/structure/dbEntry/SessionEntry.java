@@ -11,4 +11,5 @@ public interface SessionEntry {
     Date creation_date();
     Integer time_to_live();
     Boolean valid();
+    String private_key();
 }

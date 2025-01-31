@@ -19,7 +19,7 @@ public interface UsersTable {
             String google_id
     );
     boolean deleteUser(int id);
-    UserEntry getUserFromId(int id);
+    UserEntry getUserWithId(int id);
     UserEntry getUserFromUsername(String username);
     List<UserEntry> getUsersRange(int start_id, int limit);
     int getUserCount();

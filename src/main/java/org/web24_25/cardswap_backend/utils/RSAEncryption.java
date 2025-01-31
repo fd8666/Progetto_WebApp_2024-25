@@ -57,7 +57,7 @@ public class RSAEncryption {
     }
 
     public static String encrypt(String secret_message, Key publicKey) {
-        Cipher encryptCipher = null;
+        Cipher encryptCipher;
         try {
             encryptCipher = Cipher.getInstance("RSA");
             encryptCipher.init(Cipher.ENCRYPT_MODE, publicKey);
@@ -71,7 +71,7 @@ public class RSAEncryption {
     }
 
     public static String decrypt(String encrypted_message, Key privateKey) {
-        Cipher decryptCipher = null;
+        Cipher decryptCipher;
         try {
             decryptCipher = Cipher.getInstance("RSA");
             decryptCipher.init(Cipher.DECRYPT_MODE, privateKey);

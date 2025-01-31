@@ -4,11 +4,7 @@ import org.web24_25.cardswap_backend.database.postgres_implementation.DatabasePo
 import org.web24_25.cardswap_backend.database.structure.dbEntry.CardEntry;
 import org.web24_25.cardswap_backend.database.structure.dbEntry.ExpansionEntry;
 import org.web24_25.cardswap_backend.database.structure.dbEntry.GameEntry;
-import org.web24_25.cardswap_backend.database.structure.dbEntry.TagEntry;
-import org.web24_25.cardswap_backend.database.structure.dbTables.CardTagsTable;
-import org.web24_25.cardswap_backend.database.structure.dbTables.ExpansionsTable;
 import org.web24_25.cardswap_backend.database.structure.dbTables.GamesTable;
-import org.web24_25.cardswap_backend.database.structure.dbTables.TagsTable;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

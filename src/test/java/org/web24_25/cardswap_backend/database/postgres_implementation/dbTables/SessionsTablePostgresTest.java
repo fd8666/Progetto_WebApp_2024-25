@@ -5,7 +5,7 @@ import org.web24_25.cardswap_backend.database.postgres_implementation.DatabasePo
 
 import static org.junit.jupiter.api.Assertions.*;
 class SessionsTablePostgresTest {
-    private DatabasePostgres db = DatabasePostgres.getInstance();
+    private final DatabasePostgres db = DatabasePostgres.getInstance();
 
     @Test
     void getInstance() {

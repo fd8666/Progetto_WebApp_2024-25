@@ -9,7 +9,7 @@ import org.web24_25.cardswap_backend.database.structure.dbEntry.UserEntry;
 import static org.junit.jupiter.api.Assertions.*;
 
 class UsersTablePostgresTest {
-    private DatabasePostgres db = DatabasePostgres.getInstance();
+    private final DatabasePostgres db = DatabasePostgres.getInstance();
 
     @Test
     void getInstance() {
@@ -46,10 +46,10 @@ class UsersTablePostgresTest {
     }
 
     @Test
-    void getUserFromId() {
+    void getUserWithId() {
         UsersTablePostgres.getInstance().createUserWithPassword("testUser", "test@ciao", "password");
         UserEntry uet = UsersTablePostgres.getInstance().getUserFromUsername("testUser");
-        UserEntry ue = UsersTablePostgres.getInstance().getUserFromId(uet.id());
+        UserEntry ue = UsersTablePostgres.getInstance().getUserWithId(uet.id());
         assertNotNull(ue);
         assertEquals(uet, ue);
     }
