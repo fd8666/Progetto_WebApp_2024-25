@@ -5,7 +5,7 @@ import org.web24_25.cardswap_backend.database.structure.dbEntry.TradeEntry;
 import java.util.List;
 
 public interface TradesTable {
-    boolean addTrade(Integer from, Integer to, String status, String message);
+    boolean addTrade(Integer from, Integer to, String message);
     TradeEntry getTradeWithId(Integer tradeId);
     List<TradeEntry> getTradesFromUser(Integer userId);
     List<TradeEntry> getTradesToUser(Integer userId);

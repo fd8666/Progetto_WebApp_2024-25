@@ -1,8 +1,14 @@
 package org.web24_25.cardswap_backend.database.postgres_implementation.dbTables;
 
+import org.web24_25.cardswap_backend.database.postgres_implementation.DatabasePostgres;
+import org.web24_25.cardswap_backend.database.postgres_implementation.dbEntry.TradeEntryPostgres;
 import org.web24_25.cardswap_backend.database.structure.dbEntry.TradeEntry;
 import org.web24_25.cardswap_backend.database.structure.dbTables.TradesTable;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.logging.Logger;
@@ -22,37 +28,204 @@ public class TradesTablePostgres implements TradesTable {
     private TradesTablePostgres() {}
 
     @Override
-    public boolean addTrade(Integer from, Integer to, String status, String message) {
+    public boolean addTrade(Integer from, Integer to, String message) {
+        if (DatabasePostgres.getInstance().verifyConnectionAndReconnect()) {
+            try {
+                PreparedStatement ps =  DatabasePostgres.conn.prepareStatement("INSERT INTO trades (\"from\", \"to\", message) VALUES (?, ?, ?);");
+                ps.setInt(1, from);
+                ps.setInt(2, to);
+                ps.setString(3, message);
+                return ps.executeUpdate() != 0;
+            } catch (SQLException e) {
+                logger.severe(e.getMessage());
+            }
+        }
         return false;
     }
 
     @Override
     public TradeEntry getTradeWithId(Integer tradeId) {
+        if (trades.containsKey(tradeId)) {
+            return trades.get(tradeId);
+        }
+        if (DatabasePostgres.getInstance().verifyConnectionAndReconnect()) {
+            try {
+                PreparedStatement ps = DatabasePostgres.conn.prepareStatement("SELECT * FROM trades WHERE id = ?;");
+                ps.setInt(1, tradeId);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    TradeEntryPostgres tep = new TradeEntryPostgres(
+                        rs.getInt("id"),
+                        rs.getInt("from"),
+                        rs.getInt("to"),
+                        rs.getString("status"),
+                        rs.getString("message")
+                    );
+                    trades.put(tep.id(), tep);
+                    rs.close();
+                    return tep;
+                }
+            } catch (SQLException e) {
+                logger.severe(e.getMessage());
+            }
+        }
         return null;
     }
 
     @Override
     public List<TradeEntry> getTradesFromUser(Integer userId) {
-        return List.of();
+        ArrayList<TradeEntry> trades_list = new ArrayList<>();
+        if (DatabasePostgres.getInstance().verifyConnectionAndReconnect()) {
+            try {
+                PreparedStatement ps = DatabasePostgres.conn.prepareStatement("SELECT * FROM trades WHERE \"from\" = ?;");
+                ps.setInt(1, userId);
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    if (trades.containsKey(rs.getInt("id"))) {
+                        trades_list.add(trades.get(rs.getInt("id")));
+                        continue;
+                    }
+                    TradeEntryPostgres tep = new TradeEntryPostgres(
+                        rs.getInt("id"),
+                        rs.getInt("from"),
+                        rs.getInt("to"),
+                        rs.getString("status"),
+                        rs.getString("message")
+                    );
+                    trades_list.add(tep);
+                    trades.put(tep.id(), tep);
+                }
+                rs.close();
+            } catch (SQLException e) {
+                logger.severe(e.getMessage());
+            }
+        }
+        return trades_list;
     }
 
     @Override
     public List<TradeEntry> getTradesToUser(Integer userId) {
-        return List.of();
+        ArrayList<TradeEntry> trades_list = new ArrayList<>();
+        if (DatabasePostgres.getInstance().verifyConnectionAndReconnect()) {
+            try {
+                PreparedStatement ps = DatabasePostgres.conn.prepareStatement("SELECT * FROM trades WHERE \"to\" = ?;");
+                ps.setInt(1, userId);
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    if (trades.containsKey(rs.getInt("id"))) {
+                        trades_list.add(trades.get(rs.getInt("id")));
+                        continue;
+                    }
+                    TradeEntryPostgres tep = new TradeEntryPostgres(
+                        rs.getInt("id"),
+                        rs.getInt("from"),
+                        rs.getInt("to"),
+                        rs.getString("status"),
+                        rs.getString("message")
+                    );
+                    trades_list.add(tep);
+                    trades.put(tep.id(), tep);
+                }
+                rs.close();
+            } catch (SQLException e) {
+                logger.severe(e.getMessage());
+            }
+        }
+        return trades_list;
     }
 
     @Override
     public List<TradeEntry> getTradesWithStatus(String status) {
-        return List.of();
+        ArrayList<TradeEntry> trades_list = new ArrayList<>();
+        if (DatabasePostgres.getInstance().verifyConnectionAndReconnect()) {
+            try {
+                PreparedStatement ps = DatabasePostgres.conn.prepareStatement("SELECT * FROM trades WHERE status = ?;");
+                ps.setString(1, status);
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    if (trades.containsKey(rs.getInt("id"))) {
+                        trades_list.add(trades.get(rs.getInt("id")));
+                        continue;
+                    }
+                    TradeEntryPostgres tep = new TradeEntryPostgres(
+                        rs.getInt("id"),
+                        rs.getInt("from"),
+                        rs.getInt("to"),
+                        rs.getString("status"),
+                        rs.getString("message")
+                    );
+                    trades_list.add(tep);
+                    trades.put(tep.id(), tep);
+                }
+                rs.close();
+            } catch (SQLException e) {
+                logger.severe(e.getMessage());
+            }
+        }
+        return trades_list;
     }
 
     @Override
     public List<TradeEntry> getTradesFromUserWithStatus(Integer userId, String status) {
-        return List.of();
+        ArrayList<TradeEntry> trades_list = new ArrayList<>();
+        if (DatabasePostgres.getInstance().verifyConnectionAndReconnect()) {
+            try {
+                PreparedStatement ps = DatabasePostgres.conn.prepareStatement("SELECT * FROM trades WHERE \"from\" = ? AND status = ?;");
+                ps.setInt(1, userId);
+                ps.setString(2, status);
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    if (trades.containsKey(rs.getInt("id"))) {
+                        trades_list.add(trades.get(rs.getInt("id")));
+                        continue;
+                    }
+                    TradeEntryPostgres tep = new TradeEntryPostgres(
+                        rs.getInt("id"),
+                        rs.getInt("from"),
+                        rs.getInt("to"),
+                        rs.getString("status"),
+                        rs.getString("message")
+                    );
+                    trades_list.add(tep);
+                    trades.put(tep.id(), tep);
+                }
+                rs.close();
+            } catch (SQLException e) {
+                logger.severe(e.getMessage());
+            }
+        }
+        return trades_list;
     }
 
     @Override
     public List<TradeEntry> getTradesToUserWithStatus(Integer userId, String status) {
-        return List.of();
+        ArrayList<TradeEntry> trades_list = new ArrayList<>();
+        if (DatabasePostgres.getInstance().verifyConnectionAndReconnect()) {
+            try {
+                PreparedStatement ps = DatabasePostgres.conn.prepareStatement("SELECT * FROM trades WHERE \"to\" = ? AND status = ?;");
+                ps.setInt(1, userId);
+                ps.setString(2, status);
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    if (trades.containsKey(rs.getInt("id"))) {
+                        trades_list.add(trades.get(rs.getInt("id")));
+                        continue;
+                    }
+                    TradeEntryPostgres tep = new TradeEntryPostgres(
+                        rs.getInt("id"),
+                        rs.getInt("from"),
+                        rs.getInt("to"),
+                        rs.getString("status"),
+                        rs.getString("message")
+                    );
+                    trades_list.add(tep);
+                    trades.put(tep.id(), tep);
+                }
+                rs.close();
+            } catch (SQLException e) {
+                logger.severe(e.getMessage());
+            }
+        }
+        return trades_list;
     }
 }

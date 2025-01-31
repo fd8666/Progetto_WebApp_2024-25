@@ -32,17 +32,45 @@ public class CardTagsTablePostgres implements CardTagsTable {
     }
 
     @Override
-    public boolean removeCardTagFromTable(int cardId, int tagId) {
+    public boolean removeTagFromCard(int cardId, int tagId) {
+        if (DatabasePostgres.getInstance().verifyConnectionAndReconnect()) {
+            try {
+                var ps = DatabasePostgres.conn.prepareStatement("DELETE FROM card_tags WHERE card = ? AND tag = ?;");
+                ps.setInt(1, cardId);
+                ps.setInt(2, tagId);
+                return ps.executeUpdate() != 0;
+            } catch (Exception e) {
+                logger.severe(e.getMessage());
+            }
+        }
         return false;
     }
 
     @Override
-    public boolean removeAllCardTagsFromCard(int cardId) {
+    public boolean removeAllTagsFromCard(int cardId) {
+        if (DatabasePostgres.getInstance().verifyConnectionAndReconnect()) {
+            try {
+                var ps = DatabasePostgres.conn.prepareStatement("DELETE FROM card_tags WHERE card = ?;");
+                ps.setInt(1, cardId);
+                return ps.executeUpdate() != 0;
+            } catch (Exception e) {
+                logger.severe(e.getMessage());
+            }
+        }
         return false;
     }
 
     @Override
-    public boolean removeAllCardTagsFromTag(int tagId) {
+    public boolean removeTagFromAllCards(int tagId) {
+        if (DatabasePostgres.getInstance().verifyConnectionAndReconnect()) {
+            try {
+                var ps = DatabasePostgres.conn.prepareStatement("DELETE FROM card_tags WHERE tag = ?;");
+                ps.setInt(1, tagId);
+                return ps.executeUpdate() != 0;
+            } catch (Exception e) {
+                logger.severe(e.getMessage());
+            }
+        }
         return false;
     }
 

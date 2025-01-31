@@ -172,7 +172,7 @@ public final class CardEntryPostgres implements CardEntry {
 
     @Override
     public boolean removeTag(TagEntry tag) {
-        return CardTagsTablePostgres.getInstance().removeCardTagFromTable(id(), tag.id());
+        return CardTagsTablePostgres.getInstance().removeTagFromCard(id(), tag.id());
     }
 
     public String description() {
