@@ -1,0 +1,26 @@
+/* Animazione di rimbalzo */
+@keyframes bounce {
+  0%, 20%, 50%, 80%, 100% {
+    transform: translateY(0); /* Posizione originale */
+  }
+  40% {
+    transform: translateY(-30px); /* Rimbalzo verso l'alto */
+  }
+  60% {
+    transform: translateY(-15px); /* Rimbalzo verso il basso */
+  }
+}
+
+/* Effetto di zoom e ombra per il titolo del sito */
+h1.h2 {
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transizione per zoom e ombra */
+  font-size: 3rem; /* Dimensione del titolo */
+  color: #ffffff; /* Colore del titolo */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Ombra del testo */
+  animation: bounce 2s ease-in-out; /* Animazione di rimbalzo */
+}
+
+h1.h2:hover {
+  transform: scale(1.1); /* Zoom al 110% al passaggio del mouse */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Ombra al passaggio del mouse */
+}

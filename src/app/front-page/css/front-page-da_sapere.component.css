@@ -1,0 +1,36 @@
+#da-sapere {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    margin: 0 auto;
+    font-family: sans-serif;
+    font-size: 18px;
+}
+
+.da-sapere-row {
+    background-color: #f2f2f2;
+    padding: 10px;
+    margin-bottom: 0;
+}
+
+.da-sapere-row:first-child {
+    background-color: #ffd700;
+}
+
+.da-sapere-row:nth-child(2) {
+    background-color: #ff9800;
+}
+
+.da-sapere-row:nth-child(3) {
+    background-color: #ff4500;
+}
+
+.da-sapere-row:nth-child(4) {
+    background-color: #4caf50;
+}
+
+.da-sapere-row:nth-child(5) {
+    background-color: #00bcd4;
+}
