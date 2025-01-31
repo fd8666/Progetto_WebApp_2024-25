@@ -85,7 +85,7 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/static/styles.css"
             ],
             "scripts": []
           }
