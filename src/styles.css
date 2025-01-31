@@ -1,0 +1,137 @@
+/* Default (per desktop) */
+body {
+  font-size: 1rem;
+  font-family: 'Roboto', sans-serif;
+}
+
+/* Tablet: applica quando la larghezza della finestra è 768px o inferiore */
+@media (max-width: 768px) {
+  body {
+    font-size: 0.9rem;
+  }
+}
+
+/* Mobile: applica quando la larghezza della finestra è 480px o inferiore */
+@media (max-width: 480px) {
+  body {
+    font-size: 0.8rem;
+  }
+}
+img {
+  max-width: 100%;
+  height: auto;
+}
+nav{
+  max-width: 100%;
+  height: auto;
+}
+
+.bg-light {
+  background-color: #f7fafc !important;
+}
+
+.bg-dark {
+  background-color: #343a40 !important;
+}
+
+.text-muted {
+  color: #6c757d !important;
+}
+
+.text-primary {
+  color: #007bff !important;
+}
+
+.card-title {
+  font-size: 1.25rem;
+}
+
+.card-text {
+  font-size: 1rem;
+}
+
+.h2, .h3 {
+  margin-bottom: 1rem;
+}
+
+.mb-4 {
+  margin-bottom: 1rem;
+}
+
+/* Aggiungi questo codice per l'effetto di zoom */
+.card {
+  margin-bottom: 1rem;
+  transition: transform 0.3s ease; /* Transizione per l'effetto di zoom */
+  border-radius: 0.5rem; /* Arrotondamento degli angoli delle card */
+  overflow: visible; /* Assicurati che l'overflow sia visibile */
+  transform-origin: center; /* Imposta il punto di origine dello zoom al centro */
+}
+
+.card:hover {
+  transform: scale(1.05); /* Zoom al 102% al passaggio del mouse */
+}
+
+.card-body {
+  transition: transform 0.3s ease; /* Transizione per l'effetto di zoom */
+}
+
+.card-body:hover {
+  transform: scale(1.05); /* Zoom al 102% al passaggio del mouse */
+}
+
+.text-center {
+  transition: transform 0.3s ease; /* Transizione per l'effetto di zoom */
+}
+
+.text-center:hover {
+  transform: scale(1.05); /* Zoom al 102% al passaggio del mouse */
+}
+
+/* Arrotondamento delle sezioni */
+section {
+  border-radius: 0.5rem; /* Arrotondamento degli angoli delle sezioni */
+  overflow: visible; /* Assicurati che l'overflow sia visibile */
+}
+section h2 {
+  margin-bottom: 10px; /* Riduci il margine sotto il titolo */
+}
+/* Arrotondamento del footer */
+footer {
+  border-radius: 0.5rem; /* Arrotondamento degli angoli del footer */
+}
+
+/* Effetto di zoom e ombra per i pulsanti nella barra di navigazione */
+.dropdown-toggle {
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transizione per zoom e ombra */
+}
+
+.dropdown-toggle:hover {
+  transform: scale(1.1); /* Zoom al 110% al passaggio del mouse */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Ombra al passaggio del mouse */
+}
+
+.btn-secondary {
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transizione per zoom e ombra */
+}
+
+.btn-secondary:hover {
+  transform: scale(1.1); /* Zoom al 110% al passaggio del mouse */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Ombra al passaggio del mouse */
+}
+
+
+h1.h2:hover {
+  transform: scale(1.1); /* Zoom al 110% al passaggio del mouse */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Ombra al passaggio del mouse */
+}
+
+/* Effetto di zoom e ombra per gli elementi della nav */
+.nav-link {
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transizione per zoom e ombra */
+}
+
+.nav-link:hover {
+  transform: scale(1.1); /* Zoom al 110% al passaggio del mouse */
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Ombra al passaggio del mouse */
+}
+
