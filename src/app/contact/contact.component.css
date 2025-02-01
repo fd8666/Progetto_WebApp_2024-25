@@ -8,7 +8,7 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.btn{
+.btn {
   background-color: #e1981e;
 }
 
@@ -33,25 +33,47 @@
 
 .social-media {
   margin-top: 20px;
+  display: flex;
+  gap: 10px; /* Spazio tra i pulsanti */
 }
 
 .social-button {
-  background-color: #e1981e;
-  color: white;
-  padding: 10px;
+  padding: 10px 20px;
+  font-size: 16px;
   border: none;
   border-radius: 5px;
-  margin-right: 10px;
   cursor: pointer;
-  font-size: 1rem;
+  transition: background-color 0.3s, color 0.3s;
 }
 
-.social-button:hover {
-  opacity: 0.8;
+.social-button.insta {
+  background-color: #e4405f;
+  color: white;
 }
 
-.social-button .fab {
-  margin-right: 10px;
+.social-button.facebook {
+  background-color: #3b5998;
+  color: white;
+}
+
+.social-button.Sito {
+  background-color: #28a745;
+  color: white;
+}
+
+.social-button.insta:hover {
+  background-color: #e1981e;
+  color: black;
+}
+
+.social-button.facebook:hover {
+  background-color: #e1981e;
+  color: black;
+}
+
+.social-button.Sito:hover {
+  background-color: #e1981e;
+  color: black;
 }
 
 .map-container {
@@ -65,4 +87,58 @@ iframe {
   width: 100%;
   height: 300px;
   border-radius: 8px;
+}
+
+/* Media Queries per Responsività */
+
+@media screen and (max-width: 1024px) {
+  .contact-container {
+    flex-direction: column; /* Disposizione verticale su schermi più piccoli */
+    width: 90%;
+  }
+
+  .contact-info, .map-container {
+    flex: none;
+    width: 100%;
+    margin-bottom: 20px; /* Spazio tra le sezioni */
+  }
+
+  .social-media {
+    flex-direction: column; /* Disposizione verticale dei pulsanti */
+    align-items: center; /* Centra i pulsanti */
+  }
+
+  .social-button {
+    width: 100%; /* Pulsanti a larghezza piena */
+    text-align: center; /* Centra il testo dei pulsanti */
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .contact-info h2 {
+    font-size: 1.8rem; /* Riduci la dimensione del titolo */
+  }
+
+  .contact-info p {
+    font-size: 0.9rem; /* Riduci la dimensione del testo */
+  }
+
+  .social-button {
+    font-size: 14px; /* Riduci la dimensione dei pulsanti */
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .contact-info h2 {
+    font-size: 1.5rem; /* Ancora più piccolo per schermi molto piccoli */
+  }
+
+  .contact-info p {
+    font-size: 0.8rem; /* Ulteriore riduzione del testo */
+  }
+
+  .social-button {
+    font-size: 12px; /* Ancora più piccolo per i pulsanti */
+    padding: 8px 16px; /* Adatta il padding per schermi piccoli */
+  }
 }
