@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import {VetrinaComponent} from './vetrina/vetrina.component';
 
 @Component({
   selector: 'app-root',

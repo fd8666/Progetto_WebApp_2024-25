@@ -5,6 +5,7 @@ import {LoginComponent} from './login/login.component';
 import {ProfiloComponent} from './profilo/profilo.component';
 import {InfoCartaComponent} from './info-carta/info-carta.component';
 import {ContactComponent} from './contact/contact.component';
+import {VetrinaComponent} from './vetrina/vetrina.component';
 
 export const routes: Routes = [
   {path:'',component:FrontPageComponent},
@@ -12,5 +13,7 @@ export const routes: Routes = [
   {path:'Login',component:LoginComponent},
   {path:'profilo',component: ProfiloComponent},
   {path:'info-carta',component:InfoCartaComponent},
-  {path:'contatti',component:ContactComponent}
+  {path:'contatti',component:ContactComponent},
+  {path:'vetrina',component:VetrinaComponent}
+
 ];
