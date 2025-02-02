@@ -6,6 +6,8 @@ import {ProfiloComponent} from './profilo/profilo.component';
 import {InfoCartaComponent} from './info-carta/info-carta.component';
 import {ContactComponent} from './contact/contact.component';
 import {VetrinaComponent} from './vetrina/vetrina.component';
+import {ScambioComponent} from './scambio/scambio.component';
+import {PropostaScambioComponent} from './proposta-scambio/proposta-scambio.component';
 
 export const routes: Routes = [
   {path:'',component:FrontPageComponent},
@@ -14,6 +16,9 @@ export const routes: Routes = [
   {path:'profilo',component: ProfiloComponent},
   {path:'info-carta',component:InfoCartaComponent},
   {path:'contatti',component:ContactComponent},
-  {path:'vetrina',component:VetrinaComponent}
+  {path:'vetrina',component:VetrinaComponent},
+  {path:'scambio',component:ScambioComponent},
+  {path:'propostaScambio',component:PropostaScambioComponent}
+
 
 ];

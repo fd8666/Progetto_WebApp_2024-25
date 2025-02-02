@@ -1,0 +1,66 @@
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f0f0f0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.scambio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.carta {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.carti-proposte, .carti-offerte {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.carti-proposte .carta-proposta, .carti-offerte .carta-offerta {
+  width: 100px;
+  height: 150px;
+  margin: 10px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.carti-proposte .carta-proposta img, .carti-offerte .carta-offerta img {
+  width: 80px;
+  height: 120px;
+  border-radius: 10px;
+}
+
+.messaggio {
+  margin-top: 20px;
+}
+
+.azioni {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.azioni button {
+  width: 45%;
+  padding: 10px 20px;
+  font-size: 18px;
+}
