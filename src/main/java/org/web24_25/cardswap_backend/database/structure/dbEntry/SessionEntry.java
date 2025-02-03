@@ -12,4 +12,6 @@ public interface SessionEntry {
     Integer time_to_live();
     Boolean valid();
     String private_key();
+
+    boolean invalidate();
 }

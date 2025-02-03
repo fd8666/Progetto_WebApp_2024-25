@@ -75,6 +75,7 @@ public final class SessionEntryPostgres implements SessionEntry {
         return private_key;
     }
 
+    @Override
     public boolean invalidate() {
         if (DatabasePostgres.getInstance().verifyConnectionAndReconnect()) {
             try {

@@ -7,7 +7,7 @@ import java.util.Base64;
 import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
-class GzipCompression {
+public class GzipCompression {
     public static byte[] compress(String data) throws IOException {
         if (data == null || data.isEmpty()) {
             return null;

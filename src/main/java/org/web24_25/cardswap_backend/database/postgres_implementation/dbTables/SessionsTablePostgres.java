@@ -85,7 +85,7 @@ public class SessionsTablePostgres implements SessionsTable {
         }
         if (DatabasePostgres.getInstance().verifyConnectionAndReconnect()) {
             try {
-                PreparedStatement ps = DatabasePostgres.conn.prepareStatement("SELECT * FROM users WHERE username = ?;");
+                PreparedStatement ps = DatabasePostgres.conn.prepareStatement("SELECT * FROM valid_sessions WHERE cookie = ?;");
                 ps.setString(1, cookie);
                 ResultSet rs = ps.executeQuery();
                 if (rs.next()) {

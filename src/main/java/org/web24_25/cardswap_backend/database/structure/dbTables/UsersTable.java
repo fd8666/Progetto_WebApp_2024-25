@@ -21,6 +21,11 @@ public interface UsersTable {
     boolean deleteUser(int id);
     UserEntry getUserWithId(int id);
     UserEntry getUserFromUsername(String username);
+
+    UserEntry getUserFromGoogleId(String google_id);
+
+    UserEntry getUserFromEmail(String email);
+
     List<UserEntry> getUsersRange(int start_id, int limit);
     int getUserCount();
 }

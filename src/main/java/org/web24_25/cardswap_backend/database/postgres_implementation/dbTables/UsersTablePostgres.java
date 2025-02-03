@@ -31,6 +31,9 @@ public class UsersTablePostgres implements UsersTable {
     public boolean createUserWithPassword( String username, String email, String password_hash ) {
         if (DatabasePostgres.getInstance().verifyConnectionAndReconnect()) {
             try {
+                if (getUserFromEmail(email) != null) {
+                    return false;
+                }
                 PreparedStatement ps =  DatabasePostgres.conn.prepareStatement("INSERT INTO users (username, email, password_hash) VALUES (?, ?, ?);");
                 ps.setString(1, username);
                 ps.setString(2, email);
@@ -138,6 +141,71 @@ public class UsersTablePostgres implements UsersTable {
         return null;
     }
 
+    @Override
+    public UserEntry getUserFromGoogleId(String google_id) {
+        for (UserEntry ue : users.values()) {
+            if (ue.google_id().equals(google_id)) {
+                return ue;
+            }
+        }
+        if (DatabasePostgres.getInstance().verifyConnectionAndReconnect()) {
+            try {
+                PreparedStatement ps = DatabasePostgres.conn.prepareStatement("SELECT * FROM users WHERE google_id = ?;");
+                ps.setString(1, google_id);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    UserEntryPostgres uep = new UserEntryPostgres(
+                            rs.getInt("id"),
+                            rs.getString("username"),
+                            rs.getString("email"),
+                            rs.getString("password_hash"),
+                            rs.getString("google_id"),
+                            rs.getDate("creation_date")
+                    );
+                    users.put(uep.id(), uep);
+                    rs.close();
+                    return uep;
+                }
+            } catch (SQLException e) {
+                logger.severe(e.getMessage());
+            }
+        }
+        return null;
+    }
+
+    @Override
+    public UserEntry getUserFromEmail(String email) {
+        for (UserEntry ue : users.values()) {
+            if (ue.email().equals(email)) {
+                return ue;
+            }
+        }
+        if (DatabasePostgres.getInstance().verifyConnectionAndReconnect()) {
+            try {
+                PreparedStatement ps = DatabasePostgres.conn.prepareStatement("SELECT * FROM users WHERE email = ?;");
+                ps.setString(1, email);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    UserEntryPostgres uep = new UserEntryPostgres(
+                            rs.getInt("id"),
+                            rs.getString("username"),
+                            rs.getString("email"),
+                            rs.getString("password_hash"),
+                            rs.getString("google_id"),
+                            rs.getDate("creation_date")
+                    );
+                    users.put(uep.id(), uep);
+                    rs.close();
+                    return uep;
+                }
+            } catch (SQLException e) {
+                logger.severe(e.getMessage());
+            }
+        }
+        return null;
+    }
+
+    @Override
     public List<UserEntry> getUsersRange(int start_id, int limit) {
         List<UserEntry> user_list = new ArrayList<>();
         if (DatabasePostgres.getInstance().verifyConnectionAndReconnect()) {
@@ -148,6 +216,7 @@ public class UsersTablePostgres implements UsersTable {
                 ResultSet rs = ps.executeQuery();
                 while (rs.next()) {
                     if (users.containsKey(rs.getInt("id"))) {
+                        user_list.add(users.get(rs.getInt("id")));
                         user_list.add(users.get(rs.getInt("id")));
                         continue;
                     }
@@ -171,6 +240,7 @@ public class UsersTablePostgres implements UsersTable {
         return user_list;
     }
 
+    @Override
     public int getUserCount() {
         if (DatabasePostgres.getInstance().verifyConnectionAndReconnect()) {
             try {

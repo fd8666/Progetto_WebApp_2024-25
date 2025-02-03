@@ -1,6 +1,7 @@
 package org.web24_25.cardswap_backend.service;
 
 import org.springframework.http.ResponseEntity;
+import org.web24_25.cardswap_backend.database.postgres_implementation.dbTables.UsersTablePostgres;
 import org.web24_25.cardswap_backend.requests.GoogleRegistration;
 import org.web24_25.cardswap_backend.requests.PasswordRegistration;
 
@@ -14,7 +15,7 @@ public class RegisterService {
             //Username must be between 3 and 20 characters
             return ResponseEntity.badRequest().body("Invalid username");
         }
-        if (!data.email().matches("(?=.{1,254}$)[a-z0-9A-Z](?:[a-z0-9A-Z-]{0,61}[a-z0-9A-Z]|)(?:\\.[a-zA-Z]([a-z0-9A-Z-]{0,61}[a-z0-9A-Z]|))*")) {
+        if (!data.email().matches("^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
             return ResponseEntity.badRequest().body("Invalid email");
         }
         if (!data.password().matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$")) {
@@ -22,7 +23,11 @@ public class RegisterService {
             return ResponseEntity.badRequest().body("Invalid password");
         }
 
-        return ResponseEntity.ok("Success");
+        if (UsersTablePostgres.getInstance().createUserWithPassword(data.username(), data.email(), data.password())) {
+            return ResponseEntity.ok("Success");
+        } else {
+            return ResponseEntity.badRequest().body("Username or email already in use");
+        }
     }
 
     public ResponseEntity<String> registerGoogle(GoogleRegistration data) {

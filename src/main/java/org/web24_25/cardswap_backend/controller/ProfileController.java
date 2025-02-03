@@ -13,18 +13,23 @@ import org.web24_25.cardswap_backend.service.ProfileService;
 @RequestMapping("/api/profile")
 public class ProfileController {
     private final ProfileService service = new ProfileService();
+    @GetMapping("/logOut")
+    public ResponseEntity<String> logOut(HttpSession session) {
+        return service.logOut(session);
+    }
+
     @GetMapping("/username")
-    public ResponseEntity<String> getUsername(@CookieValue HttpSession session) {
+    public ResponseEntity<String> getUsername(HttpSession session) {
         return service.getUsername(session);
     }
 
     @GetMapping("/email")
-    public ResponseEntity<String> getEmail(@CookieValue HttpSession session) {
+    public ResponseEntity<String> getEmail(HttpSession session) {
         return service.getEmail(session);
     }
 
     @GetMapping("/picture")
-    public ResponseEntity<String> getPicture(@CookieValue HttpSession session) {
+    public ResponseEntity<String> getPicture(HttpSession session) {
         return service.getPicture(session);
     }
 
