@@ -122,68 +122,19 @@
   <section>
     <h2 class="h3 font-weight-bold mb-4">Domande Frequenti</h2>
     <div class="row">
-      <div class="col-md-6 mb-4">
+      <div class="col-md-6 mb-4" *ngFor="let faq of faqs; let i = index">
         <div class="card">
-          <button class="btn btn-link w-100 text-left" data-toggle="collapse" data-target="#faq1">
-            <h3 class="h5">Come posso scambiare le mie carte?</h3>
+          <button class="btn btn-link w-100 text-left" (click)="toggleFaq(i)">
+            <h3 class="h5">{{ faq.question }}</h3>
           </button>
-          <div class="collapse" id="faq1">
-            <div class="card-body">Per scambiare le tue carte, vai alla sezione Scambi e trova altri collezionisti interessati.</div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6 mb-4">
-        <div class="card">
-          <button class="btn btn-link w-100 text-left" data-toggle="collapse" data-target="#faq2">
-            <h3 class="h5">Come posso vendere le mie carte?</h3>
-          </button>
-          <div class="collapse" id="faq2">
-            <div class="card-body">Per vendere le tue carte, vai alla sezione Vendite e segui le istruzioni per mettere in vendita le tue carte.</div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6 mb-4">
-        <div class="card">
-          <button class="btn btn-link w-100 text-left" data-toggle="collapse" data-target="#faq3">
-            <h3 class="h5">Come posso acquistare carte?</h3>
-          </button>
-          <div class="collapse" id="faq3">
-            <div class="card-body">Per acquistare carte, vai alla sezione Vetrina e scegli le carte che desideri acquistare.</div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6 mb-4">
-        <div class="card">
-          <button class="btn btn-link w-100 text-left" data-toggle="collapse" data-target="#faq4">
-            <h3 class="h5">Come posso partecipare agli eventi?</h3>
-          </button>
-          <div class="collapse" id="faq4">
-            <div class="card-body">Per partecipare agli eventi, visita la sezione Eventi e iscriviti agli eventi di tuo interesse.</div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6 mb-4">
-        <div class="card">
-          <button class="btn btn-link w-100 text-left" data-toggle="collapse" data-target="#faq5">
-            <h3 class="h5">Come posso contattare il supporto?</h3>
-          </button>
-          <div class="collapse" id="faq5">
-            <div class="card-body">Per contattare il supporto, visita la sezione Contatti e compila il modulo di contatto.</div>
-          </div>
-        </div>
-      </div>
-      <div class="col-md-6 mb-4">
-        <div class="card">
-          <button class="btn btn-link w-100 text-left" data-toggle="collapse" data-target="#faq6">
-            <h3 class="h5">Come posso creare un account?</h3>
-          </button>
-          <div class="collapse" id="faq6">
-            <div class="card-body">Per creare un account, clicca sull'icona dell'account in alto a destra e seleziona Registrati.</div>
+          <div [@faqAnimation]="openedFaq === i ? 'open' : 'closed'">
+            <div class="card-body">{{ faq.answer }}</div>
           </div>
         </div>
       </div>
     </div>
   </section>
+
 </main>
 <footer class="bg-dark text-white py-4">
   <div class="container text-center">
