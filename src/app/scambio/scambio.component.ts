@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {NgForOf} from '@angular/common';
 import {RouterLink} from '@angular/router';
+import {HeaderComponent} from '../header/header.component';
 
 @Component({
   selector: 'app-scambio',
@@ -8,7 +9,8 @@ import {RouterLink} from '@angular/router';
   styleUrls: ['./scambio.component.css'],
   imports: [
     NgForOf,
-    RouterLink
+    RouterLink,
+    HeaderComponent
   ],
   standalone: true
 })

@@ -4,10 +4,11 @@ import {RouterModule} from '@angular/router';
 import {AuthService} from '../services/auth.service';
 import {FormsModule} from '@angular/forms';
 import { firstValueFrom } from 'rxjs';
+import {HeaderComponent} from '../header/header.component';
 
 @Component({
   selector: 'app-login',
-  imports: [CommonModule, RouterModule, FormsModule],
+  imports: [CommonModule, RouterModule, FormsModule, HeaderComponent],
   templateUrl: './login.component.html',
   standalone: true,
   styleUrl: './login.component.css'

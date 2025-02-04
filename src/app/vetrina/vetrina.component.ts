@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {CurrencyPipe, NgForOf} from '@angular/common';
 import {RouterLink} from '@angular/router';
+import {HeaderComponent} from '../header/header.component';
 
 interface Annuncio {
   id: number;
@@ -13,7 +14,7 @@ interface Annuncio {
   selector: 'app-vetrina',
   templateUrl: './vetrina.component.html',
   standalone: true,
-  imports: [CurrencyPipe, NgForOf, RouterLink],
+  imports: [CurrencyPipe, NgForOf, RouterLink, HeaderComponent],
   styleUrls: ['./vetrina.component.scss']
 })
 export class VetrinaComponent {

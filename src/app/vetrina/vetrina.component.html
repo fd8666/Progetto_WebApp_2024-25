@@ -11,39 +11,7 @@
 </head>
 
 <body class="bg-light">
-<header class="titolo-sfondo text-white" style="position: sticky; top: 0; left: 0; right: 0; z-index: 9999;">
-  <div class="container-header d-flex justify-content-between align-items-center py-4">
-    <div class="d-flex align-items-center">
-      <h1 class="h2"><a class="nav-link text-white" routerLink="">TCG Exchange</a></h1>
-    </div>
-    <nav>
-      <ul class="nav">
-        <li class="nav-item bi bi-shop-window "><a class="nav-link text-white" href="#">Vetrina</a></li>
-        <li class="nav-item bi bi-calendar-event"><a class="nav-link text-white" href="#">Eventi</a></li>
-        <li class="nav-item bi bi-person-circle"><a class="nav-link text-white" href="#">Contatti</a></li>
-      </ul>
-    </nav>
-    <div class="d-flex align-items-center">
-      <div class="dropdown">
-        <button class="btn btn-secondary dropdown-toggle" id="accountButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fas fa-user"></i>
-        </button>
-        <div class="dropdown-menu" aria-labelledby="accountButton">
-          <a class="dropdown-item" routerLink="/Login">Login</a>
-          <a class="dropdown-item" routerLink="/Registrazione">Registrati</a>
-        </div>
-      </div>
-      <div class="dropdown ml-2">
-        <button class="btn btn-secondary dropdown-toggle" id="cartButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <i class="fas fa-shopping-cart"></i>
-        </button>
-        <div class="dropdown-menu" aria-labelledby="cartButton">
-          <p class="dropdown-item">Il tuo carrello è vuoto.</p>
-        </div>
-      </div>
-    </div>
-  </div>
-</header>
+<app-header></app-header>
 
 <!-- Main Content -->
 <div class="container mt-4">
