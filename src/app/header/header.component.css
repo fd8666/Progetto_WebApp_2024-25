@@ -4,7 +4,6 @@
   transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transizione per zoom e ombra */
   padding: 8px 16px; /* Aggiunto un po' di padding per migliorare la visibilità */
 }
-
 .btn-secondary:hover {
   transform: scale(1.1); /* Zoom al 110% al passaggio del mouse */
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Ombra al passaggio del mouse */
