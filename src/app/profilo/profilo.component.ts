@@ -1,11 +1,16 @@
 import { Component } from '@angular/core';
+import { HeaderComponent } from '../header/header.component'; // Importa il componente Header
 
 @Component({
   selector: 'app-profilo',
-  imports: [],
+  standalone: true,
+  imports: [
+    HeaderComponent // Aggiunto per risolvere l'errore
+  ],
   templateUrl: './profilo.component.html',
-  styleUrl: './profilo.component.css'
+  styleUrls: ['./profilo.component.css']
 })
 export class ProfiloComponent {
 
 }
+
