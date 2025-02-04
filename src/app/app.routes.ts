@@ -8,6 +8,7 @@ import {ContactComponent} from './contact/contact.component';
 import {VetrinaComponent} from './vetrina/vetrina.component';
 import {ScambioComponent} from './scambio/scambio.component';
 import {PropostaScambioComponent} from './proposta-scambio/proposta-scambio.component';
+import {EventiComponent} from './eventi/eventi.component';
 
 export const routes: Routes = [
   {path:'',component:FrontPageComponent},
@@ -18,7 +19,7 @@ export const routes: Routes = [
   {path:'contatti',component:ContactComponent},
   {path:'vetrina',component:VetrinaComponent},
   {path:'scambio',component:ScambioComponent},
-  {path:'propostaScambio',component:PropostaScambioComponent}
-
+  {path:'propostaScambio',component:PropostaScambioComponent},
+  {path:'eventi',component:EventiComponent}
 
 ];
