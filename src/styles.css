@@ -1,29 +1,4 @@
-/* Default (per desktop) */
-body {
-  font-size: 1rem;
-  font-family: 'Roboto', sans-serif;
-}
 
-/* Header */
-header {
-  background-color: #ffffff;
-  color: #fff;
-  padding: 20px;
-  text-align: center;
-  position: sticky;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 9999;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-}
-.titolo-sfondo{
-  background: linear-gradient(45deg, #0D47A1, #1E68D1, #3C8ED1);
-}
-header h1 {
-  font-size: 24px;
-  margin-bottom: 10px;
-}
 
 /* Container per il modulo di registrazione */
 .container-modulo {
@@ -134,10 +109,6 @@ section {
 section h2 {
   margin-bottom: 10px; /* Riduci il margine sotto il titolo */
 }
-/* Arrotondamento del footer */
-footer {
-  border-radius: 0.5rem; /* Arrotondamento degli angoli del footer */
-}
 
 /* Effetto di zoom e ombra per i pulsanti nella barra di navigazione */
 .dropdown-toggle {
@@ -154,13 +125,4 @@ h1.h2:hover {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Ombra al passaggio del mouse */
 }
 
-/* Effetto di zoom e ombra per gli elementi della nav */
-.nav-link {
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transizione per zoom e ombra */
-}
-
-.nav-link:hover {
-  transform: scale(1.1); /* Zoom al 110% al passaggio del mouse */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Ombra al passaggio del mouse */
-}
 

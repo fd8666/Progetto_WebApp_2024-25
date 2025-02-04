@@ -12,34 +12,7 @@ import {HeaderComponent} from '../header/header.component';
   ],
   standalone: true
 })
-export class FrontPageComponent implements OnInit {
+export class FrontPageComponent{
 
-  constructor(private renderer: Renderer2) {}
 
-  ngOnInit() {
-    const accountButton = this.renderer.selectRootElement('#accountButton', true);
-    const accountMenu = accountButton.nextElementSibling;
-
-    this.renderer.listen(accountButton, 'click', () => {
-      accountMenu.classList.toggle('show');
-    });
-
-    const cartButton = this.renderer.selectRootElement('#cartButton', true);
-    const cartMenu = cartButton.nextElementSibling;
-
-    this.renderer.listen(cartButton, 'click', () => {
-      cartMenu.classList.toggle('show');
-    });
-
-    this.renderer.listen(document, 'click', (event: Event) => {
-      if (!(event.target as HTMLElement).matches('#accountButton') &&
-        !(event.target as HTMLElement).matches('#cartButton')) {
-        document.querySelectorAll('.dropdown-menu').forEach(menu => {
-          if (menu.classList.contains('show')) {
-            menu.classList.remove('show');
-          }
-        });
-      }
-    });
-  }
 }

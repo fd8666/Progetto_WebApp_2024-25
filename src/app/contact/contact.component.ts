@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {ContactMapComponent} from '../contact-map/contact-map.component';
 import {RouterLink} from '@angular/router';
+import {HeaderComponent} from '../header/header.component';
 
 @Component({
   selector: 'app-contact',
@@ -8,7 +9,8 @@ import {RouterLink} from '@angular/router';
   templateUrl: './contact.component.html',
   imports: [
     ContactMapComponent,
-    RouterLink
+    RouterLink,
+    HeaderComponent
   ],
   styleUrls: ['./contact.component.css']
 })

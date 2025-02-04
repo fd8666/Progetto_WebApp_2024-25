@@ -2,10 +2,6 @@ body {
   font-family: 'Roboto', sans-serif;
   background-color: #f0f0f0;
 }
-.btn{
-  background-color: #e1981e;
-}
-
 .col-md-4 {
   flex-basis: 33.33%;
   padding: 20px;

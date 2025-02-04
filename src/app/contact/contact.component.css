@@ -8,10 +8,6 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.btn {
-  background-color: #e1981e;
-}
-
 .contact-info {
   flex: 1;
   padding: 20px;
