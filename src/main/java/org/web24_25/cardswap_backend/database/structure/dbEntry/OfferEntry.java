@@ -6,4 +6,5 @@ public interface OfferEntry {
     Integer card();
     TradeEntry getTrade();
     CardEntry getCard();
+    String toJson();
 }

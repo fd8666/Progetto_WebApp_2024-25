@@ -8,10 +8,13 @@ public interface TradeEntry {
     Integer to();
     String status();
     String message();
+    boolean accept();
+    boolean reject();
     boolean setStatus(String status);
     boolean setMessage(String message);
     UserEntry getFrom();
     UserEntry getTo();
     List<OfferEntry> getOffers();
     List<RequestEntry> getRequests();
+    String toJson();
 }

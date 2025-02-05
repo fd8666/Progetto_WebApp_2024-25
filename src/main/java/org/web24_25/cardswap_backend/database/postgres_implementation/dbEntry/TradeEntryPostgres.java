@@ -53,7 +53,30 @@ public final class TradeEntryPostgres implements TradeEntry {
     }
 
     @Override
+    public boolean accept() {
+        if (status.equals("accepted") || status.equals("rejected")) return false;
+        return setStatus("accepted");
+    }
+
+    @Override
+    public boolean reject() {
+        if (status.equals("accepted") || status.equals("rejected")) return false;
+        return setStatus("refused");
+    }
+
+    @Override
     public boolean setStatus(String status) {
+        if (DatabasePostgres.getInstance().verifyConnectionAndReconnect()) {
+            try {
+                PreparedStatement ps =  DatabasePostgres.conn.prepareStatement("UPDATE trades SET status = ? WHERE id = ?;");
+                ps.setString(1, status);
+                ps.setInt(2, this.id);
+                int res = ps.executeUpdate();
+                return res != 0;
+            } catch (SQLException e) {
+                logger.severe(e.getMessage());
+            }
+        }
         return false;
     }
 
@@ -94,6 +117,11 @@ public final class TradeEntryPostgres implements TradeEntry {
     @Override
     public List<RequestEntry> getRequests() {
         return RequestsTablePostgres.getInstance().getRequestsWithTrade(id);
+    }
+
+    @Override
+    public String toJson() {
+        return "{\"id\":" + id + ",\"from\":" + from + ",\"to\":" + to + ",\"status\":\"" + status + "\",\"message\":\"" + message + "\"}";
     }
 
     @Override

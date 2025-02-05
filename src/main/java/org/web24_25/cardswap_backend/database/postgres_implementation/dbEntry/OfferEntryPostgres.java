@@ -43,6 +43,11 @@ public final class OfferEntryPostgres implements OfferEntry {
     }
 
     @Override
+    public String toJson() {
+        return "{\"id\":" + id + ",\"trade\":" + trade + ",\"card\":" + card + "}";
+    }
+
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) return true;
         if (obj == null || obj.getClass() != this.getClass()) return false;

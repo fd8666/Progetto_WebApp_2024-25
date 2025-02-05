@@ -17,5 +17,7 @@ public interface CardsTable {
     List<CardEntry> getCardsWithGame(int gameId);
     List<CardEntry> getCardsWithTag(int tagId);
     CardEntry getCardWithName(String cardName);
+    List<CardEntry> getAvailableCardsContainingStringFromIdWithLimit(String cardName, int from_id, int limit);
+    int getAvailableCardsContainingStringFromIdWithLimitNumber(String cardName, int from_id);
     CardEntry getCardWithIdentifier(String identifier);
 }

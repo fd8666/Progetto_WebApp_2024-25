@@ -75,6 +75,7 @@ public class ProfileService {
         if (data.username() == null || data.password_hash() == null) {
             return ResponseEntity.badRequest().body("Missing fields");
         }
+
         SessionEntry sessionEntry = SessionsTablePostgres.getInstance().getSessionWithCookie(sessionId);
         if (sessionEntry == null) {
             return ResponseEntity.badRequest().body("Session not found");
@@ -86,6 +87,7 @@ public class ProfileService {
         if (!userEntry.password_hash().equals(data.password_hash())) {
             return ResponseEntity.badRequest().body("Invalid request");
         }
+
         userEntry.setUsername(data.username());
         return ResponseEntity.ok("username set to: "+data.username());
     }

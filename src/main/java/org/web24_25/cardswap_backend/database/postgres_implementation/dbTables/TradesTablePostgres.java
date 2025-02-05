@@ -72,6 +72,21 @@ public class TradesTablePostgres implements TradesTable {
         return null;
     }
 
+    private TradeEntry makeTradeEntryFromResultSet(ResultSet rs) throws SQLException {
+        if (trades.containsKey(rs.getInt("id"))) {
+            return trades.get(rs.getInt("id"));
+        }
+        TradeEntryPostgres tep = new TradeEntryPostgres(
+            rs.getInt("id"),
+            rs.getInt("from"),
+            rs.getInt("to"),
+            rs.getString("status"),
+            rs.getString("message")
+        );
+        trades.put(tep.id(), tep);
+        return tep;
+    }
+
     @Override
     public List<TradeEntry> getTradesFromUser(Integer userId) {
         ArrayList<TradeEntry> trades_list = new ArrayList<>();
@@ -227,5 +242,72 @@ public class TradesTablePostgres implements TradesTable {
             }
         }
         return trades_list;
+    }
+
+    @Override
+    public List<TradeEntry> getTradesToUserWithRange(Integer userId, Integer start, Integer limit) {
+        ArrayList<TradeEntry> trades_list = new ArrayList<>();
+        if (DatabasePostgres.getInstance().verifyConnectionAndReconnect()) {
+            try {
+                PreparedStatement ps = DatabasePostgres.conn.prepareStatement("SELECT * FROM trades WHERE \"to\" = ? AND id > ? LIMIT ?;");
+                ps.setInt(1, userId);
+                ps.setInt(2, start);
+                ps.setInt(3, limit);
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    if (trades.containsKey(rs.getInt("id"))) {
+                        trades_list.add(trades.get(rs.getInt("id")));
+                        continue;
+                    }
+                    trades_list.add(makeTradeEntryFromResultSet(rs));
+                }
+                rs.close();
+            } catch (SQLException e) {
+                logger.severe(e.getMessage());
+            }
+        }
+        return trades_list;
+    }
+
+    @Override
+    public List<TradeEntry> getTradesFromUserWithRange(Integer userId, Integer start, Integer limit) {
+        ArrayList<TradeEntry> trades_list = new ArrayList<>();
+        if (DatabasePostgres.getInstance().verifyConnectionAndReconnect()) {
+            try {
+                PreparedStatement ps = DatabasePostgres.conn.prepareStatement("SELECT * FROM trades WHERE \"from\" = ? AND id > ? LIMIT ?;");
+                ps.setInt(1, userId);
+                ps.setInt(2, start);
+                ps.setInt(3, limit);
+                ResultSet rs = ps.executeQuery();
+                while (rs.next()) {
+                    if (trades.containsKey(rs.getInt("id"))) {
+                        trades_list.add(trades.get(rs.getInt("id")));
+                        continue;
+                    }
+                    trades_list.add(makeTradeEntryFromResultSet(rs));
+                }
+                rs.close();
+            } catch (SQLException e) {
+                logger.severe(e.getMessage());
+            }
+        }
+        return trades_list;
+    }
+
+    @Override
+    public TradeEntry getLatestTradeFromUser(Integer userId) {
+        if (DatabasePostgres.getInstance().verifyConnectionAndReconnect()) {
+            try {
+                PreparedStatement ps = DatabasePostgres.conn.prepareStatement("SELECT * FROM trades WHERE \"from\" = ? ORDER BY id DESC LIMIT 1;");
+                ps.setInt(1, userId);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    return makeTradeEntryFromResultSet(rs);
+                }
+            } catch (SQLException e) {
+                logger.severe(e.getMessage());
+            }
+        }
+        return null;
     }
 }

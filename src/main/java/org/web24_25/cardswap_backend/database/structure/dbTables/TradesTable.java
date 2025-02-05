@@ -12,4 +12,7 @@ public interface TradesTable {
     List<TradeEntry> getTradesWithStatus(String status);
     List<TradeEntry> getTradesFromUserWithStatus(Integer userId, String status);
     List<TradeEntry> getTradesToUserWithStatus(Integer userId, String status);
+    List<TradeEntry> getTradesToUserWithRange(Integer userId, Integer start, Integer limit);
+    List<TradeEntry> getTradesFromUserWithRange(Integer userId, Integer start, Integer limit);
+    TradeEntry getLatestTradeFromUser(Integer userId);
 }

@@ -5,7 +5,6 @@ import org.springframework.http.ResponseEntity;
 import org.web24_25.cardswap_backend.database.postgres_implementation.dbTables.SessionsTablePostgres;
 import org.web24_25.cardswap_backend.database.postgres_implementation.dbTables.UsersTablePostgres;
 import org.web24_25.cardswap_backend.database.structure.dbEntry.UserEntry;
-import org.web24_25.cardswap_backend.database.structure.dbTables.UsersTable;
 import org.web24_25.cardswap_backend.requests.GoogleLogin;
 import org.web24_25.cardswap_backend.requests.PasswordLogin;
 
