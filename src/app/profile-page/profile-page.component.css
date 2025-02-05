@@ -1,0 +1,254 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f0f0f0;
+}
+.btn{
+  background-color: #e1981e;
+}
+
+.col-md-4 {
+  flex-basis: 33.33%;
+  padding: 20px;
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+#login-form {
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+#login-form label {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+#login-form input[type="text"], #login-form input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#login-form button[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #337ab7;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#login-form button[type="submit"]:hover {
+  background-color: #e1981e;
+}
+
+@media (max-width: 768px) {
+  .col-md-4 {
+    flex-basis: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  header {
+    padding: 10px;
+  }
+  header h1 {
+    font-size: 18px;
+  }
+  nav ul {
+    flex-direction: column;
+  }
+  nav li {
+    margin-bottom: 10px;
+  }
+  .dropdown {
+    margin-left: 0;
+  }
+  .container-registrazione {
+    margin: 20px auto;
+    padding: 10px;
+  }
+  .container-header {
+    margin: 20px auto;
+    padding: 10px;
+  }
+  #login-form {
+    padding: 10px;
+  }
+}
+
+.profile-header {
+  display: flex;
+  justify-content: center; /* Centra l'immagine */
+  align-items: center;
+  margin-top: 10px; /* Spazio sopra */
+  position: relative; /* Permette di posizionare meglio la foto */
+}
+
+.profile-picture {
+  width: 275px; /* Aumentata la dimensione */
+  height: 275px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid #333; /* Bordo grigio scuro più spesso */
+  background: #5c62db;
+  position: relative; /* Gestibile per ulteriori modifiche */
+}
+
+.profile-picture img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  transform: scale(1.1);
+}
+.info-user{
+  margin-top: 50px;
+  margin-left: 50px;
+}
+.bio {
+  font-size: 1.1rem;
+  color: #555;
+  line-height: 1.5;
+  padding: 15px;
+  background: #f9f9f9;
+  border-radius: 15px;
+  border: 2px solid #ddd;
+  width: 500px; /* Larghezza fissa */
+  height: 200px; /* Altezza fissa */
+  overflow-y: auto; /* Abilita scroll verticale */
+  overflow-x: hidden; /* Blocca scroll orizzontale */
+  word-wrap: break-word; /* Forza il testo a capo */
+  white-space: pre-wrap; /* Mantiene spazi e va a capo automaticamente */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.saluto{
+  font-size: 2rem; /* Font più grande */
+  font-weight: bold; /* Rende il testo più in evidenza */
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Ombra leggera per il testo */
+}
+.profile-actions {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 15px; /* Distanza tra i bottoni */
+}
+
+.profile-actions button {
+  padding: 12px 40px; /* Più largo per seguire lo stile dei social */
+  font-size: 1.1rem;
+  color: white;
+  border: none;
+  border-radius: 10px; /* Smussato, non arrotondato */
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease, color 0.3s ease, transform 0.1s ease-in-out;
+  font-weight: bold;
+  min-width: 180px; /* Larghezza minima per uniformità */
+  height: 50px;
+}
+
+/* Stile simile ai bottoni social */
+.impostazioni-profilo {
+  background-color: #28a745; /* Verde simile al bottone Sito */
+}
+
+.scambi {
+  background-color: #e4405f; /* Rosso simile al bottone Instagram */
+}
+
+.profile-actions button i {
+  margin-right: 10px; /* Distanza tra icona e testo */
+  font-size: 1.2rem;
+}
+
+/* Effetto Hover */
+.impostazioni-profilo:hover,
+.scambi:hover {
+  background-color: #e1981e; /* Cambia in arancione al passaggio del mouse */
+  color: black;
+}
+
+/* Effetto Active (Click) */
+.profile-actions button:active {
+  transform: scale(0.95); /* Effetto click leggero */
+}
+.modal-backdrop {
+  position: fixed;
+  top: 33%; /* Resta la stessa posizione verticale */
+  left: 50%;
+  transform: translateX(-50%);
+  width: 20%; /* Ridotto ulteriormente */
+  height: auto;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.modal-content {
+  background: white;
+  padding: 15px; /* Ridotto il padding per maggiore compattezza */
+  border-radius: 8px; /* Bordo più smussato */
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3); /* Ombra più leggera */
+  width: 35%; /* Ancora più piccola */
+  min-width: 320px; /* Larghezza minima più ridotta */
+  max-width: 500px; /* Limita la larghezza massima */
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 12px; /* Distanza ridotta tra i campi */
+}
+
+.modal-content label {
+  font-weight: bold;
+  margin-bottom: 5px; /* Ancora meno spazio tra etichetta e campo */
+}
+
+.modal-content input,
+.modal-content textarea {
+  width: 100%;
+  padding: 6px; /* Ridotto il padding degli input */
+  margin-bottom: 12px; /* Meno spazio tra i campi */
+  border: 1px solid #ccc;
+  border-radius: 4px; /* Bordo leggermente più sottile */
+}
+
+.modal-buttons {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px; /* Ancora meno spazio tra i pulsanti */
+}
+
+.modal-buttons button {
+  padding: 8px 16px; /* Ridotto il padding dei pulsanti */
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  width: 48%;
+}
+
+.modal-buttons button:first-child {
+  background-color: #28a745;
+  color: white;
+}
+
+.modal-buttons button:last-child {
+  background-color: #dc3545;
+  color: white;
+}
+

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="utf-8"/>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+  <title>TCG Exchange</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet"/>
+
+
+</head>
+
+<body class="bg-light">
+<app-header></app-header>
+<div class="profile-header">
+  <!-- Header con immagine profilo e username -->
+
+  <div class="profile-picture">
+    <img [src]="userProfile.profileImage" alt="Profile Image">
+  </div>
+
+  <div class="info-user">
+    <h1 class="saluto">Ciao, {{ userProfile.username }}!</h1>
+    <p class="bio">{{ userProfile.bio }}</p>
+
+</div>
+</div>
+<div class="profile-actions">
+  <button class="impostazioni-profilo" (click)="openEditForm()">
+    <i class="fas fa-user-edit"></i> Modifica Profilo
+  </button>
+  <button class="scambi">
+    <i class="fas fa-comments"></i> Proposte Scambi
+  </button>
+</div>
+
+<!-- Modale per modificare il profilo -->
+<div class="modal-backdrop" *ngIf="isEditing">
+  <div class="modal-content">
+    <h2>Modifica Profilo</h2>
+
+    <form (ngSubmit)="saveProfile()">
+      <label>Username:</label>
+      <input type="text" [(ngModel)]="editableUser.username" name="username" required>
+
+      <label>Email:</label>
+      <input type="email" [(ngModel)]="editableUser.email" name="email" required>
+
+      <label>Bio:</label>
+      <textarea [(ngModel)]="editableUser.bio" name="bio"></textarea>
+
+      <label>Immagine Profilo (Carica dal computer):</label>
+      <input type="file" (change)="onFileSelected($event)" accept="image/*" name="profileImage">
+
+
+      <div class="modal-buttons">
+        <button type="submit">Salva</button>
+        <button type="button" (click)="closeEditForm()">Annulla</button>
+      </div>
+    </form>
+  </div>
+</div>
+</body>
+</html>
