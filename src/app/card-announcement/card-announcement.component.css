@@ -1,0 +1,246 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f0f0f0;
+}
+.btn{
+  background-color: #e1981e;
+}
+
+.col-md-4 {
+  flex-basis: 33.33%;
+  padding: 20px;
+}
+
+h2 {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+#login-form {
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+#login-form label {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+#login-form input[type="text"], #login-form input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+#login-form button[type="submit"] {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: bold;
+  color: #fff;
+  background-color: #337ab7;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+#login-form button[type="submit"]:hover {
+  background-color: #e1981e;
+}
+
+@media (max-width: 768px) {
+  .col-md-4 {
+    flex-basis: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  header {
+    padding: 10px;
+  }
+  header h1 {
+    font-size: 18px;
+  }
+  nav ul {
+    flex-direction: column;
+  }
+  nav li {
+    margin-bottom: 10px;
+  }
+  .dropdown {
+    margin-left: 0;
+  }
+  .container-registrazione {
+    margin: 20px auto;
+    padding: 10px;
+  }
+  .container-header {
+    margin: 20px auto;
+    padding: 10px;
+  }
+  #login-form {
+    padding: 10px;
+  }
+}
+
+
+
+.card-header {
+  text-align: center;
+  margin-bottom: 20px; /* Distanza tra il titolo e le sezioni sottostanti */
+}
+
+.card-title {
+  font-size: 2em;  /* Nome carta grande */
+  font-weight: bold;
+  color: black;
+  margin-bottom: 5px;
+}
+
+.card-expansion {
+  font-size: 1em;  /* Più piccolo rispetto al nome della carta */
+}
+.card-game{
+  color: #403e3e;
+  margin-top: 0;
+}
+
+
+/* Rimuoviamo i bordi dalle sezioni carta e descrizione */
+.card-section {
+  border: none; /* Rimuove il bordo */
+}
+
+
+
+
+/* Contenitore principale che mantiene le sezioni vicine */
+.card-container {
+  display: flex;
+  justify-content: center;
+  gap: 10px; /* Spazio tra le sezioni */
+  width: 80%;
+  margin: 20px auto;
+}
+
+
+
+/* Sezione immagine */
+.card-image img {
+  height: auto;  /* Dimensione fissa per l'immagine */
+  width: 1200px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Sezione "Informazioni carta" */
+.card-info {
+  border: none; /* Rimuove il bordo */
+  padding: 20px; /* Manteniamo il padding per distanziare gli elementi */
+}
+
+/* Titolo "Informazioni carta" */
+.info-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: left; /* Allineato a sinistra */
+  color: #333;
+}
+
+/* Sezione tag */
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  justify-content: flex-start; /* Allinea i tag a sinistra */
+  margin-bottom: 15px;
+}
+
+/* Tag rettangolari con angoli smussati e più piccoli */
+.tag {
+  background-color: #ff4d4d; /* Rosso brillante */
+  color: white;
+  padding: 5px 12px; /* Ridotto per rendere il tag più piccolo */
+  border-radius: 8px; /* Angoli smussati */
+  font-size: 0.9rem; /* Font leggermente più piccolo */
+  font-weight: bold; /* Grassetto */
+  text-transform: uppercase; /* Tutte le lettere maiuscole */
+  margin-bottom: 10px; /* Distanza tra le righe di tag */
+}
+
+
+/* Sottotitolo "Descrizione" */
+.info-subtitle {
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-top: 10px;
+  margin-bottom: 5px;
+  color: #555;
+}
+
+/* Testo descrizione */
+.card-description {
+  font-size: 1rem;
+  padding: 0 10px;
+}
+/* Sezione con prezzo e pulsanti */
+.card-price-buttons {
+  border: 2px solid #ccc; /* Bordo grigio chiaro */
+  border-radius: 8px; /* Angoli smussati */
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* Centra il contenuto */
+  gap: 15px;
+}
+
+/* Prezzo in grande */
+.card-price {
+  font-size: 3rem; /* Prezzo grande */
+  font-weight: bold;
+  color: #333; /* Colore scuro per il prezzo */
+}
+
+/* Pulsanti uno sopra l'altro */
+.card-buttons {
+  display: flex;
+  flex-direction: column; /* Imposta i pulsanti uno sopra l'altro */
+  gap: 15px; /* Distanza tra i pulsanti */
+  width: 100%; /* Larghezza 100% per il contenitore */
+  align-items: center; /* Centra i pulsanti */
+}
+
+/* Pulsante */
+.card-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px 20px;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  width: 100%; /* Larghezza del pulsante */
+  max-width: 200px; /* Impostiamo un limite di larghezza */
+}
+
+/* Pulsante di acquisto - verde */
+.card-button.buy {
+  background-color: #28a745; /* Verde brillante */
+}
+
+/* Pulsante di scambio - azzurro */
+.card-button.exchange {
+  background-color: #17a2b8; /* Azzurro brillante */
+}
+
+/* Hover per i pulsanti */
+.card-button:hover {
+  opacity: 0.9; /* Effetto hover con leggera trasparenza */
+}
