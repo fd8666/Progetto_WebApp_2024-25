@@ -14,43 +14,43 @@ public class LoginService {
     public ResponseEntity<String> loginPassword(PasswordLogin data, HttpSession session) {
         if (data.email() == null || data.password() == null) {
             session.invalidate();
-            return ResponseEntity.badRequest().body("Missing fields");
+            return ResponseEntity.badRequest().body("{\"result\":\"Missing fields\"}");
         }
 
         UserEntry user = UsersTablePostgres.getInstance().getUserFromEmail(data.email());
         if (user == null) {
             session.invalidate();
-            return ResponseEntity.badRequest().body("User not found");
+            return ResponseEntity.badRequest().body("{\"result\":\"User not found\"}");
         }
 
         String sessionId = UUID.randomUUID().toString();
         if (SessionsTablePostgres.getInstance().createSession(user.id(), sessionId)) {
             session.setAttribute("session_id", sessionId);
-            return ResponseEntity.ok("Success");
+            return ResponseEntity.ok("{\"result\":\"Success\"}");
         } else {
             session.invalidate();
-            return ResponseEntity.badRequest().body("Invalid credentials");
+            return ResponseEntity.badRequest().body("{\"result\":\"Invalid credentials\"}");
         }
     }
 
     public ResponseEntity<String> loginGoogle(GoogleLogin data, HttpSession session) {
         if (data.google_id() == null) {
-            return ResponseEntity.badRequest().body("Missing fields");
+            return ResponseEntity.badRequest().body("{\"result\":\"Missing fields\"}");
         }
 
         UserEntry user = UsersTablePostgres.getInstance().getUserFromGoogleId(data.google_id());
         if (user == null) {
             session.invalidate();
-            return ResponseEntity.badRequest().body("User not found");
+            return ResponseEntity.badRequest().body("{\"result\":\"User not found\"}");
         }
 
         String sessionId = UUID.randomUUID().toString();
         if (SessionsTablePostgres.getInstance().createSession(user.id(), sessionId)) {
             session.setAttribute("session_id", sessionId);
-            return ResponseEntity.ok("Success");
+            return ResponseEntity.ok("{\"result\":\"Success\"}");
         } else {
             session.invalidate();
-            return ResponseEntity.badRequest().body("Invalid credentials");
+            return ResponseEntity.badRequest().body("{\"result\":\"Invalid credentials\"}");
         }
     }
 }

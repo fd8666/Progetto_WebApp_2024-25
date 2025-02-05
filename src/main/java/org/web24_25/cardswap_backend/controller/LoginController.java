@@ -8,7 +8,7 @@ import org.web24_25.cardswap_backend.requests.PasswordLogin;
 import org.web24_25.cardswap_backend.service.LoginService;
 
 @RestController
-@CrossOrigin(origins="http://localhost:4200")
+@CrossOrigin("http://localhost:4200")
 @RequestMapping("/api/login")
 public class LoginController {
     private final LoginService service = new LoginService();
