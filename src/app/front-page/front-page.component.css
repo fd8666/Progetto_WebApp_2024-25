@@ -1,2 +1,29 @@
 @import "./css/front-page-da_sapere.component.css";
-@import "./css/front-page-carosello.component.css";
+.mySlides {
+  display: none;
+}
+
+.mySlides.active {
+  display: block;
+  opacity: 1;
+  transition: opacity 1s;
+}
+
+.dot {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+  cursor: pointer;
+}
+
+.dot:hover {
+  background-color: #717171;
+}
+
+.dot.active {
+  background-color: #717171;
+}

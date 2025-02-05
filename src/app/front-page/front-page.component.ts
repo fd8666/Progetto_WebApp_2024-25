@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../header/header.component';
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { NgFor } from '@angular/common';
+import {NgClass, NgFor} from '@angular/common';
 
 @Component({
   selector: 'app-front-page',
@@ -11,7 +12,9 @@ import { NgFor } from '@angular/common';
   imports: [
     RouterLink,
     HeaderComponent,
-    NgFor
+    NgFor,
+    NgClass,
+    CommonModule
   ],
   standalone: true,
   animations: [
@@ -36,5 +39,27 @@ export class FrontPageComponent {
 
   toggleFaq(index: number) {
     this.openedFaq = this.openedFaq === index ? null : index;
+  }
+
+  slideIndex: number = 0;
+  slides: { src: string }[] = [
+    { src: 'https://www.guizettefamily.com/wp-content/uploads/2024/08/Pokemon-JCC-Etincelles-Deferlantes-1.jpg' },
+    { src: 'https://cardotaku.com/cdn/shop/collections/one-piece-card-game-booster-pack-op-09-emperors-in-the-new-world-cards-list.png?v=1720055194&width=1200' },
+    { src: 'https://www.disneylorcana.com/cms/gallery/lorcana-web/landing/shimmeringskies_it_thumbnail.jpg' }
+  ];
+
+  ngOnInit() {
+    this.showSlides();
+  }
+
+  showSlides() {
+    setInterval(() => {
+      this.slideIndex = (this.slideIndex + 1) % this.slides.length;
+    }, 2000); // Cambia immagine ogni 2 secondi
+  }
+
+
+  currentSlide(index: number) {
+    this.slideIndex = index;
   }
 }

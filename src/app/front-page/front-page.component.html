@@ -18,27 +18,16 @@
     <p class="text-muted mb-4">Scopri il mondo degli scambi e degli acquisti di carte collezionabili! Qui puoi trovare altri collezionisti con cui scambiare le tue carte, partecipare a eventi e rimanere aggiornato sulle ultime notizie del mondo delle carte collezionabili.</p>
 
     <div class="slideshow-container">
-
-      <div class="mySlides fade">
-        <div class="numbertext">1 / 3</div>
-        <img src="https://www.guizettefamily.com/wp-content/uploads/2024/08/Pokemon-JCC-Etincelles-Deferlantes-1.jpg" style="width:100%">
+      <div class="mySlides fade" *ngFor="let slide of slides; let i = index" [ngClass]="{'active': slideIndex === i}">
+        <img [src]="slide.src" style="width:100%;" *ngIf="slideIndex === i">
       </div>
-
-      <div class="mySlides fade">
-        <div class="numbertext">2 / 3</div>
-        <img src="https://cardotaku.com/cdn/shop/collections/one-piece-card-game-booster-pack-op-09-emperors-in-the-new-world-cards-list.png?v=1720055194&width=1200" style="width:100%">
-      </div>
-
-      <div class="mySlides fade">
-        <div class="numbertext">3 / 3</div>
-        <img src="https://www.disneylorcana.com/cms/gallery/lorcana-web/landing/shimmeringskies_it_thumbnail.jpg" style="width:100%">
-      </div>
-      <div style="text-align:center; position:absolute; top:710px;right:640px">
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
+      <br>
+      <div style="text-align:center; position:absolute; top:998px;right:740px">
+        <span *ngFor="let dot of slides; let i = index" class="dot" [ngClass]="{'active': slideIndex === i}" (click)="currentSlide(i)"></span>
       </div>
     </div>
+
+
     <br>
 
   </section>
