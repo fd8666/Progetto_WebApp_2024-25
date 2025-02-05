@@ -1,31 +1,33 @@
 import { Component } from '@angular/core';
-import {CommonModule} from '@angular/common';
-import {RouterModule} from '@angular/router';
-import {AuthService} from '../services/auth.service';
-import {FormsModule} from '@angular/forms';
-import { firstValueFrom } from 'rxjs';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import {Router} from '@angular/router';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
 import {HeaderComponent} from '../header/header.component';
 
 @Component({
   selector: 'app-login',
-  imports: [CommonModule, RouterModule, FormsModule, HeaderComponent],
+  standalone: true,  // <--- Standalone Component
+  imports: [CommonModule, FormsModule, HttpClientModule, HeaderComponent],
   templateUrl: './login.component.html',
-  standalone: true,
-  styleUrl: './login.component.css'
+  styleUrls: ['./login.component.css']
 })
 export class LoginComponent {
-  constructor(private authService:AuthService) {}
-
-
-  async login(email: string, password: string) {
-    console.log('Login function called');
-
-    try {
-      const response = await firstValueFrom(this.authService.loginWithPassword({ email, password }));
-      console.log('Login Success:', response);
-    } catch (error) {
-      console.error('Login Failed:', error);
-    }
+  email: string = '';
+  password: string = '';
+  errorMessage: string = '';
+  constructor(private http: HttpClient, private router: Router) {}
+  login() {
+    this.http.post('http://localhost:8080/api/test/success_post', { email: this.email, password: this.password })
+      .subscribe({
+        next: (response) => {
+          console.log('Login riuscito:', response);
+          this.router.navigate([""])
+        },
+        error: (error) => {
+          this.errorMessage = 'Credenziali errate o server non disponibile';
+        }
+      });
   }
-
 }
+
