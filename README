@@ -1,0 +1,8 @@
+Per far funzionare il database bisogna modificare il file .env con le proprie credenziali di accesso al database.
+I campi da inserire sono:
+
+DATASOURCE_URL=jdbc:postgresql://localhost:5432/cardswap
+DATASOURCE_USERNAME=cardswap
+DATASOURCE_PASSWORD=justAPassword
+
+(questo è l'esempio che abbiamo usato noi)
