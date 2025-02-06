@@ -1,7 +1,7 @@
 Card Swap
 progetto per l'esame di WebApp 2024/25 di:
 
-Orlando Sgrò 
+\nOrlando Sgrò 
 Francesco Pio Falbo
 Fabio De Lio
 
