@@ -16,21 +16,21 @@ public class TradeService {
 
     public ResponseEntity<String> createTrade(CreateTrade trade, HttpSession session) {
         if (trade.to() == null || trade.offer() == null || trade.request() == null) {
-            return ResponseEntity.badRequest().body("Missing fields");
+            return ResponseEntity.badRequest().body("{\"result\":\"Missing fields\"}");
         }
         if (trade.offer().isEmpty() || trade.request().isEmpty()) {
-            return ResponseEntity.badRequest().body("Empty offer or request");
+            return ResponseEntity.badRequest().body("{\"result\":\"Empty offer or request\"}");
         }
 
         String sessionId = (String) session.getAttribute("session_id");
         SessionEntry sessionEntry = SessionsTablePostgres.getInstance().getSessionWithCookie(sessionId);
         if (sessionEntry == null) {
-            return ResponseEntity.badRequest().body("Session not found");
+            return ResponseEntity.badRequest().body("{\"result\":\"Session not found\"}");
         }
 
         UserEntry userEntry = UsersTablePostgres.getInstance().getUserWithId(sessionEntry.user_id());
         if (userEntry == null) {
-            return ResponseEntity.badRequest().body("User not found");
+            return ResponseEntity.badRequest().body("{\"result\":\"User not found\"}");
         }
 
         try {
@@ -44,7 +44,7 @@ public class TradeService {
             }
             return ResponseEntity.ok(t.id().toString());
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error creating trade");
+            return ResponseEntity.badRequest().body("{\"result\":\"Error creating trade\"}");
         }
     }
 
@@ -52,25 +52,25 @@ public class TradeService {
         String sessionId = (String) session.getAttribute("session_id");
         SessionEntry sessionEntry = SessionsTablePostgres.getInstance().getSessionWithCookie(sessionId);
         if (sessionEntry == null) {
-            return ResponseEntity.badRequest().body("Session not found");
+            return ResponseEntity.badRequest().body("{\"result\":\"Session not found\"}");
         }
 
         UserEntry userEntry = UsersTablePostgres.getInstance().getUserWithId(sessionEntry.user_id());
         if (userEntry == null) {
-            return ResponseEntity.badRequest().body("User not found");
+            return ResponseEntity.badRequest().body("{\"result\":\"User not found\"}");
         }
 
         try {
             var trade = TradesTablePostgres.getInstance().getTradeWithId(id);
             if (trade == null) {
-                return ResponseEntity.badRequest().body("Trade not found");
+                return ResponseEntity.badRequest().body("{\"result\":\"Trade not found\"}");
             }
             if (!Objects.equals(userEntry.id(), trade.from()) && !Objects.equals(userEntry.id(), trade.to())) {
-                return ResponseEntity.badRequest().body("Unauthorized");
+                return ResponseEntity.badRequest().body("{\"result\":\"Unauthorized\"}");
             }
             return ResponseEntity.ok(trade.toJson());
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error getting trade");
+            return ResponseEntity.badRequest().body("{\"result\":\"Error getting trade\"}");
         }
     }
 
@@ -78,21 +78,21 @@ public class TradeService {
         String sessionId = (String) session.getAttribute("session_id");
         SessionEntry sessionEntry = SessionsTablePostgres.getInstance().getSessionWithCookie(sessionId);
         if (sessionEntry == null) {
-            return ResponseEntity.badRequest().body("Session not found");
+            return ResponseEntity.badRequest().body("{\"result\":\"Session not found\"}");
         }
 
         UserEntry userEntry = UsersTablePostgres.getInstance().getUserWithId(sessionEntry.user_id());
         if (userEntry == null) {
-            return ResponseEntity.badRequest().body("User not found");
+            return ResponseEntity.badRequest().body("{\"result\":\"User not found\"}");
         }
 
         try {
             var trade = TradesTablePostgres.getInstance().getTradeWithId(id);
             if (trade == null) {
-                return ResponseEntity.badRequest().body("Trade not found");
+                return ResponseEntity.badRequest().body("{\"result\":\"Trade not found\"}");
             }
             if (!Objects.equals(userEntry.id(), trade.from()) && !Objects.equals(userEntry.id(), trade.to())) {
-                return ResponseEntity.badRequest().body("Unauthorized");
+                return ResponseEntity.badRequest().body("{\"result\":\"Unauthorized\"}");
             }
             StringBuilder offers = new StringBuilder("{ \"offers\": [");
             for (var offer : OffersTablePostgres.getInstance().getOffersWithTrade(trade.id())) {
@@ -104,7 +104,7 @@ public class TradeService {
             offers.append("]}");
             return ResponseEntity.ok(offers.toString());
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error getting trade");
+            return ResponseEntity.badRequest().body("{\"result\":\"Error getting trade\"}");
         }
     }
 
@@ -112,21 +112,21 @@ public class TradeService {
         String sessionId = (String) session.getAttribute("session_id");
         SessionEntry sessionEntry = SessionsTablePostgres.getInstance().getSessionWithCookie(sessionId);
         if (sessionEntry == null) {
-            return ResponseEntity.badRequest().body("Session not found");
+            return ResponseEntity.badRequest().body("{\"result\":\"Session not found\"}");
         }
 
         UserEntry userEntry = UsersTablePostgres.getInstance().getUserWithId(sessionEntry.user_id());
         if (userEntry == null) {
-            return ResponseEntity.badRequest().body("User not found");
+            return ResponseEntity.badRequest().body("{\"result\":\"User not found\"}");
         }
 
         try {
             var trade = TradesTablePostgres.getInstance().getTradeWithId(id);
             if (trade == null) {
-                return ResponseEntity.badRequest().body("Trade not found");
+                return ResponseEntity.badRequest().body("{\"result\":\"Trade not found\"}");
             }
             if (!Objects.equals(userEntry.id(), trade.from()) && !Objects.equals(userEntry.id(), trade.to())) {
-                return ResponseEntity.badRequest().body("Unauthorized");
+                return ResponseEntity.badRequest().body("{\"result\":\"Unauthorized\"}");
             }
             StringBuilder requests = new StringBuilder("{ \"requests\": [");
             for (var offer : RequestsTablePostgres.getInstance().getRequestsWithTrade(trade.id())) {
@@ -138,7 +138,7 @@ public class TradeService {
             requests.append("]}");
             return ResponseEntity.ok(requests.toString());
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error getting trade");
+            return ResponseEntity.badRequest().body("{\"result\":\"Error getting trade\"}");
         }
     }
 
@@ -146,12 +146,12 @@ public class TradeService {
         String sessionId = (String) session.getAttribute("session_id");
         SessionEntry sessionEntry = SessionsTablePostgres.getInstance().getSessionWithCookie(sessionId);
         if (sessionEntry == null) {
-            return ResponseEntity.badRequest().body("Session not found");
+            return ResponseEntity.badRequest().body("{\"result\":\"Session not found\"}");
         }
 
         UserEntry userEntry = UsersTablePostgres.getInstance().getUserWithId(sessionEntry.user_id());
         if (userEntry == null) {
-            return ResponseEntity.badRequest().body("User not found");
+            return ResponseEntity.badRequest().body("{\"result\":\"User not found\"}");
         }
         try {
             StringBuilder trades = new StringBuilder("{ \"trades\": [");
@@ -164,7 +164,7 @@ public class TradeService {
             trades.append("]}");
             return ResponseEntity.ok(trades.toString());
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error getting trades");
+            return ResponseEntity.badRequest().body("{\"result\":\"Error getting trades\"}");
         }
     }
 
@@ -172,12 +172,12 @@ public class TradeService {
         String sessionId = (String) session.getAttribute("session_id");
         SessionEntry sessionEntry = SessionsTablePostgres.getInstance().getSessionWithCookie(sessionId);
         if (sessionEntry == null) {
-            return ResponseEntity.badRequest().body("Session not found");
+            return ResponseEntity.badRequest().body("{\"result\":\"Session not found\"}");
         }
 
         UserEntry userEntry = UsersTablePostgres.getInstance().getUserWithId(sessionEntry.user_id());
         if (userEntry == null) {
-            return ResponseEntity.badRequest().body("User not found");
+            return ResponseEntity.badRequest().body("{\"result\":\"User not found\"}");
         }
         try {
             StringBuilder trades = new StringBuilder("{ \"trades\": [");
@@ -190,7 +190,7 @@ public class TradeService {
             trades.append("]}");
             return ResponseEntity.ok(trades.toString());
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error getting trades");
+            return ResponseEntity.badRequest().body("{\"result\":\"Error getting trades\"}");
         }
     }
 
@@ -198,27 +198,27 @@ public class TradeService {
         String sessionId = (String) session.getAttribute("session_id");
         SessionEntry sessionEntry = SessionsTablePostgres.getInstance().getSessionWithCookie(sessionId);
         if (sessionEntry == null) {
-            return ResponseEntity.badRequest().body("Session not found");
+            return ResponseEntity.badRequest().body("{\"result\":\"Session not found\"}");
         }
 
         UserEntry userEntry = UsersTablePostgres.getInstance().getUserWithId(sessionEntry.user_id());
         if (userEntry == null) {
-            return ResponseEntity.badRequest().body("User not found");
+            return ResponseEntity.badRequest().body("{\"result\":\"User not found\"}");
         }
         try {
             var trade = TradesTablePostgres.getInstance().getTradeWithId(id);
             if (trade == null) {
-                return ResponseEntity.badRequest().body("Trade not found");
+                return ResponseEntity.badRequest().body("{\"result\":\"Trade not found\"}");
             }
             if (!Objects.equals(userEntry.id(), trade.to())) {
-                return ResponseEntity.badRequest().body("Unauthorized");
+                return ResponseEntity.badRequest().body("{\"result\":\"Unauthorized\"}");
             }
             if (trade.accept())
-                return ResponseEntity.ok("Trade accepted");
+                return ResponseEntity.ok("{\"result\":\"Trade accepted\"}");
             else
-                return ResponseEntity.badRequest().body("Error accepting trade");
+                return ResponseEntity.badRequest().body("{\"result\":\"Error accepting trade\"}");
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error accepting trade");
+            return ResponseEntity.badRequest().body("{\"result\":\"Error accepting trade\"}");
         }
     }
 
@@ -226,27 +226,27 @@ public class TradeService {
         String sessionId = (String) session.getAttribute("session_id");
         SessionEntry sessionEntry = SessionsTablePostgres.getInstance().getSessionWithCookie(sessionId);
         if (sessionEntry == null) {
-            return ResponseEntity.badRequest().body("Session not found");
+            return ResponseEntity.badRequest().body("{\"result\":\"Session not found\"}");
         }
 
         UserEntry userEntry = UsersTablePostgres.getInstance().getUserWithId(sessionEntry.user_id());
         if (userEntry == null) {
-            return ResponseEntity.badRequest().body("User not found");
+            return ResponseEntity.badRequest().body("{\"result\":\"User not found\"}");
         }
         try {
             var trade = TradesTablePostgres.getInstance().getTradeWithId(id);
             if (trade == null) {
-                return ResponseEntity.badRequest().body("Trade not found");
+                return ResponseEntity.badRequest().body("{\"result\":\"Trade not found\"}");
             }
             if (!Objects.equals(userEntry.id(), trade.to())) {
-                return ResponseEntity.badRequest().body("Unauthorized");
+                return ResponseEntity.badRequest().body("{\"result\":\"Unauthorized\"}");
             }
             if (trade.reject())
-                return ResponseEntity.ok("Trade rejected");
+                return ResponseEntity.ok("{\"result\":\"Trade rejected\"}");
             else
-                return ResponseEntity.badRequest().body("Error rejecting trade");
+                return ResponseEntity.badRequest().body("{\"result\":\"Error rejecting trade\"}");
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error rejecting trade");
+            return ResponseEntity.badRequest().body("{\"result\":\"Error rejecting trade\"}");
         }
     }
 
@@ -254,11 +254,11 @@ public class TradeService {
         String sessionId = (String) session.getAttribute("session_id");
         SessionEntry sessionEntry = SessionsTablePostgres.getInstance().getSessionWithCookie(sessionId);
         if (sessionEntry == null) {
-            return ResponseEntity.badRequest().body("Session not found");
+            return ResponseEntity.badRequest().body("{\"result\":\"Session not found\"}");
         }
         UserEntry userEntry = UsersTablePostgres.getInstance().getUserWithId(sessionEntry.user_id());
         if (userEntry == null) {
-            return ResponseEntity.badRequest().body("User not found");
+            return ResponseEntity.badRequest().body("{\"result\":\"User not found\"}");
         }
 
         try {
@@ -272,7 +272,7 @@ public class TradeService {
             trades.append("]}");
             return ResponseEntity.ok(trades.toString());
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error getting trades");
+            return ResponseEntity.badRequest().body("{\"result\":\"Error getting trades\"}");
         }
     }
 
@@ -280,11 +280,11 @@ public class TradeService {
         String sessionId = (String) session.getAttribute("session_id");
         SessionEntry sessionEntry = SessionsTablePostgres.getInstance().getSessionWithCookie(sessionId);
         if (sessionEntry == null) {
-            return ResponseEntity.badRequest().body("Session not found");
+            return ResponseEntity.badRequest().body("{\"result\":\"Session not found\"}");
         }
         UserEntry userEntry = UsersTablePostgres.getInstance().getUserWithId(sessionEntry.user_id());
         if (userEntry == null) {
-            return ResponseEntity.badRequest().body("User not found");
+            return ResponseEntity.badRequest().body("{\"result\":\"User not found\"}");
         }
 
         try {
@@ -298,7 +298,7 @@ public class TradeService {
             trades.append("]}");
             return ResponseEntity.ok(trades.toString());
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Error getting trades");
+            return ResponseEntity.badRequest().body("{\"result\":\"Error getting trades\"}");
         }
     }
 }
