@@ -1,0 +1,456 @@
+-- DROP SCHEMA public;
+
+CREATE SCHEMA public AUTHORIZATION pg_database_owner;
+
+COMMENT ON SCHEMA public IS 'standard public schema';
+
+-- DROP TYPE public."status_type";
+
+CREATE TYPE public."status_type" AS ENUM (
+	'sent',
+	'refused',
+	'accepted');
+
+-- DROP SEQUENCE public.card_tags_primary_key;
+
+CREATE SEQUENCE public.card_tags_primary_key
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 9223372036854775807
+	START 1
+	CACHE 1
+	NO CYCLE;
+-- DROP SEQUENCE public.cards_primary_key;
+
+CREATE SEQUENCE public.cards_primary_key
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 9223372036854775807
+	START 1
+	CACHE 1
+	NO CYCLE;
+-- DROP SEQUENCE public.expansions_primary_key;
+
+CREATE SEQUENCE public.expansions_primary_key
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 9223372036854775807
+	START 1
+	CACHE 1
+	NO CYCLE;
+-- DROP SEQUENCE public.games_primary_key;
+
+CREATE SEQUENCE public.games_primary_key
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 9223372036854775807
+	START 1
+	CACHE 1
+	NO CYCLE;
+-- DROP SEQUENCE public.inventories_primary_key;
+
+CREATE SEQUENCE public.inventories_primary_key
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 9223372036854775807
+	START 1
+	CACHE 1
+	NO CYCLE;
+-- DROP SEQUENCE public.offers_primary_key;
+
+CREATE SEQUENCE public.offers_primary_key
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 9223372036854775807
+	START 1
+	CACHE 1
+	NO CYCLE;
+-- DROP SEQUENCE public.requests_primary_key;
+
+CREATE SEQUENCE public.requests_primary_key
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 9223372036854775807
+	START 1
+	CACHE 1
+	NO CYCLE;
+-- DROP SEQUENCE public.sessions_primary_key;
+
+CREATE SEQUENCE public.sessions_primary_key
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 9223372036854775807
+	START 1
+	CACHE 1
+	NO CYCLE;
+-- DROP SEQUENCE public.tags_primary_key;
+
+CREATE SEQUENCE public.tags_primary_key
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 9223372036854775807
+	START 1
+	CACHE 1
+	NO CYCLE;
+-- DROP SEQUENCE public.trades_primary_key;
+
+CREATE SEQUENCE public.trades_primary_key
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 9223372036854775807
+	START 1
+	CACHE 1
+	NO CYCLE;
+-- DROP SEQUENCE public.users_primary_key;
+
+CREATE SEQUENCE public.users_primary_key
+	INCREMENT BY 1
+	MINVALUE 1
+	MAXVALUE 9223372036854775807
+	START 1
+	CACHE 1
+	NO CYCLE;-- public.games definition
+
+-- Drop table
+
+-- DROP TABLE public.games;
+
+CREATE TABLE public.games (
+	id int4 DEFAULT nextval('games_primary_key'::regclass) NOT NULL,
+	"name" varchar NULL,
+	description varchar NULL,
+	CONSTRAINT games_pk PRIMARY KEY (id),
+	CONSTRAINT games_unique UNIQUE (name)
+);
+
+
+-- public.tags definition
+
+-- Drop table
+
+-- DROP TABLE public.tags;
+
+CREATE TABLE public.tags (
+	id int4 DEFAULT nextval('tags_primary_key'::regclass) NOT NULL,
+	"name" varchar NOT NULL,
+	CONSTRAINT tags_pk PRIMARY KEY (id),
+	CONSTRAINT tags_unique UNIQUE (name)
+);
+
+
+-- public.users definition
+
+-- Drop table
+
+-- DROP TABLE public.users;
+
+CREATE TABLE public.users (
+	id int4 DEFAULT nextval('users_primary_key'::regclass) NOT NULL,
+	username varchar NOT NULL,
+	email varchar NOT NULL,
+	password_hash varchar NULL,
+	google_id varchar NULL,
+	creation_date date DEFAULT now() NOT NULL,
+	biography varchar NULL,
+	CONSTRAINT users_check CHECK (((password_hash IS NOT NULL) OR (google_id IS NOT NULL))),
+	CONSTRAINT users_pk PRIMARY KEY (id)
+);
+
+
+-- public.expansions definition
+
+-- Drop table
+
+-- DROP TABLE public.expansions;
+
+CREATE TABLE public.expansions (
+	id int4 DEFAULT nextval('expansions_primary_key'::regclass) NOT NULL,
+	game int4 NOT NULL,
+	"name" varchar NULL,
+	description varchar NULL,
+	CONSTRAINT expansions_pk PRIMARY KEY (id),
+	CONSTRAINT expansions_unique UNIQUE (name),
+	CONSTRAINT expansions_games_fk FOREIGN KEY (game) REFERENCES public.games(id)
+);
+
+
+-- public.sessions definition
+
+-- Drop table
+
+-- DROP TABLE public.sessions;
+
+CREATE TABLE public.sessions (
+	id int4 DEFAULT nextval('sessions_primary_key'::regclass) NOT NULL,
+	user_id int4 NULL,
+	ipv4 bpchar(15) NULL,
+	cookie varchar NOT NULL,
+	user_agent varchar NULL,
+	creation_date date DEFAULT now() NOT NULL,
+	time_to_live int4 DEFAULT 604800 NOT NULL, -- 1 week (604800 seconds)
+	"valid" bool DEFAULT true NOT NULL,
+	private_key varchar NULL,
+	CONSTRAINT sessions_pk PRIMARY KEY (id),
+	CONSTRAINT sessions_users_fk FOREIGN KEY (user_id) REFERENCES public.users(id)
+);
+
+-- Column comments
+
+COMMENT ON COLUMN public.sessions.time_to_live IS '1 week (604800 seconds)';
+
+
+-- public.trades definition
+
+-- Drop table
+
+-- DROP TABLE public.trades;
+
+CREATE TABLE public.trades (
+	id int4 DEFAULT nextval('trades_primary_key'::regclass) NOT NULL,
+	"from" int4 NOT NULL,
+	"to" int4 NOT NULL,
+	status public."status_type" DEFAULT 'sent'::status_type NOT NULL,
+	message varchar NULL,
+	CONSTRAINT trades_pk PRIMARY KEY (id),
+	CONSTRAINT trades_users_fk FOREIGN KEY ("from") REFERENCES public.users(id),
+	CONSTRAINT trades_users_fk_1 FOREIGN KEY ("to") REFERENCES public.users(id)
+);
+
+-- Table Triggers
+
+create trigger trade_trigger after
+update
+    of status on
+    public.trades for each row
+    when ((new.status = 'accepted'::status_type)) execute function process_trade();
+
+
+-- public.cards definition
+
+-- Drop table
+
+-- DROP TABLE public.cards;
+
+CREATE TABLE public.cards (
+	id int4 DEFAULT nextval('cards_primary_key'::regclass) NOT NULL,
+	"name" varchar NOT NULL,
+	game int4 NOT NULL,
+	expansion int4 NULL,
+	identifier varchar NULL,
+	description varchar NULL,
+	CONSTRAINT cards_pk PRIMARY KEY (id),
+	CONSTRAINT cards_unique UNIQUE (name),
+	CONSTRAINT cards_unique_1 UNIQUE (identifier, game),
+	CONSTRAINT cards_expansions_fk FOREIGN KEY (expansion) REFERENCES public.expansions(id),
+	CONSTRAINT cards_games_fk FOREIGN KEY (game) REFERENCES public.games(id)
+);
+
+
+-- public.inventories definition
+
+-- Drop table
+
+-- DROP TABLE public.inventories;
+
+CREATE TABLE public.inventories (
+	id int4 DEFAULT nextval('inventories_primary_key'::regclass) NOT NULL,
+	"user" int4 NOT NULL,
+	card int4 NOT NULL,
+	amount int4 DEFAULT 1 NOT NULL,
+	CONSTRAINT inventory_pk PRIMARY KEY (id),
+	CONSTRAINT inventories_cards_fk FOREIGN KEY (card) REFERENCES public.cards(id),
+	CONSTRAINT inventories_users_fk FOREIGN KEY ("user") REFERENCES public.users(id)
+);
+
+
+-- public.offers definition
+
+-- Drop table
+
+-- DROP TABLE public.offers;
+
+CREATE TABLE public.offers (
+	id int4 DEFAULT nextval('offers_primary_key'::regclass) NOT NULL,
+	trade int4 NOT NULL,
+	card int4 NOT NULL,
+	CONSTRAINT offers_pk PRIMARY KEY (id),
+	CONSTRAINT offers_cards_fk FOREIGN KEY (card) REFERENCES public.cards(id),
+	CONSTRAINT offers_trades_fk FOREIGN KEY (trade) REFERENCES public.trades(id)
+);
+
+-- Table Triggers
+
+create trigger check_offers_limit_trigger before
+insert
+    on
+    public.offers for each row execute function check_offers_limit();
+
+
+-- public.requests definition
+
+-- Drop table
+
+-- DROP TABLE public.requests;
+
+CREATE TABLE public.requests (
+	id int4 DEFAULT nextval('requests_primary_key'::regclass) NOT NULL,
+	trade int4 NOT NULL,
+	card int4 NOT NULL,
+	CONSTRAINT requests_pk PRIMARY KEY (id),
+	CONSTRAINT requests_cards_fk FOREIGN KEY (card) REFERENCES public.cards(id),
+	CONSTRAINT requests_trades_fk FOREIGN KEY (trade) REFERENCES public.trades(id)
+);
+
+-- Table Triggers
+
+create trigger check_requests_limit_trigger before
+insert
+    on
+    public.requests for each row execute function check_requests_limit();
+
+
+-- public.card_tags definition
+
+-- Drop table
+
+-- DROP TABLE public.card_tags;
+
+CREATE TABLE public.card_tags (
+	id int4 DEFAULT nextval('card_tags_primary_key'::regclass) NOT NULL,
+	card int4 NOT NULL,
+	tag int4 NOT NULL,
+	CONSTRAINT card_tags_pk PRIMARY KEY (id),
+	CONSTRAINT card_tags_cards_fk FOREIGN KEY (card) REFERENCES public.cards(id),
+	CONSTRAINT card_tags_tags_fk FOREIGN KEY (tag) REFERENCES public.tags(id)
+);
+
+
+-- public.cards_with_positive_amount source
+
+CREATE OR REPLACE VIEW public.cards_with_positive_amount
+AS SELECT DISTINCT c.id,
+    c.name,
+    c.game,
+    c.expansion,
+    c.identifier,
+    c.description
+   FROM cards c
+     JOIN inventories_with_positive_amount i ON c.id = i.card;
+
+
+-- public.inventories_with_positive_amount source
+
+CREATE OR REPLACE VIEW public.inventories_with_positive_amount
+AS SELECT id,
+    "user",
+    card,
+    amount
+   FROM inventories
+  WHERE amount > 0;
+
+
+-- public.registration_sessions source
+
+CREATE OR REPLACE VIEW public.registration_sessions
+AS SELECT id,
+    user_id,
+    ipv4,
+    cookie,
+    user_agent,
+    creation_date,
+    time_to_live,
+    valid
+   FROM valid_sessions
+  WHERE user_id IS NULL;
+
+
+-- public.valid_sessions source
+
+CREATE OR REPLACE VIEW public.valid_sessions
+AS SELECT id,
+    user_id,
+    ipv4,
+    cookie,
+    user_agent,
+    creation_date,
+    time_to_live,
+    valid,
+    private_key
+   FROM sessions s
+  WHERE valid = true AND (creation_date + time_to_live::double precision * '00:00:01'::interval) > now();
+
+
+
+-- DROP FUNCTION public.check_offers_limit();
+
+CREATE OR REPLACE FUNCTION public.check_offers_limit()
+ RETURNS trigger
+ LANGUAGE plpgsql
+AS $function$
+BEGIN
+    IF (SELECT COUNT(*) FROM offers WHERE trade = NEW.trade) >= 5 THEN
+        RAISE EXCEPTION 'A trade can have at most 5 offers.';
+    END IF;
+
+    RETURN NEW;
+END;
+$function$
+;
+
+-- DROP FUNCTION public.check_requests_limit();
+
+CREATE OR REPLACE FUNCTION public.check_requests_limit()
+ RETURNS trigger
+ LANGUAGE plpgsql
+AS $function$
+BEGIN
+    IF (SELECT COUNT(*) FROM requests WHERE trade = NEW.trade) >= 5 THEN
+        RAISE EXCEPTION 'A trade can have at most 5 requests.';
+    END IF;
+
+    RETURN NEW;
+END;
+$function$
+;
+
+-- DROP FUNCTION public.process_trade();
+
+CREATE OR REPLACE FUNCTION public.process_trade()
+ RETURNS trigger
+ LANGUAGE plpgsql
+AS $function$
+BEGIN
+    IF NEW.status = 'accepted' THEN
+        UPDATE inventories
+        SET amount = amount - 1
+        FROM offers o
+        WHERE inventories.user = NEW.from
+          AND inventories.card = o.card
+          AND o.trade = NEW.id;
+
+        UPDATE inventories
+        SET amount = amount - 1
+        FROM requests r
+        WHERE inventories.user = NEW.to
+          AND inventories.card = r.card
+          AND r.trade = NEW.id;
+
+        INSERT INTO inventories ("user", card, amount)
+        SELECT NEW.to, o.card, 1
+        FROM offers o
+        WHERE o.trade = NEW.id
+        ON CONFLICT (user, card)
+        DO UPDATE SET amount = inventories.amount + 1;
+
+        INSERT INTO inventories ("user", card, amount)
+        SELECT NEW.from, r.card, 1
+        FROM requests r
+        WHERE r.trade = NEW.id
+        ON CONFLICT (user, card)
+        DO UPDATE SET amount = inventories.amount + 1;
+    END IF;
+
+    RETURN NEW;
+END;
+$function$
+;
