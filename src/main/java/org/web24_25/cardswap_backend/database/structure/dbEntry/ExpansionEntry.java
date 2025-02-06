@@ -11,4 +11,5 @@ public interface ExpansionEntry {
     boolean setDescription(String description);
     GameEntry getGame();
     List<CardEntry> getCards();
+    String toJson();
 }

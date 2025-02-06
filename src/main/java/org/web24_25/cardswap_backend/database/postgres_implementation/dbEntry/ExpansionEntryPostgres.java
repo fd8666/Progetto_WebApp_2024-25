@@ -93,6 +93,11 @@ public final class ExpansionEntryPostgres implements ExpansionEntry {
     }
 
     @Override
+    public String toJson() {
+        return "{\"id\":" + id + ",\"game\":" + game + ",\"name\":\"" + name + "\",\"description\":\"" + description + "\"}";
+    }
+
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) return true;
         if (obj == null || obj.getClass() != this.getClass()) return false;

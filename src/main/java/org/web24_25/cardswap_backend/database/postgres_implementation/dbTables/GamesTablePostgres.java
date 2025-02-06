@@ -4,10 +4,13 @@ import org.web24_25.cardswap_backend.database.postgres_implementation.DatabasePo
 import org.web24_25.cardswap_backend.database.postgres_implementation.dbEntry.GameEntryPostgres;
 import org.web24_25.cardswap_backend.database.structure.dbEntry.GameEntry;
 import org.web24_25.cardswap_backend.database.structure.dbTables.GamesTable;
+import org.web24_25.cardswap_backend.requests.AddGame;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.logging.Logger;
 
 public class GamesTablePostgres implements GamesTable {
@@ -30,6 +33,20 @@ public class GamesTablePostgres implements GamesTable {
             try {
                 var ps = DatabasePostgres.conn.prepareStatement("INSERT INTO games (name) VALUES (?);");
                 ps.setString(1, name);
+                return ps.executeUpdate() != 0;
+            } catch (Exception e) {
+                logger.severe(e.getMessage());
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean addGame(AddGame game) {
+        if (DatabasePostgres.getInstance().verifyConnectionAndReconnect()) {
+            try {
+                var ps = DatabasePostgres.conn.prepareStatement("INSERT INTO games (name) VALUES (?);");
+                ps.setString(1, game.name());
                 return ps.executeUpdate() != 0;
             } catch (Exception e) {
                 logger.severe(e.getMessage());
@@ -144,5 +161,32 @@ public class GamesTablePostgres implements GamesTable {
             }
         }
         return null;
+    }
+
+    @Override
+    public List<GameEntry> getAllGames() {
+        ArrayList<GameEntry> gameEntries = new ArrayList<>();
+        if (DatabasePostgres.getInstance().verifyConnectionAndReconnect()) {
+            try {
+                var ps = DatabasePostgres.conn.prepareStatement("SELECT * FROM games;");
+                var rs = ps.executeQuery();
+                while (rs.next()) {
+                    if (games.containsKey(rs.getInt("id"))) {
+                        gameEntries.add(games.get(rs.getInt("id")));
+                        continue;
+                    }
+                    var gep = new GameEntryPostgres(
+                        rs.getInt("id"),
+                        rs.getString("name"),
+                        rs.getString("description")
+                    );
+                    games.put(gep.id(), gep);
+                    gameEntries.add(gep);
+                }
+            } catch (SQLException e) {
+                logger.severe(e.getMessage());
+            }
+        }
+        return gameEntries;
     }
 }

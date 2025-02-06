@@ -207,4 +207,16 @@ public final class CardEntryPostgres implements CardEntry {
                 "identifier=" + identifier + ", " +
                 "description=" + description + ']';
     }
+
+    @Override
+    public String toJson() {
+        return "{" +
+                "\"id\":" + id + "," +
+                "\"name\":\"" + name + "\"," +
+                "\"game\":" + game + "," +
+                "\"expansion\":" + expansion + "," +
+                "\"identifier\":\"" + identifier + "\"," +
+                "\"description\":\"" + description + "\"" +
+                "}";
+    }
 }

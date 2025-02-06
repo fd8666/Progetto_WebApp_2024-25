@@ -4,6 +4,7 @@ import org.web24_25.cardswap_backend.database.postgres_implementation.DatabasePo
 import org.web24_25.cardswap_backend.database.postgres_implementation.dbEntry.CardEntryPostgres;
 import org.web24_25.cardswap_backend.database.structure.dbEntry.CardEntry;
 import org.web24_25.cardswap_backend.database.structure.dbTables.CardsTable;
+import org.web24_25.cardswap_backend.requests.AddCard;
 
 import java.sql.ResultSet;
 import java.util.ArrayList;
@@ -34,6 +35,23 @@ public class CardsTablePostgres implements CardsTable {
                 ps.setInt(2, expansionId);
                 ps.setString(2, cardName);
                 ps.setString(2, identifier);
+                return ps.executeUpdate() != 0;
+            } catch (Exception e) {
+                logger.severe(e.getMessage());
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean addCard(AddCard card) {
+        if (DatabasePostgres.getInstance().verifyConnectionAndReconnect()) {
+            try {
+                var ps = DatabasePostgres.conn.prepareStatement("INSERT INTO cards (game, expansion, name, identifier) VALUES (?, ?, ?, ?);");
+                ps.setInt(1, card.gameId());
+                ps.setInt(2, card.expansionId());
+                ps.setString(2, card.cardName());
+                ps.setString(2, card.identifier());
                 return ps.executeUpdate() != 0;
             } catch (Exception e) {
                 logger.severe(e.getMessage());
@@ -309,5 +327,42 @@ public class CardsTablePostgres implements CardsTable {
             }
         }
         return null;
+    }
+
+    public List<CardEntry> getAllCards() {
+        ArrayList<CardEntry> cards_list = new ArrayList<>();
+        if (DatabasePostgres.getInstance().verifyConnectionAndReconnect()) {
+            try {
+                var ps = DatabasePostgres.conn.prepareStatement("SELECT * FROM cards;");
+                var rs = ps.executeQuery();
+                while (rs.next()) {
+                    makeCardWithResultSet(rs);
+                    cards_list.add(cards.get(rs.getInt("id")));
+                }
+            } catch (Exception e) {
+                logger.severe(e.getMessage());
+            }
+        }
+        return cards_list;
+    }
+
+    @Override
+    public List<CardEntry> getCardsFromIdWithLimit(int start, int limit) {
+        ArrayList<CardEntry> cards_list = new ArrayList<>();
+        if (DatabasePostgres.getInstance().verifyConnectionAndReconnect()) {
+            try {
+                var ps = DatabasePostgres.conn.prepareStatement("SELECT * FROM cards WHERE id >= ? LIMIT ?;");
+                ps.setInt(1, start);
+                ps.setInt(2, limit);
+                var rs = ps.executeQuery();
+                while (rs.next()) {
+                    makeCardWithResultSet(rs);
+                    cards_list.add(cards.get(rs.getInt("id")));
+                }
+            } catch (Exception e) {
+                logger.severe(e.getMessage());
+            }
+        }
+        return cards_list;
     }
 }

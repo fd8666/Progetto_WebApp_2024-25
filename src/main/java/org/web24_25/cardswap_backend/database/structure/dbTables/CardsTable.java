@@ -1,6 +1,7 @@
 package org.web24_25.cardswap_backend.database.structure.dbTables;
 
 import org.web24_25.cardswap_backend.database.structure.dbEntry.CardEntry;
+import org.web24_25.cardswap_backend.requests.AddCard;
 
 import java.util.List;
 
@@ -9,6 +10,9 @@ public interface CardsTable {
         return null;
     }
     boolean addCard(int gameId, int expansionId, String cardName, String identifier);
+
+    boolean addCard(AddCard card);
+
     boolean removeCardWithId(int cardId);
     boolean removeCardsWithExpansion(int expansionId);
     boolean removeCardsWithGame(int gameId);
@@ -20,4 +24,6 @@ public interface CardsTable {
     List<CardEntry> getAvailableCardsContainingStringFromIdWithLimit(String cardName, int from_id, int limit);
     int getAvailableCardsContainingStringFromIdWithLimitNumber(String cardName, int from_id);
     CardEntry getCardWithIdentifier(String identifier);
+
+    Object getCardsFromIdWithLimit(int start, int limit);
 }

@@ -4,6 +4,7 @@ import org.web24_25.cardswap_backend.database.postgres_implementation.DatabasePo
 import org.web24_25.cardswap_backend.database.postgres_implementation.dbEntry.ExpansionEntryPostgres;
 import org.web24_25.cardswap_backend.database.structure.dbEntry.ExpansionEntry;
 import org.web24_25.cardswap_backend.database.structure.dbTables.ExpansionsTable;
+import org.web24_25.cardswap_backend.requests.AddExpansion;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -29,6 +30,21 @@ public class ExpansionsTablePostgres implements ExpansionsTable {
                 var ps = DatabasePostgres.conn.prepareStatement("INSERT INTO expansions (game, name) VALUES (?, ?);");
                 ps.setInt(1, gameId);
                 ps.setString(2, name);
+                return ps.executeUpdate() != 0;
+            } catch (Exception e) {
+                logger.severe(e.getMessage());
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public boolean addExpansion(AddExpansion expansion) {
+        if (DatabasePostgres.getInstance().verifyConnectionAndReconnect()) {
+            try {
+                var ps = DatabasePostgres.conn.prepareStatement("INSERT INTO expansions (game, name) VALUES (?, ?);");
+                ps.setInt(1, expansion.gameId());
+                ps.setString(2, expansion.name());
                 return ps.executeUpdate() != 0;
             } catch (Exception e) {
                 logger.severe(e.getMessage());
@@ -148,4 +164,33 @@ public class ExpansionsTablePostgres implements ExpansionsTable {
     }
 
     private ExpansionsTablePostgres() {}
+
+    @Override
+    public List<ExpansionEntry> getAllExpansions() {
+        ArrayList<ExpansionEntry> expansions_list = new ArrayList<>();
+        if (DatabasePostgres.getInstance().verifyConnectionAndReconnect()) {
+            try {
+                var ps = DatabasePostgres.conn.prepareStatement("SELECT * FROM expansions;");
+                var rs = ps.executeQuery();
+                while (rs.next()) {
+                    if (expansions.containsKey(rs.getInt("id"))) {
+                        expansions_list.add(expansions.get(rs.getInt("id")));
+                        continue;
+                    }
+                    var entry = new ExpansionEntryPostgres(
+                        rs.getInt("id"),
+                        rs.getInt("game"),
+                        rs.getString("name"),
+                        rs.getString("description")
+                    );
+                    expansions.put(entry.id(), entry);
+                    expansions_list.add(entry);
+                }
+                rs.close();
+            } catch (Exception e) {
+                logger.severe(e.getMessage());
+            }
+        }
+        return expansions_list;
+    }
 }

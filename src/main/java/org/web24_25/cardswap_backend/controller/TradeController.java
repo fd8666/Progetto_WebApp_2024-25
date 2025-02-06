@@ -4,7 +4,6 @@ import jakarta.servlet.http.HttpSession;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.web24_25.cardswap_backend.requests.CreateTrade;
-import org.web24_25.cardswap_backend.requests.PasswordRegistration;
 import org.web24_25.cardswap_backend.service.TradeService;
 
 @RestController

@@ -8,4 +8,5 @@ public interface InventoriesTable {
     boolean addInventory(Integer userId, Integer cardId, Integer amount);
     List<InventoryEntry> getInventoriesWithUser(Integer userId);
     List<InventoryEntry> getInventoriesWithCard(Integer cardId);
+    InventoryEntry getInventoryWithCardWithUser(Integer cardId, Integer UserId);
 }

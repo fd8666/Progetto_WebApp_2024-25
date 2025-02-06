@@ -73,6 +73,16 @@ public final class InventoryEntryPostgres implements InventoryEntry {
     }
 
     @Override
+    public boolean incrementAmount(Integer amount) {
+        return setAmount(this.amount + amount);
+    }
+
+    @Override
+    public boolean decrementAmount(Integer amount) {
+        return setAmount(this.amount - amount);
+    }
+
+    @Override
     public boolean equals(Object obj) {
         if (obj == this) return true;
         if (obj == null || obj.getClass() != this.getClass()) return false;

@@ -8,4 +8,6 @@ public interface InventoryEntry {
     CardEntry getCard();
     UserEntry getUser();
     boolean setAmount(Integer amount);
+    boolean incrementAmount(Integer amount);
+    boolean decrementAmount(Integer amount);
 }

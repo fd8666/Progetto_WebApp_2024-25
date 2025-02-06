@@ -110,4 +110,35 @@ public class InventoriesTablePostgres implements InventoriesTable {
         }
         return inventories_list;
     }
+
+    @Override
+    public InventoryEntry getInventoryWithCardWithUser(Integer cardId, Integer UserId) {
+        for (InventoryEntry ie : inventories.values()) {
+            if (ie.card().equals(cardId) && ie.user().equals(UserId)) {
+                return ie;
+            }
+        }
+        if (DatabasePostgres.getInstance().verifyConnectionAndReconnect()) {
+            try {
+                var ps = DatabasePostgres.conn.prepareStatement("SELECT * FROM inventories WHERE card = ? AND \"user\" = ?;");
+                ps.setInt(1, cardId);
+                ps.setInt(2, UserId);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()) {
+                    InventoryEntryPostgres iep = new InventoryEntryPostgres(
+                            rs.getInt("id"),
+                            rs.getInt("user"),
+                            rs.getInt("card"),
+                            rs.getInt("amount")
+                    );
+                    inventories.put(iep.id(), iep);
+                    return iep;
+                }
+                rs.close();
+            } catch (Exception e) {
+                logger.severe(e.getMessage());
+            }
+        }
+        return null;
+    }
 }

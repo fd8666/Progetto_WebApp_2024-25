@@ -19,4 +19,6 @@ public interface CardEntry {
     List<TagEntry> getTags();
     boolean addTag(TagEntry tag);
     boolean removeTag(TagEntry tag);
+
+    String toJson();
 }
