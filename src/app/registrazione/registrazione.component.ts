@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import {HttpClient, HttpClientModule, HttpHeaders} from '@angular/common/http';
-import {HeaderComponent} from '../header/header.component';
+import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
+import { HeaderComponent } from '../header/header.component';
 
 @Component({
   selector: 'app-registrazione',
@@ -11,7 +11,6 @@ import {HeaderComponent} from '../header/header.component';
   styleUrls: ['./registrazione.component.css'],
   imports: [CommonModule, FormsModule, HttpClientModule, HeaderComponent]
 })
-
 export class RegistrazioneComponent {
   username: string = '';
   email: string = '';
@@ -41,14 +40,23 @@ export class RegistrazioneComponent {
 
     this.http.post("http://localhost:8080/api/register/password", requestData, { headers })
       .subscribe({
-        next: (response) => console.log("Risposta dal backend:", response),
-        error: (error) => console.error("Errore backend:", error),
+        next: (response: any) => {
+          console.log("Risposta dal backend:", response);
+          this.message = response.result || "Registrazione avvenuta con successo!";
+          this.messageType = 'success';
+        },
+        error: (error) => {
+          console.error("Errore backend:", error);
+
+          // Estrarre il messaggio di errore dal JSON
+          if (error.error && error.error.result) {
+            this.message = error.error.result;
+          } else {
+            this.message = "Si è verificato un errore durante la registrazione.";
+          }
+          this.messageType = 'danger';
+        },
         complete: () => console.log("Richiesta completata!")
       });
-
   }
-
-
-
 }
-
