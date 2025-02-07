@@ -18,11 +18,16 @@ public class LoginService {
         }
 
         UserEntry user = UsersTablePostgres.getInstance().getUserFromEmail(data.email());
+
         if (user == null) {
             session.invalidate();
             return ResponseEntity.badRequest().body("{\"result\":\"User not found\"}");
         }
-
+        // Controllo password
+        if (!user.password_hash().equals(data.password())) {  // Se la password è in chiaro
+            session.invalidate();
+            return ResponseEntity.badRequest().body("{\"result\":\"Invalid credentials\"}");
+        }
         String sessionId = UUID.randomUUID().toString();
         if (SessionsTablePostgres.getInstance().createSession(user.id(), sessionId)) {
             session.setAttribute("session_id", sessionId);
