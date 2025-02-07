@@ -18,7 +18,7 @@ public class RegisterService {
         if (!data.email().matches("^[\\w-.]+@([\\w-]+\\.)+[\\w-]{2,4}$")) {
             return ResponseEntity.badRequest().body("{\"result\":\"Invalid email\"}");
         }
-        if (!data.password().matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[a-zA-Z\\d]{8,}$")) {
+        if (!data.password().matches("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[\\W_])[a-zA-Z\\d\\W_]{8,}$")) {
             //Password must contain at least one lowercase letter, one uppercase letter, one digit, and be at least 8 characters long
             return ResponseEntity.badRequest().body("{\"result\":\"Invalid password\"}");
         }
