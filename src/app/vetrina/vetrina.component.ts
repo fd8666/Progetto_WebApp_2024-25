@@ -19,13 +19,13 @@ interface Annuncio {
 })
 export class VetrinaComponent {
   annunci: Annuncio[] = [
-    { id: 1, nome: "Annuncio 1", prezzo: 10.99, immagine: "https://via.placeholder.com/200x150?text=Annuncio+1" },
-    { id: 2, nome: "Annuncio 2", prezzo: 5.99, immagine: "https://via.placeholder.com/200x150?text=Annuncio+2" },
-    { id: 3, nome: "Annuncio 3", prezzo: 7.99, immagine: "https://via.placeholder.com/200x150?text=Annuncio+3" },
-    { id: 4, nome: "Annuncio 4", prezzo: 12.99, immagine: "https://via.placeholder.com/200x150?text=Annuncio+4" },
-    { id: 5, nome: "Annuncio 5", prezzo: 9.99, immagine: "https://via.placeholder.com/200x150?text=Annuncio+5" },
-    { id: 6, nome: "Annuncio 6", prezzo: 11.99, immagine: "https://via.placeholder.com/200x150?text=Annuncio+6" },
-    { id: 7, nome: "Annuncio 7", prezzo: 8.99, immagine: "https://via.placeholder.com/200x150?text=Annuncio+7" },
+    { id: 1, nome: "Mewtwo", prezzo: 8.99, immagine: "https://www.pokepedia.fr/images/thumb/b/b8/Carte_Pok%C3%A9mon_GO_086.png/640px-Carte_Pok%C3%A9mon_GO_086.png" },
+    { id: 2, nome: "Usopp", prezzo: 3.99, immagine: "https://th.bing.com/th/id/OIP.5GGWqx-MimpOIIVlDhmJNQHaKV?rs=1&pid=ImgDetMain" },
+    { id: 3, nome: "Jack", prezzo: 1.99, immagine: "https://th.bing.com/th/id/OIP.NQwbStd6_bms3TwRW8Y5AwHaKW?rs=1&pid=ImgDetMain" },
+    { id: 4, nome: "Sakazuki", prezzo: 42.99, immagine: "https://product-images.tcgplayer.com/527011.jpg" },
+    { id: 5, nome: "Dragonite", prezzo: 19.99, immagine: "https://th.bing.com/th/id/OIP.ixs55-9hMulqSLkj-rCwOgHaKR?w=570&h=791&rs=1&pid=ImgDetMain" },
+    { id: 6, nome: "Raichu", prezzo: 11.99, immagine: "https://i.pinimg.com/originals/c2/92/23/c292231ea46fd89310f7f3b1cc918498.png" },
+    { id: 7, nome: "Mewtwo", prezzo: 8.99, immagine: "https://www.pokepedia.fr/images/thumb/b/b8/Carte_Pok%C3%A9mon_GO_086.png/640px-Carte_Pok%C3%A9mon_GO_086.png" },
     { id: 8, nome: "Annuncio 8", prezzo: 14.99, immagine: "https://via.placeholder.com/200x150?text=Annuncio+8" },
     { id: 9, nome: "Annuncio 9", prezzo: 6.99, immagine: "https://via.placeholder.com/200x150?text=Annuncio+9" },
     { id: 10, nome: "Annuncio 10", prezzo: 13.99, immagine: "https://via.placeholder.com/200x150?text=Annuncio+10" },
