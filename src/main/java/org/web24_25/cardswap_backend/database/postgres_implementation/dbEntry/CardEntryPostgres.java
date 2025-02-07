@@ -1,5 +1,7 @@
 package org.web24_25.cardswap_backend.database.postgres_implementation.dbEntry;
 
+import lombok.Getter;
+import lombok.Setter;
 import org.web24_25.cardswap_backend.database.postgres_implementation.DatabasePostgres;
 import org.web24_25.cardswap_backend.database.postgres_implementation.dbTables.CardTagsTablePostgres;
 import org.web24_25.cardswap_backend.database.postgres_implementation.dbTables.ExpansionsTablePostgres;
@@ -23,16 +25,22 @@ public final class CardEntryPostgres implements CardEntry {
     private Integer expansion;
     private String identifier;
     private String description;
+    @Getter@Setter
+    private Double prezzo; // Aggiunto per il prezzo
+    private String img;    // Aggiunto per l'immagine
 
     private static final Logger logger = Logger.getLogger(CardEntryPostgres.class.getName());
 
-    public CardEntryPostgres(Integer id, String name, Integer game, Integer expansion, String identifier, String description) {
+    public CardEntryPostgres(Integer id, String name, Integer game, Integer expansion, String identifier, String description,Double prezzo, String img) {
         this.id = id;
         this.name = name;
         this.game = game;
         this.expansion = expansion;
         this.identifier = identifier;
         this.description = description;
+        this.prezzo = prezzo;
+        this.img = img;
+
     }
 
     public Integer id() {
@@ -149,7 +157,6 @@ public final class CardEntryPostgres implements CardEntry {
         }
         return false;
     }
-
     @Override
     public GameEntry getGame() {
         return GamesTablePostgres.getInstance().getGameWithId(game());
@@ -216,7 +223,9 @@ public final class CardEntryPostgres implements CardEntry {
                 "\"game\":" + game + "," +
                 "\"expansion\":" + expansion + "," +
                 "\"identifier\":\"" + identifier + "\"," +
-                "\"description\":\"" + description + "\"" +
+                "\"description\":\"" + description + "\"," +
+                "\"prezzo\":" + prezzo + "," +
+                "\"img\":\"" + img + "\"" +
                 "}";
     }
 }

@@ -19,6 +19,7 @@ public class CardController {
 
     @GetMapping("/getCards")
     public ResponseEntity<String> getCard() {
+        System.out.println("le carte sono"+cardService.getCards());
         return cardService.getCards();
     }
 

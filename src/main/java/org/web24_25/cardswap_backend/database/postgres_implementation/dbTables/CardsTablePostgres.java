@@ -139,7 +139,9 @@ public class CardsTablePostgres implements CardsTable {
                         rs.getInt("game"),
                         rs.getInt("expansion"),
                         rs.getString("identifier"),
-                        rs.getString("description")
+                        rs.getString("description"),
+                            rs.getDouble("prezzo"),
+                            rs.getString("img")
                     );
                     cards.put(cardId, card);
                     return card;
@@ -160,7 +162,9 @@ public class CardsTablePostgres implements CardsTable {
                     rs.getInt("game"),
                     rs.getInt("expansion"),
                     rs.getString("identifier"),
-                    rs.getString("description")
+                    rs.getString("description"),
+                        rs.getDouble("prezzo"),
+                        rs.getString("img")
                 ));
             }
             return cards.get(rs.getInt("id"));
@@ -246,7 +250,9 @@ public class CardsTablePostgres implements CardsTable {
                         rs.getInt("game"),
                         rs.getInt("expansion"),
                         rs.getString("identifier"),
-                        rs.getString("description")
+                        rs.getString("description"),
+                            rs.getDouble("prezzo"),
+                            rs.getString("img")
                     );
                     cards.put(card.id(), card);
                     return card;
@@ -317,7 +323,9 @@ public class CardsTablePostgres implements CardsTable {
                         rs.getInt("game"),
                         rs.getInt("expansion"),
                         rs.getString("identifier"),
-                        rs.getString("description")
+                        rs.getString("description"),
+                            rs.getDouble("prezzo"),
+                            rs.getString("img")
                     );
                     cards.put(card.id(), card);
                     return card;
