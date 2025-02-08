@@ -3,17 +3,19 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { HeaderComponent } from '../header/header.component';
 import {CurrencyPipe, NgIf} from '@angular/common';
+import {FooterComponent} from "../footer/footer.component";
 
 @Component({
   selector: 'app-dettaglio',
   templateUrl: './card-announcement.component.html',
   standalone: true,
-  imports: [
-    HeaderComponent,
-    NgIf,
-    RouterLink,
-    CurrencyPipe
-  ],
+    imports: [
+        HeaderComponent,
+        NgIf,
+        RouterLink,
+        CurrencyPipe,
+        FooterComponent
+    ],
   styleUrls: ['./card-announcement.component.css']
 })
 export class CardAnnouncementComponent implements OnInit {

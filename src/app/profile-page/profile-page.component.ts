@@ -3,12 +3,13 @@ import { UserProfileService, UserProfile } from '../services/user-profile.servic
 import {FormsModule} from '@angular/forms';
 import {NgFor, NgIf} from '@angular/common';
 import {HeaderComponent} from '../header/header.component';
+import {FooterComponent} from "../footer/footer.component";
 
 @Component({
   selector: 'app-profile-page',
   templateUrl: './profile-page.component.html',
   styleUrls: ['./profile-page.component.css'],
-  imports: [NgIf, NgFor, FormsModule, HeaderComponent],
+    imports: [NgIf, NgFor, FormsModule, HeaderComponent, FooterComponent],
   standalone: true
 })
 
