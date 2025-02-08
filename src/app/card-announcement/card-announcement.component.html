@@ -14,21 +14,19 @@
 <body class="bg-light">
 <app-header></app-header>
 
-<div *ngIf="card">
+<div *ngIf="annuncio">
   <!-- Header con nome della carta e espansione separati da un trattino -->
   <div class="card-header">
     <h1 class="card-title">
-      {{ card.name }} -
-      <span class="card-expansion">{{ card.expansion }}</span>
+      {{ annuncio.name }} -
     </h1>
-    <span class="card-game">{{ card.game.name }}</span>
   </div>
 
   <!-- Contenitore principale -->
   <div class="card-container">
     <!-- Sezione immagine -->
     <div class="card-section card-image">
-      <img [src]="card?.imageUrl" alt="{{ card?.name }}" class="card-img">
+      <img [src]="annuncio.img" alt="{{ annuncio.name }}" class="card-img">
     </div>
 
 
@@ -39,18 +37,18 @@
 
       <!-- Sezione Tag -->
       <div class="card-tags">
-        <span *ngFor="let tag of card?.tags" class="tag">{{ tag.name }}</span>
+        <span *ngFor="let tag of annuncio.tag" class="tag">{{ tag.name }}</span>
       </div>
 
       <!-- Sottotitolo Descrizione -->
       <h3 class="info-subtitle">Descrizione</h3>
-      <p class="card-description">{{ card?.description }}</p>
+      <p class="card-description">{{ annuncio.description }}</p>
     </div>
 
 
     <!-- Sezione prezzo e azioni -->
     <div class="card-price-buttons">
-      <div class="card-price">{{ card?.price | currency }}</div>
+      <div class="card-price">{{ annuncio.prezzo | currency }}</div>
       <div class="card-buttons">
         <button class="card-button buy">
           <i class="fa fa-shopping-cart"></i> Acquista

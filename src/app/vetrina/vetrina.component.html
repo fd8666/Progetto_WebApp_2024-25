@@ -27,7 +27,7 @@
       <div class="card-body">
         <h5 class="card-title">{{ annuncio.nome }}</h5>
         <p class="card-text">Prezzo: {{ annuncio.prezzo | currency: 'EUR' }}</p>
-        <button class="btn btn-primary">
+        <button class="btn btn-primary" [routerLink]="['/dettaglio', annuncio.id]">
           <i class="bi bi-cart-plus"></i> Visualizza
         </button>
       </div>

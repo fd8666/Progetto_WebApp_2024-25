@@ -2,6 +2,7 @@ body {
   font-family: 'Roboto', sans-serif;
   background-color: #f0f0f0;
 }
+
 .btn{
   background-color: #e1981e;
 }
@@ -87,8 +88,6 @@ h2 {
   }
 }
 
-
-
 .card-header {
   text-align: center;
   margin-bottom: 20px; /* Distanza tra il titolo e le sezioni sottostanti */
@@ -109,14 +108,10 @@ h2 {
   margin-top: 0;
 }
 
-
 /* Rimuoviamo i bordi dalle sezioni carta e descrizione */
 .card-section {
   border: none; /* Rimuove il bordo */
 }
-
-
-
 
 /* Contenitore principale che mantiene le sezioni vicine */
 .card-container {
@@ -127,12 +122,11 @@ h2 {
   margin: 20px auto;
 }
 
-
-
-/* Sezione immagine */
+/* Sezione immagine - modifiche per ridimensionare l'immagine */
 .card-image img {
   height: auto;  /* Dimensione fissa per l'immagine */
-  width: 1200px;
+  width: 250px;  /* Larghezza fissa per l'immagine */
+  max-width: 100%; /* L'immagine non supererà la larghezza del suo contenitore */
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
@@ -173,7 +167,6 @@ h2 {
   margin-bottom: 10px; /* Distanza tra le righe di tag */
 }
 
-
 /* Sottotitolo "Descrizione" */
 .info-subtitle {
   font-size: 1.2rem;
@@ -188,6 +181,7 @@ h2 {
   font-size: 1rem;
   padding: 0 10px;
 }
+
 /* Sezione con prezzo e pulsanti */
 .card-price-buttons {
   border: 2px solid #ccc; /* Bordo grigio chiaro */
