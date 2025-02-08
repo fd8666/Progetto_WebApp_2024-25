@@ -15,7 +15,7 @@ export const routes: Routes = [
   {path:'Registrazione', component:RegistrazioneComponent},
   {path:'Login',component:LoginComponent},
   {path:'profilo',component: ProfilePageComponent},
-  {path:'info-carta',component:CardAnnouncementComponent},
+  {path:'dettaglio/:id',component:CardAnnouncementComponent},
   {path:'contatti',component:ContactComponent},
   {path:'vetrina',component:VetrinaComponent},
   {path:'scambio',component:ScambioComponent},
