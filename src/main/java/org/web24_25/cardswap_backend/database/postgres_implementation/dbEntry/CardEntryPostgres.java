@@ -212,7 +212,9 @@ public final class CardEntryPostgres implements CardEntry {
                 "game=" + game + ", " +
                 "expansion=" + expansion + ", " +
                 "identifier=" + identifier + ", " +
-                "description=" + description + ']';
+                "description=" + description + ","+
+                "prezzo="+prezzo+","+
+                "img="+img+']';
     }
 
     @Override

@@ -2,6 +2,7 @@ package org.web24_25.cardswap_backend.controller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.web24_25.cardswap_backend.database.postgres_implementation.dbEntry.CardEntryPostgres;
 import org.web24_25.cardswap_backend.requests.AddCard;
 import org.web24_25.cardswap_backend.service.CardService;
 
@@ -13,13 +14,13 @@ public class CardController {
 
 //    @GetMapping("/get?id={id}")
     @GetMapping("/getCard/{id}")
-    public ResponseEntity<String> getCard(@PathVariable int id) {
-        return cardService.getCard(id);
+    public ResponseEntity<?> getCard(@PathVariable int id) {
+        ResponseEntity<String> card = cardService.getCard(id);
+        return ResponseEntity.ok().body(card);
     }
 
     @GetMapping("/getCards")
     public ResponseEntity<String> getCard() {
-        System.out.println("le carte sono"+cardService.getCards());
         return cardService.getCards();
     }
 

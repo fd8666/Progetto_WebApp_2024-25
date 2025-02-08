@@ -133,19 +133,31 @@ public class CardsTablePostgres implements CardsTable {
                 ps.setInt(1, cardId);
                 var rs = ps.executeQuery();
                 if (rs.next()) {
+                    double prezzo = rs.getDouble("prezzo");
+                    String img = rs.getString("img");
+
+                    // Stampa per il debug
+                    System.out.println("Prezzo recuperato: " + prezzo);  // Verifica se è corretto
+                    System.out.println("Immagine recuperata: " + img);   // Verifica se è corretto
+
                     var card = new CardEntryPostgres(
-                        rs.getInt("id"),
-                        rs.getString("name"),
-                        rs.getInt("game"),
-                        rs.getInt("expansion"),
-                        rs.getString("identifier"),
-                        rs.getString("description"),
-                            rs.getDouble("prezzo"),
-                            rs.getString("img")
+                            rs.getInt("id"),
+                            rs.getString("name"),
+                            rs.getInt("game"),
+                            rs.getInt("expansion"),
+                            rs.getString("identifier"),
+                            rs.getString("description"),
+                            prezzo,
+                            img
                     );
-                    cards.put(cardId, card);
+
+                    cards.put(rs.getInt("id"), card);
                     return card;
+                } else {
+                    // Se non trovi il risultato, stampare un messaggio per il debug
+                    System.out.println("Nessuna carta trovata con ID: " + cardId);
                 }
+
             } catch (Exception e) {
                 logger.severe(e.getMessage());
             }
