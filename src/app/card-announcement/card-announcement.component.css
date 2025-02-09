@@ -97,84 +97,77 @@ h2 {
 
 .card-header {
   text-align: center;
-  margin-bottom: 20px; /* Distanza tra il titolo e le sezioni sottostanti */
+  margin-bottom: 20px;
 }
 
 .card-title {
-  font-size: 2em;  /* Nome carta grande */
+  font-size: 2em;
   font-weight: bold;
   color: black;
   margin-bottom: 5px;
 }
 
 .card-expansion {
-  font-size: 1em;  /* Più piccolo rispetto al nome della carta */
+  font-size: 1em;
 }
+
 .card-game{
   color: #403e3e;
   margin-top: 0;
 }
 
-/* Rimuoviamo i bordi dalle sezioni carta e descrizione */
 .card-section {
-  border: none; /* Rimuove il bordo */
+  border: none;
 }
 
-/* Contenitore principale che mantiene le sezioni vicine */
 .card-container {
   display: flex;
   justify-content: center;
-  gap: 10px; /* Spazio tra le sezioni */
+  gap: 10px;
   width: 80%;
   margin: 20px auto;
 }
 
-/* Sezione immagine - modifiche per ridimensionare l'immagine */
 .card-image img {
-  height: auto;  /* Dimensione fissa per l'immagine */
-  width: 250px;  /* Larghezza fissa per l'immagine */
-  max-width: 100%; /* L'immagine non supererà la larghezza del suo contenitore */
+  height: auto;
+  width: 250px;
+  max-width: 100%;
   border-radius: 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Sezione "Informazioni carta" */
 .card-info {
-  border: none; /* Rimuove il bordo */
-  padding: 20px; /* Manteniamo il padding per distanziare gli elementi */
+  border: none;
+  padding: 20px;
 }
 
-/* Titolo "Informazioni carta" */
 .info-title {
   font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 10px;
-  text-align: left; /* Allineato a sinistra */
+  text-align: left;
   color: #333;
 }
 
-/* Sezione tag */
 .card-tags {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  justify-content: flex-start; /* Allinea i tag a sinistra */
+  justify-content: flex-start;
   margin-bottom: 15px;
 }
 
-/* Tag rettangolari con angoli smussati e più piccoli */
 .tag {
-  background-color: #ff4d4d; /* Rosso brillante */
+  background-color: #ff4d4d;
   color: white;
-  padding: 5px 12px; /* Ridotto per rendere il tag più piccolo */
-  border-radius: 8px; /* Angoli smussati */
-  font-size: 0.9rem; /* Font leggermente più piccolo */
-  font-weight: bold; /* Grassetto */
-  text-transform: uppercase; /* Tutte le lettere maiuscole */
-  margin-bottom: 10px; /* Distanza tra le righe di tag */
+  padding: 5px 12px;
+  border-radius: 8px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 10px;
 }
 
-/* Sottotitolo "Descrizione" */
 .info-subtitle {
   font-size: 1.2rem;
   font-weight: bold;
@@ -183,40 +176,35 @@ h2 {
   color: #555;
 }
 
-/* Testo descrizione */
 .card-description {
   font-size: 1rem;
   padding: 0 10px;
 }
 
-/* Sezione con prezzo e pulsanti */
 .card-price-buttons {
-  border: 2px solid #ccc; /* Bordo grigio chiaro */
-  border-radius: 8px; /* Angoli smussati */
+  border: 2px solid #ccc;
+  border-radius: 8px;
   padding: 20px;
   display: flex;
   flex-direction: column;
-  align-items: center; /* Centra il contenuto */
+  align-items: center;
   gap: 15px;
 }
 
-/* Prezzo in grande */
 .card-price {
-  font-size: 3rem; /* Prezzo grande */
+  font-size: 3rem;
   font-weight: bold;
-  color: #333; /* Colore scuro per il prezzo */
+  color: #333;
 }
 
-/* Pulsanti uno sopra l'altro */
 .card-buttons {
   display: flex;
-  flex-direction: column; /* Imposta i pulsanti uno sopra l'altro */
-  gap: 15px; /* Distanza tra i pulsanti */
-  width: 100%; /* Larghezza 100% per il contenitore */
-  align-items: center; /* Centra i pulsanti */
+  flex-direction: column;
+  gap: 15px;
+  width: 100%;
+  align-items: center;
 }
 
-/* Pulsante */
 .card-button {
   display: flex;
   align-items: center;
@@ -227,21 +215,18 @@ h2 {
   border-radius: 5px;
   cursor: pointer;
   font-weight: bold;
-  width: 100%; /* Larghezza del pulsante */
-  max-width: 200px; /* Impostiamo un limite di larghezza */
+  width: 100%;
+  max-width: 200px;
 }
 
-/* Pulsante di acquisto - verde */
 .card-button.buy {
-  background-color: #28a745; /* Verde brillante */
+  background-color: #28a745;
 }
 
-/* Pulsante di scambio - azzurro */
 .card-button.exchange {
-  background-color: #17a2b8; /* Azzurro brillante */
+  background-color: #17a2b8;
 }
 
-/* Hover per i pulsanti */
 .card-button:hover {
-  opacity: 0.9; /* Effetto hover con leggera trasparenza */
+  opacity: 0.9;
 }

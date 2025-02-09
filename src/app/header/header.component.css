@@ -1,20 +1,17 @@
-/* Pulsanti */
 .btn-secondary {
   background-color: orange;
-  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transizione per zoom e ombra */
-  padding: 8px 16px; /* Aggiunto un po' di padding per migliorare la visibilità */
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  padding: 8px 16px;
 }
 .btn-secondary:hover {
-  transform: scale(1.1); /* Zoom al 110% al passaggio del mouse */
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3); /* Ombra al passaggio del mouse */
+  transform: scale(1.1);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
-/* Container Header */
 .container-header {
   height: 70%;
 }
 
-/* Header */
 header {
   background-color: #ffffff;
   color: #fff;
@@ -29,20 +26,17 @@ header {
   font-size: 22px;
 }
 
-/* Titolo con sfondo gradiente */
 .titolo-sfondo {
   background: linear-gradient(45deg, #0D47A1, #1E68D1, #3C8ED1);
   font-family: 'Roboto', sans-serif;
   height: 200px;
 }
 
-/* Titolo Header */
 header h1 {
   font-size: 24px;
   margin-bottom: 10px;
 }
 
-/* Effetto di zoom e ombra per gli elementi della nav */
 .nav-link {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
@@ -51,16 +45,14 @@ header h1 {
   transform: scale(1.1);
 }
 
-/* Immagine Logo */
-.fotoTitolo{
-  max-width: 100%; /* Adatta l'immagine al 100% del contenitore */
-  height: auto;   /* Mantiene le proporzioni corrette */
-  max-width: 300px; /* Imposta una larghezza massima per desktop */
+.fotoTitolo {
+  max-width: 100%;
+  height: auto;
+  max-width: 300px;
   transition: transform 0.5s ease-in-out, box-shadow 0.3s ease-in-out;
   animation: fadeInScale 1s ease-out, subtleSwing 3s infinite alternate ease-in-out;
 }
 
-/* Animazione */
 @keyframes fadeInScale {
   0% {
     opacity: 0;
@@ -81,7 +73,6 @@ header h1 {
   }
 }
 
-/* Media Queries per dispositivi piccoli (<= 768px) */
 @media (max-width: 768px) {
   .container-fluid {
     padding-left: 15px;
@@ -92,14 +83,12 @@ header h1 {
     padding: 10px;
   }
 
-  /* Adattamento dell'immagine per dispositivi più piccoli */
   .fotoTitolo {
-    max-width: 150px; /* Ridurre la larghezza dell'immagine su schermi piccoli */
+    max-width: 150px;
   }
 
-  /* Navbar: Menu a tendina */
   .navbar-toggler {
-    background-color: #fff; /* Cambia colore per il bottone hamburger */
+    background-color: #fff;
   }
 
   .navbar-collapse {
@@ -107,27 +96,23 @@ header h1 {
     text-align: center;
   }
 
-  /* Stile delle nav-link */
   .nav-link {
-    font-size: 14px;  /* Font più piccolo su dispositivi mobili */
+    font-size: 14px;
     padding: 10px 0;
   }
 
-  /* Dropdown menu */
   .dropdown-menu {
     width: 200px;
   }
 
-  /* Gestione della spaziatura */
   .dropdown {
     margin-left: 10px;
   }
 }
 
-/* Media Queries per dispositivi medi (<= 992px) */
 @media (max-width: 992px) {
   .fotoTitolo {
-    max-width: 250px; /* Immagine più grande per tablet */
+    max-width: 250px;
   }
 
   header {
@@ -135,26 +120,22 @@ header h1 {
   }
 
   .nav-link {
-    font-size: 16px; /* Font leggermente più grande per tablet */
+    font-size: 16px;
   }
 }
 
-/* Media Queries per dispositivi extra piccoli (<= 480px) */
 @media (max-width: 480px) {
-  /* Ridurre la larghezza dell'immagine ancora di più per schermi molto piccoli */
   .fotoTitolo {
     max-width: 120px;
   }
 
-  /* Navbar: rendere la navbar ancora più semplice */
   header {
     padding: 8px;
   }
 
-  /* Ridurre ulteriormente la dimensione del font delle nav-link */
   .nav-link {
     font-size: 12px;
-    padding: 8px 0; /* Ridurre il padding delle nav-link */
+    padding: 8px 0;
   }
 
   .navbar-toggler {
@@ -162,10 +143,10 @@ header h1 {
   }
 
   .dropdown-menu {
-    width: 180px; /* Ancora più stretta per dispositivi ultra piccoli */
+    width: 180px;
   }
 }
-/* Stile di base per il dropdown */
+
 .dropdown {
   position: relative;
 }
@@ -187,7 +168,6 @@ header h1 {
   cursor: pointer;
 }
 
-/* Stile per il bottone del dropdown */
 button {
   background: none;
   border: none;
@@ -196,17 +176,14 @@ button {
   font-size: 16px;
 }
 
-/* Quando il dropdown è attivo, lo mostriamo */
 .dropdown.show .dropdown-menu {
   display: block;
 }
 
-/* Effetti al passaggio del mouse */
 .dropdown:hover .dropdown-menu {
   display: block;
 }
 
-/* Piccolo effetto hover sul bottone */
 button:hover {
   background-color: rgba(255, 255, 255, 0.2);
 }

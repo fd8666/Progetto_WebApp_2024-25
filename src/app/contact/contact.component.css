@@ -30,7 +30,7 @@
 .social-media {
   margin-top: 20px;
   display: flex;
-  gap: 10px; /* Spazio tra i pulsanti */
+  gap: 10px;
 }
 
 .social-button {
@@ -85,56 +85,55 @@ iframe {
   border-radius: 8px;
 }
 
-/* Media Queries per Responsività */
 
 @media screen and (max-width: 1024px) {
   .contact-container {
-    flex-direction: column; /* Disposizione verticale su schermi più piccoli */
+    flex-direction: column;
     width: 90%;
   }
 
   .contact-info, .map-container {
     flex: none;
     width: 100%;
-    margin-bottom: 20px; /* Spazio tra le sezioni */
+    margin-bottom: 20px;
   }
 
   .social-media {
-    flex-direction: column; /* Disposizione verticale dei pulsanti */
-    align-items: center; /* Centra i pulsanti */
+    flex-direction: column;
+    align-items: center;
   }
 
   .social-button {
-    width: 100%; /* Pulsanti a larghezza piena */
-    text-align: center; /* Centra il testo dei pulsanti */
+    width: 100%;
+    text-align: center;
   }
 }
 
 @media screen and (max-width: 768px) {
   .contact-info h2 {
-    font-size: 1.8rem; /* Riduci la dimensione del titolo */
+    font-size: 1.8rem;
   }
 
   .contact-info p {
-    font-size: 0.9rem; /* Riduci la dimensione del testo */
+    font-size: 0.9rem;
   }
 
   .social-button {
-    font-size: 14px; /* Riduci la dimensione dei pulsanti */
+    font-size: 14px;
   }
 }
 
 @media screen and (max-width: 480px) {
   .contact-info h2 {
-    font-size: 1.5rem; /* Ancora più piccolo per schermi molto piccoli */
+    font-size: 1.5rem;
   }
 
   .contact-info p {
-    font-size: 0.8rem; /* Ulteriore riduzione del testo */
+    font-size: 0.8rem;
   }
 
   .social-button {
-    font-size: 12px; /* Ancora più piccolo per i pulsanti */
-    padding: 8px 16px; /* Adatta il padding per schermi piccoli */
+    font-size: 12px;
+    padding: 8px 16px;
   }
 }

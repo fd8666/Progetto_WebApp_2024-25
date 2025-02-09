@@ -2,9 +2,11 @@ body {
   font-family: 'Roboto', sans-serif;
   background-color: #f0f0f0;
 }
-.btn{
+
+.btn {
   background-color: #e1981e;
 }
+
 
 .col-md-4 {
   flex-basis: 33.33%;
@@ -52,57 +54,23 @@ h2 {
   background-color: #e1981e;
 }
 
-@media (max-width: 768px) {
-  .col-md-4 {
-    flex-basis: 100%;
-  }
-}
-
-@media (max-width: 480px) {
-  header {
-    padding: 10px;
-  }
-  header h1 {
-    font-size: 18px;
-  }
-  nav ul {
-    flex-direction: column;
-  }
-  nav li {
-    margin-bottom: 10px;
-  }
-  .dropdown {
-    margin-left: 0;
-  }
-  .container-registrazione {
-    margin: 20px auto;
-    padding: 10px;
-  }
-  .container-header {
-    margin: 20px auto;
-    padding: 10px;
-  }
-  #login-form {
-    padding: 10px;
-  }
-}
 
 .profile-header {
   display: flex;
-  justify-content: center; /* Centra l'immagine */
+  justify-content: center;
   align-items: center;
-  margin-top: 10px; /* Spazio sopra */
-  position: relative; /* Permette di posizionare meglio la foto */
+  margin-top: 10px;
+  position: relative;
 }
 
 .profile-picture {
-  width: 275px; /* Aumentata la dimensione */
+  width: 275px;
   height: 275px;
   border-radius: 50%;
   overflow: hidden;
-  border: 4px solid #333; /* Bordo grigio scuro più spesso */
+  border: 4px solid #333;
   background: #5c62db;
-  position: relative; /* Gestibile per ulteriori modifiche */
+  position: relative;
 }
 
 .profile-picture img {
@@ -124,74 +92,74 @@ h2 {
   background: #f9f9f9;
   border-radius: 15px;
   border: 2px solid #ddd;
-  width: 500px; /* Larghezza fissa */
-  height: 200px; /* Altezza fissa */
-  overflow-y: auto; /* Abilita scroll verticale */
-  overflow-x: hidden; /* Blocca scroll orizzontale */
-  word-wrap: break-word; /* Forza il testo a capo */
-  white-space: pre-wrap; /* Mantiene spazi e va a capo automaticamente */
+  width: 500px;
+  height: 200px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  word-wrap: break-word;
+  white-space: pre-wrap;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
 .saluto{
-  font-size: 2rem; /* Font più grande */
-  font-weight: bold; /* Rende il testo più in evidenza */
-  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* Ombra leggera per il testo */
+  font-size: 2rem;
+  font-weight: bold;
+  text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
 }
 .profile-actions {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 15px; /* Distanza tra i bottoni */
+  gap: 15px;
 }
 
 .profile-actions button {
-  padding: 12px 40px; /* Più largo per seguire lo stile dei social */
+  padding: 12px 40px;
   font-size: 1.1rem;
   color: white;
   border: none;
-  border-radius: 10px; /* Smussato, non arrotondato */
+  border-radius: 10px;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
   transition: background-color 0.3s ease, color 0.3s ease, transform 0.1s ease-in-out;
   font-weight: bold;
-  min-width: 180px; /* Larghezza minima per uniformità */
+  min-width: 180px;
   height: 50px;
 }
 
-/* Stile simile ai bottoni social */
+
 .impostazioni-profilo {
-  background-color: #28a745; /* Verde simile al bottone Sito */
+  background-color: #28a745;
 }
 
 .scambi {
-  background-color: #e4405f; /* Rosso simile al bottone Instagram */
+  background-color: #e4405f;
 }
 
 .profile-actions button i {
-  margin-right: 10px; /* Distanza tra icona e testo */
+  margin-right: 10px;
   font-size: 1.2rem;
 }
 
-/* Effetto Hover */
+
 .impostazioni-profilo:hover,
 .scambi:hover {
-  background-color: #e1981e; /* Cambia in arancione al passaggio del mouse */
+  background-color: #e1981e;
   color: black;
 }
 
-/* Effetto Active (Click) */
+
 .profile-actions button:active {
-  transform: scale(0.95); /* Effetto click leggero */
+  transform: scale(0.95);
 }
 .modal-backdrop {
   position: fixed;
-  top: 33%; /* Resta la stessa posizione verticale */
+  top: 33%;
   left: 50%;
   transform: translateX(-50%);
-  width: 20%; /* Ridotto ulteriormente */
+  width: 20%;
   height: auto;
   background: rgba(0, 0, 0, 0.5);
   display: flex;
@@ -201,40 +169,40 @@ h2 {
 
 .modal-content {
   background: white;
-  padding: 15px; /* Ridotto il padding per maggiore compattezza */
-  border-radius: 8px; /* Bordo più smussato */
-  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3); /* Ombra più leggera */
-  width: 35%; /* Ancora più piccola */
-  min-width: 320px; /* Larghezza minima più ridotta */
-  max-width: 500px; /* Limita la larghezza massima */
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.3);
+  width: 35%;
+  min-width: 320px;
+  max-width: 500px;
   text-align: left;
   display: flex;
   flex-direction: column;
-  gap: 12px; /* Distanza ridotta tra i campi */
+  gap: 12px;
 }
 
 .modal-content label {
   font-weight: bold;
-  margin-bottom: 5px; /* Ancora meno spazio tra etichetta e campo */
+  margin-bottom: 5px;
 }
 
 .modal-content input,
 .modal-content textarea {
   width: 100%;
-  padding: 6px; /* Ridotto il padding degli input */
-  margin-bottom: 12px; /* Meno spazio tra i campi */
+  padding: 6px;
+  margin-bottom: 12px;
   border: 1px solid #ccc;
-  border-radius: 4px; /* Bordo leggermente più sottile */
+  border-radius: 4px;
 }
 
 .modal-buttons {
   display: flex;
   justify-content: space-between;
-  gap: 8px; /* Ancora meno spazio tra i pulsanti */
+  gap: 8px;
 }
 
 .modal-buttons button {
-  padding: 8px 16px; /* Ridotto il padding dei pulsanti */
+  padding: 8px 16px;
   border: none;
   border-radius: 5px;
   cursor: pointer;
@@ -250,5 +218,71 @@ h2 {
 .modal-buttons button:last-child {
   background-color: #dc3545;
   color: white;
+}
+/* Layout responsive */
+@media (max-width: 992px) {
+  .profile-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .info-user {
+    margin: 20px 0;
+  }
+  .bio {
+    width: 90%;
+    height: auto;
+  }
+}
+
+@media (max-width: 720px) {
+  .profile-header {
+    flex-direction: column;
+    align-items: center;
+  }
+  .profile-picture {
+    width: 200px;
+    height: 200px;
+  }
+  .profile-actions {
+    flex-direction: column;
+  }
+  .profile-actions button {
+    width: 100%;
+  }
+  .bio {
+    width: 90%;
+    height: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .profile-picture {
+    width: 150px;
+    height: 150px;
+  }
+  .profile-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .profile-actions button {
+    width: 100%;
+    padding: 10px;
+  }
+  .modal-content {
+    width: 90%;
+  }
+  .bio {
+    width: 100%;
+    height: auto;
+  }
+  #login-form {
+    padding: 10px;
+  }
 }
 
