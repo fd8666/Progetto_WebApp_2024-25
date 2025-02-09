@@ -15,7 +15,6 @@
 <body class="bg-light">
 <app-header></app-header>
 <div class="profile-header">
-  <!-- Header con immagine profilo e username -->
 
   <div class="profile-picture">
     <img [src]="userProfile.profileImage" alt="Profile Image">
@@ -36,7 +35,7 @@
   </button>
 </div>
 
-<!-- Modale per modificare il profilo -->
+
 <div class="modal-backdrop" *ngIf="isEditing">
   <div class="modal-content">
     <h2>Modifica Profilo</h2>
