@@ -2,9 +2,11 @@ body {
   font-family: 'Roboto', sans-serif;
   background-color: #f0f0f0;
 }
-.btn{
+
+.btn {
   background-color: #e1981e;
 }
+
 
 .col-md-4 {
   flex-basis: 33.33%;
@@ -52,40 +54,6 @@ h2 {
   background-color: #e1981e;
 }
 
-@media (max-width: 768px) {
-  .col-md-4 {
-    flex-basis: 100%;
-  }
-}
-
-@media (max-width: 480px) {
-  header {
-    padding: 10px;
-  }
-  header h1 {
-    font-size: 18px;
-  }
-  nav ul {
-    flex-direction: column;
-  }
-  nav li {
-    margin-bottom: 10px;
-  }
-  .dropdown {
-    margin-left: 0;
-  }
-  .container-registrazione {
-    margin: 20px auto;
-    padding: 10px;
-  }
-  .container-header {
-    margin: 20px auto;
-    padding: 10px;
-  }
-  #login-form {
-    padding: 10px;
-  }
-}
 
 .profile-header {
   display: flex;
@@ -250,5 +218,71 @@ h2 {
 .modal-buttons button:last-child {
   background-color: #dc3545;
   color: white;
+}
+/* Layout responsive */
+@media (max-width: 992px) {
+  .profile-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .info-user {
+    margin: 20px 0;
+  }
+  .bio {
+    width: 90%;
+    height: auto;
+  }
+}
+
+@media (max-width: 720px) {
+  .profile-header {
+    flex-direction: column;
+    align-items: center;
+  }
+  .profile-picture {
+    width: 200px;
+    height: 200px;
+  }
+  .profile-actions {
+    flex-direction: column;
+  }
+  .profile-actions button {
+    width: 100%;
+  }
+  .bio {
+    width: 90%;
+    height: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-header {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+  .profile-picture {
+    width: 150px;
+    height: 150px;
+  }
+  .profile-actions {
+    flex-direction: column;
+    gap: 10px;
+  }
+  .profile-actions button {
+    width: 100%;
+    padding: 10px;
+  }
+  .modal-content {
+    width: 90%;
+  }
+  .bio {
+    width: 100%;
+    height: auto;
+  }
+  #login-form {
+    padding: 10px;
+  }
 }
 
