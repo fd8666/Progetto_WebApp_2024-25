@@ -15,7 +15,6 @@ export interface UserProfile {
   providedIn: 'root',
 })
 export class UserProfileService {
-  // Dati mock dell'utente
   private mockUser: UserProfile = {
     id: 1,
     username: 'DemoUser',
