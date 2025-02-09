@@ -53,13 +53,14 @@
         <button class="card-button buy">
           <i class="fa fa-shopping-cart"></i> Acquista
         </button>
-        <button class="card-button exchange">
+        <button class="card-button exchange" (click)="proponiScambio()">
           <i class="fa fa-exchange-alt"></i> Proponi Scambio
         </button>
       </div>
     </div>
-
-
+  </div>
+  <div *ngIf="isScambioVisible">
+    <app-proposta-scambio></app-proposta-scambio>
   </div>
 </div>
 <app-footer></app-footer>
