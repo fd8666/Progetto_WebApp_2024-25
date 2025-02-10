@@ -2,16 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import {NgForOf} from '@angular/common';
 import {RouterLink} from '@angular/router';
 import {HeaderComponent} from '../header/header.component';
+import {FooterComponent} from "../footer/footer.component";
 
 @Component({
   selector: 'app-scambio',
   templateUrl: './scambio.component.html',
   styleUrls: ['./scambio.component.css'],
-  imports: [
-    NgForOf,
-    RouterLink,
-    HeaderComponent
-  ],
+    imports: [
+        NgForOf,
+        RouterLink,
+        HeaderComponent,
+        FooterComponent
+    ],
   standalone: true
 })
 export class ScambioComponent implements OnInit {

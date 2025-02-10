@@ -15,14 +15,14 @@
 <app-header></app-header>
 
 <div *ngIf="annuncio">
-  <!-- Header con nome della carta e espansione separati da un trattino -->
+
   <div class="card-header">
     <h1 class="card-title">
       {{ annuncio.name }} -
     </h1>
   </div>
 
-  <!-- Contenitore principale -->
+
   <div class="card-container">
     <!-- Sezione immagine -->
     <div class="card-section card-image">
@@ -30,12 +30,11 @@
     </div>
 
 
-    <!-- Sezione info -->
     <div class="card-section card-info">
       <!-- Titolo della sezione -->
       <h2 class="info-title">Informazioni carta</h2>
 
-      <!-- Sezione Tag -->
+
       <div class="card-tags">
         <span *ngFor="let tag of annuncio.tag" class="tag">{{ tag.name }}</span>
       </div>
@@ -46,20 +45,21 @@
     </div>
 
 
-    <!-- Sezione prezzo e azioni -->
     <div class="card-price-buttons">
       <div class="card-price">{{ annuncio.prezzo | currency }}</div>
       <div class="card-buttons">
         <button class="card-button buy">
-          <i class="fa fa-shopping-cart"></i> Acquista
+          <i class="fa fa-shopping-cart"></i> <s>Acquista</s>
         </button>
-        <button class="card-button exchange">
+        <button class="card-button exchange" (click)="proponiScambio()">
           <i class="fa fa-exchange-alt"></i> Proponi Scambio
         </button>
       </div>
     </div>
-
-
+  </div>
+  <div *ngIf="isScambioVisible">
+    <app-proposta-scambio></app-proposta-scambio>
   </div>
 </div>
+
 </body>

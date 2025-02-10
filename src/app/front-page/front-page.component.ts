@@ -4,6 +4,7 @@ import { CommonModule } from '@angular/common';
 import { HeaderComponent } from '../header/header.component';
 import { trigger, state, style, transition, animate } from '@angular/animations';
 import {NgClass, NgFor} from '@angular/common';
+import {FooterComponent} from '../footer/footer.component';
 
 @Component({
   selector: 'app-front-page',
@@ -14,7 +15,8 @@ import {NgClass, NgFor} from '@angular/common';
     HeaderComponent,
     NgFor,
     NgClass,
-    CommonModule
+    CommonModule,
+    FooterComponent
   ],
   standalone: true,
   animations: [

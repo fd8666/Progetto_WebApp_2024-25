@@ -1,0 +1,73 @@
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: #f0f0f0;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 40px auto;
+  padding: 20px;
+  background-color: #fff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+.carti-selezionate {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.carta-selezionata {
+  width: 100px;
+  height: 150px;
+  margin: 10px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.carta-vuota {
+  border: 1px dashed #ddd;
+  cursor: pointer;
+  position: relative;
+}
+
+.azioni {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.lista-carte {
+  position: absolute;
+  background-color: white;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+  width: 200px;
+  padding: 10px;
+}
+
+.lista-carte div {
+  padding: 10px;
+  cursor: pointer;
+}
+
+.lista-carte div:hover {
+  background-color: #f0f0f0;
+}
+.message-container h2 {
+  color: #333;
+  text-align: center;
+  margin-bottom: 20px;
+}
+.form-control {
+  border-radius: 8px;
+}
+.btn-group {
+  display: flex;
+  justify-content: space-between;
+}

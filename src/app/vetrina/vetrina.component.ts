@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { CurrencyPipe, NgForOf } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { HeaderComponent } from '../header/header.component';
+import {FooterComponent} from "../footer/footer.component";
 
 interface Annuncio {
   id: number;
@@ -15,7 +16,7 @@ interface Annuncio {
   selector: 'app-vetrina',
   templateUrl: './vetrina.component.html',
   standalone: true,
-  imports: [CurrencyPipe, NgForOf, RouterLink, HeaderComponent],
+    imports: [CurrencyPipe, NgForOf, RouterLink, HeaderComponent, FooterComponent],
   styleUrls: ['./vetrina.component.scss']
 })
 export class VetrinaComponent implements OnInit {

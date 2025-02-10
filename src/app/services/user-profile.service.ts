@@ -1,7 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
+import {HttpClient} from '@angular/common/http';
+import {AuthService} from './auth.service';
 
-// Interfaccia per il profilo utente
 export interface UserProfile {
   id: number;
   username: string;
@@ -15,17 +16,13 @@ export interface UserProfile {
   providedIn: 'root',
 })
 export class UserProfileService {
-  // Dati mock dell'utente
-  private mockUser: UserProfile = {
-    id: 1,
-    username: 'DemoUser',
-    email: 'demo@example.com',
-    bio: ' Sono un utente demo.',
-    profileImage: 'people19.png',
-  };
+  private apiUrl = 'http://localhost:8080/api/login/user';
 
-  // Simula una chiamata API restituendo i dati con un Observable
-  getUserProfile(): Observable<UserProfile> {
-    return of(this.mockUser);
+  constructor(private http: HttpClient ,private authService:AuthService) {}
+
+  getUserProfile(email: string): Observable<UserProfile> {
+    const headers = { 'Accept': 'application/json' };  // Aggiunto header
+    return this.http.get<UserProfile>(`${this.apiUrl}/${email}`, { headers });
   }
+
 }

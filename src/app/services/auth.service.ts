@@ -7,8 +7,24 @@ import { Observable, catchError, throwError } from 'rxjs';
 })
 export class AuthService {
   private apiUrl = 'http://localhost:8080/api/login'; // URL del backend
+  logn: boolean = this.getAuthStatus(); // Recupera lo stato salvato
+  email: string = this.getEmail();
 
   constructor(private http: HttpClient) {}
+
+  setUser(email: string): void {
+    this.logn = true;
+    this.email = email;
+    sessionStorage.setItem('email', email);
+    sessionStorage.setItem('isAuthenticated', 'true'); // Salva l'autenticazione
+  }
+
+  logOut(): void {
+    this.logn = false;
+    this.email = "";
+    sessionStorage.removeItem('email');
+    sessionStorage.removeItem('isAuthenticated'); // Rimuove i dati salvati
+  }
 
   login(email: string, password: string): Observable<string> {
     const headers = new HttpHeaders({ 'Content-Type': 'application/json' });
@@ -22,5 +38,13 @@ export class AuthService {
           return throwError(() => new Error(errorMsg));
         })
       );
+  }
+
+  private getAuthStatus(): boolean {
+    return sessionStorage.getItem('isAuthenticated') === 'true'; // Recupera l'autenticazione salvata
+  }
+
+  private getEmail(): string {
+    return sessionStorage.getItem('email') || ''; // Recupera l'email salvata
   }
 }

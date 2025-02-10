@@ -3,6 +3,8 @@ import { ActivatedRoute, RouterLink } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { HeaderComponent } from '../header/header.component';
 import {CurrencyPipe, NgIf} from '@angular/common';
+import {FooterComponent} from "../footer/footer.component";
+import {PropostaScambioComponent} from '../proposta-scambio/proposta-scambio.component';
 
 @Component({
   selector: 'app-dettaglio',
@@ -12,7 +14,9 @@ import {CurrencyPipe, NgIf} from '@angular/common';
     HeaderComponent,
     NgIf,
     RouterLink,
-    CurrencyPipe
+    CurrencyPipe,
+    FooterComponent,
+    PropostaScambioComponent
   ],
   styleUrls: ['./card-announcement.component.css']
 })
@@ -20,6 +24,7 @@ export class CardAnnouncementComponent implements OnInit {
   annuncio: any = null;
   loading: boolean = true;
   error: boolean = false;
+  isScambioVisible:boolean=false;
   private apiUrl = 'http://localhost:8080/api/cards/getCard'; // URL API backend
 
   constructor(private route: ActivatedRoute, private http: HttpClient) {}
@@ -81,6 +86,6 @@ export class CardAnnouncementComponent implements OnInit {
 
   proponiScambio() {
     console.log('Proposta di scambio per:', this.annuncio);
-    alert('Proposta di scambio inviata!');
+    this.isScambioVisible=true;
   }
 }
