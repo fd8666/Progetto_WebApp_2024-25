@@ -5,13 +5,14 @@ import { FormsModule } from '@angular/forms';
 import { NgIf } from '@angular/common';
 import { HeaderComponent } from '../header/header.component';
 import { FooterComponent } from '../footer/footer.component';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-profile-page',
   templateUrl: './profile-page.component.html',
   styleUrls: ['./profile-page.component.css'],
   standalone: true,
-  imports: [NgIf, FormsModule, HeaderComponent, FooterComponent]
+  imports: [NgIf, FormsModule, HeaderComponent, FooterComponent, RouterLink]
 })
 export class ProfilePageComponent implements OnInit {
   userProfile!: UserProfile;

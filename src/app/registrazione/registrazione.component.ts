@@ -4,13 +4,14 @@ import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { HeaderComponent } from '../header/header.component';
 import {FooterComponent} from "../footer/footer.component";
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-registrazione',
   standalone: true,
   templateUrl: './registrazione.component.html',
   styleUrls: ['./registrazione.component.css'],
-    imports: [CommonModule, FormsModule, HttpClientModule, HeaderComponent, FooterComponent]
+  imports: [CommonModule, FormsModule, HttpClientModule, HeaderComponent, FooterComponent, RouterLink]
 })
 export class RegistrazioneComponent {
   username: string = '';

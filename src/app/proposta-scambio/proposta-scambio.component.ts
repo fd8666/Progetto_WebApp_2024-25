@@ -15,11 +15,11 @@ import {NgClass, NgForOf, NgIf, NgStyle} from '@angular/common';
 })
 export class PropostaScambioComponent {
   carteDisponibili = [
-    { nome: 'Carta 1', immagine: 'https://den-cards.pokellector.com/371/Pikachu.SV2A.173.48341.png' },
-    { nome: 'Carta 2', immagine: 'https://den-cards.pokellector.com/365/Lumineon-V.GG.GG39.46538.png' },
-    { nome: 'Carta 3', immagine: 'https://via.placeholder.com/80x120' },
-    { nome: 'Carta 4', immagine: 'https://via.placeholder.com/80x120' },
-    { nome: 'Carta 5', immagine: 'https://via.placeholder.com/80x120' }
+    { nome: 'Pikachu', immagine: 'https://den-cards.pokellector.com/371/Pikachu.SV2A.173.48341.png' },
+    { nome: 'Lumineon-V', immagine: 'https://den-cards.pokellector.com/365/Lumineon-V.GG.GG39.46538.png' },
+    { nome: 'Galarian-Moltres', immagine: 'https://den-cards.pokellector.com/320/Galarian-Moltres-V.CRE.177.38907.png' },
+    { nome: 'Duraludon-VMAX', immagine: 'https://den-cards.pokellector.com/356/Duraludon-VMAX.SWSH12TG.TG21.45604.png' },
+    { nome: 'Chien-Pao-EX', immagine: 'https://den-cards.pokellector.com/367/Chien-Pao-ex.PAL.261.47792.png' }
   ];
 
   carteSelezionate: any[] = [null, null, null, null, null]; // 5 slot vuoti
@@ -57,6 +57,7 @@ export class PropostaScambioComponent {
 
   inviaProposta() {
     alert('Proposta di scambio inviata!');
+    this.carteSelezionate = [null, null, null, null, null];
     console.log('Carte selezionate:', this.carteSelezionate);
   }
 
