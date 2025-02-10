@@ -7,12 +7,13 @@ import org.web24_25.cardswap_backend.requests.PasswordRegistration;
 import org.web24_25.cardswap_backend.service.RegisterService;
 
 @RestController
-@CrossOrigin("http://localhost:4200")
+@CrossOrigin(origins ="http://localhost:4200")
 @RequestMapping("/api/register")
 public class RegisterController {
     private final RegisterService service = new RegisterService();
     @PostMapping("/password")
     public ResponseEntity<String> loginPassword(@RequestBody PasswordRegistration data) {
+        System.out.println("Dati ricevuti: " + data);
         return service.registerPassword(data);
     }
 

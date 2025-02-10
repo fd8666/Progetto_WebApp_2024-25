@@ -11,6 +11,10 @@ import org.web24_25.cardswap_backend.requests.PasswordLogin;
 import java.util.UUID;
 
 public class LoginService {
+    public ResponseEntity<String> saveIdSession(PasswordLogin data, HttpSession session){
+        UserEntry user = UsersTablePostgres.getInstance().getUserFromEmail(data.email());
+        return ResponseEntity.ok().body(user.id().toString());
+    }
     public ResponseEntity<String> loginPassword(PasswordLogin data, HttpSession session) {
         if (data.email() == null || data.password() == null) {
             session.invalidate();

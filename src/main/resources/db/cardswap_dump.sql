@@ -5,7 +5,7 @@
 -- Dumped from database version 17.0
 -- Dumped by pg_dump version 17.0
 
--- Started on 2025-02-06 22:46:09
+-- Started on 2025-02-08 17:57:39
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -203,8 +203,10 @@ CREATE TABLE public.cards (
     name character varying NOT NULL,
     game integer NOT NULL,
     expansion integer,
-    identifier character varying,
-    description character varying
+    identifier character varying DEFAULT ' '::character varying,
+    description character varying,
+    prezzo real DEFAULT 0.01,
+    img character varying
 );
 
 
@@ -537,6 +539,30 @@ CREATE TABLE public.users (
 -- Data for Name: cards; Type: TABLE DATA; Schema: public; Owner: -
 --
 
+INSERT INTO public.cards VALUES (3, 'Sanji (Parallel)', 1, 1, ' ', 'Una carta con illustrazione alternativa che raffigura Sanji in una posa dinamica.', 15, 'https://th.bing.com/th/id/R.df95c767e70fd9cff56bef9f4936505a?rik=VF7ESyn80q%2f8fg&riu=http%3a%2f%2fcarteonepiece.fr%2fcdn%2fshop%2fproducts%2fOP02-026_p1-Sanji_Parallel.png%3fv%3d1676486519');
+INSERT INTO public.cards VALUES (4, 'Monkey D Luffy', 1, 1, ' ', 'Carta dedicata a Monkey D. Luffy, il capitano della ciurma di Cappello di Paglia.', 20, 'https://en.onepiece-cardgame.com/images/cardlist/card/OP03-001.png?230630');
+INSERT INTO public.cards VALUES (5, 'Roronoa Zoro (Parallel)', 1, 1, ' ', 'Versione a illustrazione alternativa della carta di Roronoa Zoro, spadaccino dei Mugiwara.', 18, 'https://en.onepiece-cardgame.com/images/cardlist/card/OP01-073_p1.png?20221227_2');
+INSERT INTO public.cards VALUES (6, 'Nami (Parallel)', 1, 1, ' ', 'Carta con artwork speciale di Nami, la navigatrice della ciurma di Luffy.', 12, 'https://img.mypcards.com/img/12/1848/one_op03_123p/one_op03_123p_en.jpg');
+INSERT INTO public.cards VALUES (7, 'Pikachu', 2, 2, ' ', 'Una carta che raffigura Pikachu, uno dei Pokémon più iconici e amati.', 10, 'https://den-cards.pokellector.com/371/Pikachu.SV2A.173.48341.png');
+INSERT INTO public.cards VALUES (8, 'Lumineon V', 2, 2, ' ', 'Carta che mostra Lumineon in tutta la sua eleganza, noto per il suo aspetto luminoso.', 8, 'https://den-cards.pokellector.com/365/Lumineon-V.GG.GG39.46538.png');
+INSERT INTO public.cards VALUES (9, 'Galarian Moltres V', 2, 2, ' ', 'Una rappresentazione di Moltres di Galar con il suo design oscuro e affascinante.', 12, 'https://den-cards.pokellector.com/320/Galarian-Moltres-V.CRE.177.38907.png');
+INSERT INTO public.cards VALUES (10, 'Duraludon VMAX', 2, 2, ' ', 'Carta che ritrae Duraludon nella sua potente forma VMAX, con un aspetto imponente.', 15, 'https://den-cards.pokellector.com/356/Duraludon-VMAX.SWSH12TG.TG21.45604.png');
+INSERT INTO public.cards VALUES (11, 'Chien-Pao ex', 2, 2, ' ', 'Una carta che mostra Chien-Pao in un’illustrazione dettagliata e accattivante.', 20, 'https://den-cards.pokellector.com/367/Chien-Pao-ex.PAL.261.47792.png');
+INSERT INTO public.cards VALUES (12, 'Galarian Zapdos V', 2, 2, ' ', 'Versione Galar di Zapdos, con un design aggressivo e unico.', 10, 'https://den-cards.pokellector.com/320/Galarian-Zapdos-V.CRE.174.38906.png');
+INSERT INTO public.cards VALUES (13, 'Dragonite V', 2, 2, ' ', 'Carta dedicata a Dragonite, uno dei Pokémon Drago più apprezzati dai fan.', 18, 'https://den-cards.pokellector.com/325/Dragonite-V.SWSH7.192.40059.png');
+INSERT INTO public.cards VALUES (14, 'Rotom V', 2, 2, ' ', 'Illustrazione che rappresenta Rotom nella sua forma più energetica e vivace.', 7, 'https://den-cards.pokellector.com/350/Rotom-V.SWSH10.177.44834.png');
+INSERT INTO public.cards VALUES (15, 'Rayquaza V', 2, 2, ' ', 'Una carta che raffigura Rayquaza, il leggendario drago del cielo.', 25, 'https://den-cards.pokellector.com/325/Rayquaza-V.SWSH7.194.40061.png');
+INSERT INTO public.cards VALUES (16, 'Alakazam ex', 2, 2, ' ', 'Illustrazione dettagliata di Alakazam, con il suo iconico sguardo ipnotico.', 22, 'https://den-cards.pokellector.com/374/Alakazam-ex.MEW.201.49284.png');
+INSERT INTO public.cards VALUES (17, 'Venusaur ex', 2, 2, ' ', 'Carta con Venusaur in un’illustrazione spettacolare e imponente.', 30, 'https://den-cards.pokellector.com/371/Venusaur-ex.SV2A.200.48350.png');
+INSERT INTO public.cards VALUES (18, 'Charizard Vmax', 2, 2, ' ', 'Carta che mostra Charizard nella sua forma più potente e fiammeggiante.', 5, 'https://i.pinimg.com/originals/a7/b8/fa/a7b8fa54c87a239afce4e88756dd4ea1.jpg');
+INSERT INTO public.cards VALUES (19, 'Monkey D Luffy (Manga Parallel)', 1, 1, ' ', 'Una versione speciale con illustrazione in stile manga di Luffy.', 50, 'https://th.bing.com/th/id/R.46d8c77337d963ec3fac116181309651?rik=lsiIConCElHQ4A&riu=http%3a%2f%2fcarteonepiece.fr%2fcdn%2fshop%2ffiles%2fOP05-119SECMonkey.D.Luffy_MangaParallele.png%3fv%3d1703089693');
+INSERT INTO public.cards VALUES (20, 'Event Pack Vol5 Card', 1, 1, ' ', 'Carta esclusiva di un pacchetto evento con un design unico.', 10, 'https://en.onepiece-cardgame.com/images/prize/event_pack_vol5/02.png');
+INSERT INTO public.cards VALUES (21, 'Belo Betty (Parallel)', 1, 1, ' ', 'Carta con artwork alternativo di Belo Betty in una posa iconica.', 12, 'https://www.arcadegamecards.com/wp-content/uploads/2023/11/One-Piece-Card-Game-Awakening-Of-The-New-Era-Card-OP05-015-Belo-Betty-Parallel.png');
+INSERT INTO public.cards VALUES (22, 'Nami', 1, 1, ' ', 'Carta dedicata a Nami, con un’illustrazione che mette in risalto il suo stile.', 8, 'https://onepiece-card-labo.com/img/card/OP04-039_p1.png');
+INSERT INTO public.cards VALUES (23, 'Aramaki', 1, 1, ' ', 'Carta che rappresenta Aramaki con un’illustrazione suggestiva.', 9, 'https://static.dotgg.gg/onepiece/card/OP06-043_p1.webp');
+INSERT INTO public.cards VALUES (24, 'Mysterious Tail', 2, 2, ' ', 'Una carta con una rappresentazione particolare, dal design intrigante.', 5, 'https://th.bing.com/th/id/OIP.k737TucyDK_eTXUUJmtNzQHaKT?w=186&h=259&c=7&r=0&o=5&dpr=1.3&pid=1.7');
+INSERT INTO public.cards VALUES (25, 'Charizard V', 2, 2, ' ', 'Carta che raffigura Charizard in tutta la sua potenza e maestosità.', 5, 'https://th.bing.com/th/id/OIP.-uVwu6qdAEn5cfzsjhCZlQHaKV?w=186&h=260&c=7&r=0&o=5&dpr=1.3&pid=1.7');
+INSERT INTO public.cards VALUES (26, 'Boa Hancock', 1, 1, ' ', 'Una carta che mostra Boa Hancock con il suo sguardo affascinante e fiero.', 5, 'https://th.bing.com/th/id/OIP.BQzZ50PJht2V79_O6nIrGQHaKW?w=600&h=838&rs=1&pid=ImgDetMain');
 
 
 --
@@ -545,6 +571,8 @@ CREATE TABLE public.users (
 -- Data for Name: expansions; Type: TABLE DATA; Schema: public; Owner: -
 --
 
+INSERT INTO public.expansions VALUES (1, 1, 'Pokemon Nova', NULL);
+INSERT INTO public.expansions VALUES (2, 2, 'OP-01', NULL);
 
 
 --
@@ -553,6 +581,8 @@ CREATE TABLE public.users (
 -- Data for Name: games; Type: TABLE DATA; Schema: public; Owner: -
 --
 
+INSERT INTO public.games VALUES (1, 'Pokemon TCG', NULL);
+INSERT INTO public.games VALUES (2, 'One Piece Card Game', NULL);
 
 
 --
@@ -585,6 +615,7 @@ CREATE TABLE public.users (
 -- Data for Name: sessions; Type: TABLE DATA; Schema: public; Owner: -
 --
 
+INSERT INTO public.sessions VALUES (71, 21, NULL, 'f02c55b5-c742-4603-bb63-42252cb50335', NULL, '2025-02-07', 604800, true, NULL);
 INSERT INTO public.sessions VALUES (1, 20, '1              ', '1', '1', '2025-01-26', 604800, true, NULL);
 INSERT INTO public.sessions VALUES (2, 21, NULL, '345e0b71-61d6-4f43-b89a-ceb5b4583f45', NULL, '2025-02-03', 604800, true, NULL);
 INSERT INTO public.sessions VALUES (3, 21, NULL, 'd6b05c4c-599e-49d6-bb57-cb1a5a465093', NULL, '2025-02-03', 604800, true, NULL);
@@ -683,6 +714,9 @@ INSERT INTO public.users VALUES (20, 'test', 's', 's', NULL, '2025-01-26', NULL)
 INSERT INTO public.users VALUES (21, 'ciao2', 'test@gmail.com', 'Test1234', NULL, '2025-02-03', NULL);
 INSERT INTO public.users VALUES (26, 'testo', 'testo@gmail.com', 'Testo1234', NULL, '2025-02-06', NULL);
 INSERT INTO public.users VALUES (27, 'testo12', 'testo12@gmail.com', 'Testo1234', NULL, '2025-02-06', NULL);
+INSERT INTO public.users VALUES (28, 'rqwerrwe', 'gfdbhugdf@gmail.cod', '1234Ciao', NULL, '2025-02-06', NULL);
+INSERT INTO public.users VALUES (29, 'rqwerrwe12', 'gf1212dbhugdf@gmail.cod', 'Banane1234', NULL, '2025-02-06', NULL);
+INSERT INTO public.users VALUES (30, 'rqwerrwe1212', '12gf1212dbhugdf@gmail.cod', 'Banane1234', NULL, '2025-02-06', NULL);
 
 
 --
@@ -700,7 +734,7 @@ SELECT pg_catalog.setval('public.card_tags_primary_key', 1, false);
 -- Name: cards_primary_key; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.cards_primary_key', 1, false);
+SELECT pg_catalog.setval('public.cards_primary_key', 26, true);
 
 
 --
@@ -709,7 +743,7 @@ SELECT pg_catalog.setval('public.cards_primary_key', 1, false);
 -- Name: expansions_primary_key; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.expansions_primary_key', 1, false);
+SELECT pg_catalog.setval('public.expansions_primary_key', 2, true);
 
 
 --
@@ -718,7 +752,7 @@ SELECT pg_catalog.setval('public.expansions_primary_key', 1, false);
 -- Name: games_primary_key; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.games_primary_key', 1, false);
+SELECT pg_catalog.setval('public.games_primary_key', 2, true);
 
 
 --
@@ -754,7 +788,7 @@ SELECT pg_catalog.setval('public.requests_primary_key', 1, false);
 -- Name: sessions_primary_key; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.sessions_primary_key', 70, true);
+SELECT pg_catalog.setval('public.sessions_primary_key', 71, true);
 
 
 --
@@ -781,7 +815,7 @@ SELECT pg_catalog.setval('public.trades_primary_key', 1, false);
 -- Name: users_primary_key; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.users_primary_key', 27, true);
+SELECT pg_catalog.setval('public.users_primary_key', 30, true);
 
 
 --
@@ -794,7 +828,7 @@ ALTER TABLE ONLY public.card_tags
 
 
 --
--- TOC entry 4797 (class 2606 OID 16481)
+-- TOC entry 4799 (class 2606 OID 16481)
 -- Name: cards cards_pk; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -803,21 +837,12 @@ ALTER TABLE ONLY public.cards
 
 
 --
--- TOC entry 4799 (class 2606 OID 16541)
+-- TOC entry 4801 (class 2606 OID 16541)
 -- Name: cards cards_unique; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.cards
     ADD CONSTRAINT cards_unique UNIQUE (name);
-
-
---
--- TOC entry 4801 (class 2606 OID 16543)
--- Name: cards cards_unique_1; Type: CONSTRAINT; Schema: public; Owner: -
---
-
-ALTER TABLE ONLY public.cards
-    ADD CONSTRAINT cards_unique_1 UNIQUE (identifier, game);
 
 
 --
@@ -884,7 +909,7 @@ ALTER TABLE ONLY public.requests
 
 
 --
--- TOC entry 4791 (class 2606 OID 16426)
+-- TOC entry 4793 (class 2606 OID 16426)
 -- Name: sessions sessions_pk; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -893,7 +918,7 @@ ALTER TABLE ONLY public.sessions
 
 
 --
--- TOC entry 4793 (class 2606 OID 16474)
+-- TOC entry 4795 (class 2606 OID 16474)
 -- Name: tags tags_pk; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -902,7 +927,7 @@ ALTER TABLE ONLY public.tags
 
 
 --
--- TOC entry 4795 (class 2606 OID 16535)
+-- TOC entry 4797 (class 2606 OID 16535)
 -- Name: tags tags_unique; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -920,7 +945,7 @@ ALTER TABLE ONLY public.trades
 
 
 --
--- TOC entry 4789 (class 2606 OID 16421)
+-- TOC entry 4791 (class 2606 OID 16421)
 -- Name: users users_pk; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
@@ -1372,7 +1397,7 @@ ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA public GRANT ALL ON FUNCTIO
 ALTER DEFAULT PRIVILEGES FOR ROLE postgres IN SCHEMA public GRANT ALL ON TABLES TO cardswap;
 
 
--- Completed on 2025-02-06 22:46:09
+-- Completed on 2025-02-08 17:57:39
 
 --
 -- PostgreSQL database dump complete
